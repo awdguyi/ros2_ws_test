@@ -1,0 +1,1 @@
+/home/michael/ros2_ws_test/build/zmr_interfaces/ament_cmake_python/zmr_interfaces/zmr_interfaces.egg-info/top_level.txt

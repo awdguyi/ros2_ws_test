@@ -1,0 +1,1 @@
+/home/michael/ros2_ws_test/build/zmr_interfaces/rosidl_generator_py/zmr_interfaces/srv/_get_other_robot_states.py

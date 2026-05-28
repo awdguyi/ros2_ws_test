@@ -1,0 +1,27 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from mps_interfaces/msg/Schedule.msg
+// generated code does not contain a copyright notice
+
+
+module mps_interfaces {
+  module msg {
+    @verbatim (language="comment", text=
+      "A schedule of a robot indicates the time and location.")
+    struct Schedule {
+      @verbatim (language="comment", text=
+        "Identifier of the schedule" "\n"
+        "XXX not used yet")
+      string schedule_name;
+
+      @verbatim (language="comment", text=
+        "schedule content")
+      int16 robot_id;
+
+      sequence<int16> node_ids;
+
+      sequence<string> node_names;
+
+      sequence<float> etas;
+    };
+  };
+};

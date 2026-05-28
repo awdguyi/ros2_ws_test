@@ -1,0 +1,16 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from mps_interfaces/srv/GetInflatedMap.srv
+// generated code does not contain a copyright notice
+
+#include "map_interfaces/msg/GeometricMap.idl"
+
+module mps_interfaces {
+  module srv {
+    struct GetInflatedMap_Request {
+      int64 robot_id;
+    };
+    struct GetInflatedMap_Response {
+      map_interfaces::msg::GeometricMap inflated_map;
+    };
+  };
+};

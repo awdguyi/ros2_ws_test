@@ -1,0 +1,1 @@
+/home/michael/ros2_ws_test/build/zmr_interfaces/rosidl_cmake/srv/GetRobotState_Request.msg

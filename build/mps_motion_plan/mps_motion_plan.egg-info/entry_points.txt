@@ -1,0 +1,4 @@
+[console_scripts]
+global_path_coordinate_node = mps_motion_plan.global_path_coordinate_node:main
+schedule_visualize_node = mps_motion_plan.schedule_visualize_node:main
+

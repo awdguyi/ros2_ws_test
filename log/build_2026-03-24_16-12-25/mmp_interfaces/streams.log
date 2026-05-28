@@ -1,0 +1,258 @@
+[0.023s] Invoking command in '/home/michael/ros2_ws_test/build/mmp_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/michael/ros2_ws_test/install/zmr_pure_pursuit:/home/michael/ros2_ws_test/install/zmr_mpc:/home/michael/ros2_ws_test/install/zmr_manager:/home/michael/ros2_ws_test/install/zmr_drive_model:/home/michael/ros2_ws_test/install/zmr_description:/home/michael/ros2_ws_test/install/mps_motion_plan:/home/michael/ros2_ws_test/install/map_description:/home/michael/ros2_ws_test/install/zmr_demo:/home/michael/ros2_ws_test/install/mmp_motion_predict:/opt/ros/humble /usr/bin/cmake /home/michael/ros2_ws_test/src/DyObAv-MPCnEBM-Warehouse-ROS2/src/mmp_interfaces -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/michael/ros2_ws_test/install/mmp_interfaces
+[0.350s] -- The C compiler identification is GNU 11.4.0
+[0.350s] -- The CXX compiler identification is GNU 11.4.0
+[0.350s] -- Detecting C compiler ABI info
+[0.350s] -- Detecting C compiler ABI info - done
+[0.350s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.350s] -- Detecting C compile features
+[0.350s] -- Detecting C compile features - done
+[0.350s] -- Detecting CXX compiler ABI info
+[0.350s] -- Detecting CXX compiler ABI info - done
+[0.350s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.350s] -- Detecting CXX compile features
+[0.350s] -- Detecting CXX compile features - done
+[0.350s] -- Found ament_cmake: 1.3.13 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.350s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[0.350s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.351s] -- Found builtin_interfaces: 1.2.2 (/opt/ros/humble/share/builtin_interfaces/cmake)
+[0.353s] -- Found rosidl_generator_c: 3.1.8 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.353s] -- Found rosidl_adapter: 3.1.8 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.353s] -- Found rosidl_generator_cpp: 3.1.8 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.353s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.353s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.353s] -- Found rosidl_default_generators: 1.2.0 (/opt/ros/humble/share/rosidl_default_generators/cmake)
+[0.353s] -- Found std_msgs: 4.9.1 (/opt/ros/humble/share/std_msgs/cmake)
+[0.353s] -- Found geometry_msgs: 4.9.1 (/opt/ros/humble/share/geometry_msgs/cmake)
+[0.478s] -- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)
+[0.710s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.797s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.810s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.6") 
+[0.810s] -- Found python_cmake_module: 0.10.0 (/opt/ros/humble/share/python_cmake_module/cmake)
+[0.825s] -- Found PythonLibs: /usr/lib/x86_64-linux-gnu/libpython3.10.so (found suitable version "3.10.12", minimum required is "3.5") 
+[0.825s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[0.825s] -- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.10
+[0.825s] -- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.10.so
+[0.836s] -- Found PythonExtra: .so  
+[0.868s] -- Found ament_lint_auto: 0.12.15 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[0.875s] -- Added test 'lint_cmake' to check CMake code style
+[0.875s] -- Added test 'xmllint' to check XML markup files
+[0.877s] -- Configuring done
+[0.891s] -- Generating done
+[0.894s] -- Build files have been written to: /home/michael/ros2_ws_test/build/mmp_interfaces
+[0.899s] Invoked command in '/home/michael/ros2_ws_test/build/mmp_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/michael/ros2_ws_test/install/zmr_pure_pursuit:/home/michael/ros2_ws_test/install/zmr_mpc:/home/michael/ros2_ws_test/install/zmr_manager:/home/michael/ros2_ws_test/install/zmr_drive_model:/home/michael/ros2_ws_test/install/zmr_description:/home/michael/ros2_ws_test/install/mps_motion_plan:/home/michael/ros2_ws_test/install/map_description:/home/michael/ros2_ws_test/install/zmr_demo:/home/michael/ros2_ws_test/install/mmp_motion_predict:/opt/ros/humble /usr/bin/cmake /home/michael/ros2_ws_test/src/DyObAv-MPCnEBM-Warehouse-ROS2/src/mmp_interfaces -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/michael/ros2_ws_test/install/mmp_interfaces
+[0.902s] Invoking command in '/home/michael/ros2_ws_test/build/mmp_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/michael/ros2_ws_test/install/zmr_pure_pursuit:/home/michael/ros2_ws_test/install/zmr_mpc:/home/michael/ros2_ws_test/install/zmr_manager:/home/michael/ros2_ws_test/install/zmr_drive_model:/home/michael/ros2_ws_test/install/zmr_description:/home/michael/ros2_ws_test/install/mps_motion_plan:/home/michael/ros2_ws_test/install/map_description:/home/michael/ros2_ws_test/install/zmr_demo:/home/michael/ros2_ws_test/install/mmp_motion_predict:/opt/ros/humble /usr/bin/cmake --build /home/michael/ros2_ws_test/build/mmp_interfaces -- -j24 -l24
+[0.921s] [  2%] [34m[1mGenerating C code for ROS interfaces[0m
+[0.926s] [  4%] [34m[1mGenerating C++ code for ROS interfaces[0m
+[0.929s] [  4%] Built target ament_cmake_python_symlink_mmp_interfaces
+[1.037s] running egg_info
+[1.038s] creating mmp_interfaces.egg-info
+[1.038s] writing mmp_interfaces.egg-info/PKG-INFO
+[1.038s] writing dependency_links to mmp_interfaces.egg-info/dependency_links.txt
+[1.038s] writing top-level names to mmp_interfaces.egg-info/top_level.txt
+[1.038s] writing manifest file 'mmp_interfaces.egg-info/SOURCES.txt'
+[1.039s] reading manifest file 'mmp_interfaces.egg-info/SOURCES.txt'
+[1.039s] writing manifest file 'mmp_interfaces.egg-info/SOURCES.txt'
+[1.052s] [  4%] Built target ament_cmake_python_build_mmp_interfaces_egg
+[1.098s] [  4%] Built target mmp_interfaces__cpp
+[1.101s] [  6%] [32mBuilding C object CMakeFiles/mmp_interfaces__rosidl_generator_c.dir/rosidl_generator_c/mmp_interfaces/msg/detail/human_trajectory__functions.c.o[0m
+[1.101s] [  8%] [32mBuilding C object CMakeFiles/mmp_interfaces__rosidl_generator_c.dir/rosidl_generator_c/mmp_interfaces/msg/detail/human_trajectory_array__functions.c.o[0m
+[1.101s] [ 10%] [32mBuilding C object CMakeFiles/mmp_interfaces__rosidl_generator_c.dir/rosidl_generator_c/mmp_interfaces/msg/detail/motion_prediction_result__functions.c.o[0m
+[1.101s] [ 12%] [34m[1mGenerating C++ type support dispatch for ROS interfaces[0m
+[1.101s] [ 14%] [34m[1mGenerating C++ type support for eProsima Fast-RTPS[0m
+[1.102s] [ 17%] [34m[1mGenerating C++ introspection for ROS interfaces[0m
+[1.126s] [ 19%] [32m[1mLinking C shared library libmmp_interfaces__rosidl_generator_c.so[0m
+[1.149s] [ 19%] Built target mmp_interfaces__rosidl_generator_c
+[1.154s] [ 23%] [34m[1mGenerating C type support dispatch for ROS interfaces[0m
+[1.154s] [ 23%] [34m[1mGenerating C type support for eProsima Fast-RTPS[0m
+[1.155s] [ 25%] [34m[1mGenerating C introspection for ROS interfaces[0m
+[1.279s] [ 27%] [32mBuilding CXX object CMakeFiles/mmp_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/mmp_interfaces/msg/detail/dds_fastrtps/human_trajectory__type_support.cpp.o[0m
+[1.284s] [ 29%] [32mBuilding CXX object CMakeFiles/mmp_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/mmp_interfaces/msg/detail/dds_fastrtps/human_trajectory_array__type_support.cpp.o[0m
+[1.284s] [ 31%] [32mBuilding CXX object CMakeFiles/mmp_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/mmp_interfaces/msg/detail/dds_fastrtps/motion_prediction_result__type_support.cpp.o[0m
+[1.305s] [ 34%] [32mBuilding CXX object CMakeFiles/mmp_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/mmp_interfaces/msg/human_trajectory__type_support.cpp.o[0m
+[1.305s] [ 36%] [32mBuilding CXX object CMakeFiles/mmp_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/mmp_interfaces/msg/human_trajectory_array__type_support.cpp.o[0m
+[1.306s] [ 38%] [32mBuilding CXX object CMakeFiles/mmp_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/mmp_interfaces/msg/motion_prediction_result__type_support.cpp.o[0m
+[1.309s] [ 40%] [32mBuilding CXX object CMakeFiles/mmp_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/mmp_interfaces/msg/human_trajectory__type_support.cpp.o[0m
+[1.309s] [ 42%] [32mBuilding CXX object CMakeFiles/mmp_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/mmp_interfaces/msg/human_trajectory_array__type_support.cpp.o[0m
+[1.313s] [ 44%] [32mBuilding CXX object CMakeFiles/mmp_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/mmp_interfaces/msg/motion_prediction_result__type_support.cpp.o[0m
+[1.334s] [ 46%] [32mBuilding CXX object CMakeFiles/mmp_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/mmp_interfaces/msg/detail/human_trajectory__type_support.cpp.o[0m
+[1.339s] [ 48%] [32mBuilding CXX object CMakeFiles/mmp_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/mmp_interfaces/msg/detail/motion_prediction_result__type_support.cpp.o[0m
+[1.340s] [ 51%] [32mBuilding CXX object CMakeFiles/mmp_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/mmp_interfaces/msg/detail/human_trajectory_array__type_support.cpp.o[0m
+[1.356s] [ 53%] [32m[1mLinking CXX shared library libmmp_interfaces__rosidl_typesupport_c.so[0m
+[1.373s] [ 55%] [32mBuilding C object CMakeFiles/mmp_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/mmp_interfaces/msg/detail/human_trajectory__type_support.c.o[0m
+[1.378s] [ 57%] [32mBuilding C object CMakeFiles/mmp_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/mmp_interfaces/msg/detail/human_trajectory_array__type_support.c.o[0m
+[1.380s] [ 59%] [32mBuilding C object CMakeFiles/mmp_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/mmp_interfaces/msg/detail/motion_prediction_result__type_support.c.o[0m
+[1.393s] [ 59%] Built target mmp_interfaces__rosidl_typesupport_c
+[1.412s] [ 61%] [32m[1mLinking C shared library libmmp_interfaces__rosidl_typesupport_introspection_c.so[0m
+[1.417s] [ 63%] [32mBuilding CXX object CMakeFiles/mmp_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/mmp_interfaces/msg/detail/human_trajectory_array__type_support_c.cpp.o[0m
+[1.418s] [ 65%] [32mBuilding CXX object CMakeFiles/mmp_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/mmp_interfaces/msg/detail/human_trajectory__type_support_c.cpp.o[0m
+[1.421s] [ 68%] [32mBuilding CXX object CMakeFiles/mmp_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/mmp_interfaces/msg/detail/motion_prediction_result__type_support_c.cpp.o[0m
+[1.449s] [ 68%] Built target mmp_interfaces__rosidl_typesupport_introspection_c
+[1.490s] [ 70%] [32m[1mLinking CXX shared library libmmp_interfaces__rosidl_typesupport_cpp.so[0m
+[1.515s] [ 70%] Built target mmp_interfaces__rosidl_typesupport_cpp
+[1.559s] [ 72%] [32m[1mLinking CXX shared library libmmp_interfaces__rosidl_typesupport_fastrtps_cpp.so[0m
+[1.615s] [ 74%] [32m[1mLinking CXX shared library libmmp_interfaces__rosidl_typesupport_fastrtps_c.so[0m
+[1.620s] [ 76%] [32m[1mLinking CXX shared library libmmp_interfaces__rosidl_typesupport_introspection_cpp.so[0m
+[1.627s] [ 76%] Built target mmp_interfaces__rosidl_typesupport_fastrtps_cpp
+[1.679s] [ 76%] Built target mmp_interfaces__rosidl_typesupport_introspection_cpp
+[1.691s] [ 76%] Built target mmp_interfaces__rosidl_typesupport_fastrtps_c
+[1.711s] [ 76%] Built target mmp_interfaces
+[1.735s] [ 78%] [34m[1mGenerating Python code for ROS interfaces[0m
+[1.992s] [ 78%] Built target mmp_interfaces__py
+[2.007s] [ 82%] [32mBuilding C object CMakeFiles/mmp_interfaces__rosidl_generator_py.dir/rosidl_generator_py/mmp_interfaces/msg/_human_trajectory_array_s.c.o[0m
+[2.007s] [ 82%] [32mBuilding C object CMakeFiles/mmp_interfaces__rosidl_generator_py.dir/rosidl_generator_py/mmp_interfaces/msg/_human_trajectory_s.c.o[0m
+[2.007s] [ 85%] [32mBuilding C object CMakeFiles/mmp_interfaces__rosidl_generator_py.dir/rosidl_generator_py/mmp_interfaces/msg/_motion_prediction_result_s.c.o[0m
+[2.074s] [ 87%] [32m[1mLinking C shared library rosidl_generator_py/mmp_interfaces/libmmp_interfaces__rosidl_generator_py.so[0m
+[2.100s] [ 87%] Built target mmp_interfaces__rosidl_generator_py
+[2.111s] [ 89%] [32mBuilding C object CMakeFiles/mmp_interfaces__rosidl_typesupport_introspection_c__pyext.dir/rosidl_generator_py/mmp_interfaces/_mmp_interfaces_s.ep.rosidl_typesupport_introspection_c.c.o[0m
+[2.111s] [ 91%] [32mBuilding C object CMakeFiles/mmp_interfaces__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator_py/mmp_interfaces/_mmp_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c.o[0m
+[2.111s] [ 93%] [32mBuilding C object CMakeFiles/mmp_interfaces__rosidl_typesupport_c__pyext.dir/rosidl_generator_py/mmp_interfaces/_mmp_interfaces_s.ep.rosidl_typesupport_c.c.o[0m
+[2.156s] [ 95%] [32m[1mLinking C shared library rosidl_generator_py/mmp_interfaces/mmp_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so[0m
+[2.156s] [ 97%] [32m[1mLinking C shared library rosidl_generator_py/mmp_interfaces/mmp_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so[0m
+[2.156s] [100%] [32m[1mLinking C shared library rosidl_generator_py/mmp_interfaces/mmp_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so[0m
+[2.173s] [100%] Built target mmp_interfaces__rosidl_typesupport_fastrtps_c__pyext
+[2.176s] [100%] Built target mmp_interfaces__rosidl_typesupport_introspection_c__pyext
+[2.177s] [100%] Built target mmp_interfaces__rosidl_typesupport_c__pyext
+[2.184s] Invoked command in '/home/michael/ros2_ws_test/build/mmp_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/michael/ros2_ws_test/install/zmr_pure_pursuit:/home/michael/ros2_ws_test/install/zmr_mpc:/home/michael/ros2_ws_test/install/zmr_manager:/home/michael/ros2_ws_test/install/zmr_drive_model:/home/michael/ros2_ws_test/install/zmr_description:/home/michael/ros2_ws_test/install/mps_motion_plan:/home/michael/ros2_ws_test/install/map_description:/home/michael/ros2_ws_test/install/zmr_demo:/home/michael/ros2_ws_test/install/mmp_motion_predict:/opt/ros/humble /usr/bin/cmake --build /home/michael/ros2_ws_test/build/mmp_interfaces -- -j24 -l24
+[2.187s] Invoking command in '/home/michael/ros2_ws_test/build/mmp_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/michael/ros2_ws_test/install/zmr_pure_pursuit:/home/michael/ros2_ws_test/install/zmr_mpc:/home/michael/ros2_ws_test/install/zmr_manager:/home/michael/ros2_ws_test/install/zmr_drive_model:/home/michael/ros2_ws_test/install/zmr_description:/home/michael/ros2_ws_test/install/mps_motion_plan:/home/michael/ros2_ws_test/install/map_description:/home/michael/ros2_ws_test/install/zmr_demo:/home/michael/ros2_ws_test/install/mmp_motion_predict:/opt/ros/humble /usr/bin/cmake --install /home/michael/ros2_ws_test/build/mmp_interfaces
+[2.189s] -- Install configuration: ""
+[2.189s] -- Execute custom install script
+[2.189s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/share/ament_index/resource_index/rosidl_interfaces/mmp_interfaces
+[2.193s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/detail/human_trajectory__functions.h
+[2.198s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/detail/human_trajectory__struct.h
+[2.201s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/detail/human_trajectory__type_support.h
+[2.209s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/detail/human_trajectory_array__functions.h
+[2.209s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/detail/human_trajectory_array__struct.h
+[2.213s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/detail/human_trajectory_array__type_support.h
+[2.216s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/detail/motion_prediction_result__functions.h
+[2.220s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/detail/motion_prediction_result__struct.h
+[2.224s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/detail/motion_prediction_result__type_support.h
+[2.228s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/human_trajectory.h
+[2.233s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/human_trajectory_array.h
+[2.237s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/motion_prediction_result.h
+[2.241s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/rosidl_generator_c__visibility_control.h
+[2.245s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/environment/library_path.sh
+[2.249s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/environment/library_path.dsv
+[2.253s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/detail/human_trajectory__rosidl_typesupport_fastrtps_c.h
+[2.256s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/detail/human_trajectory_array__rosidl_typesupport_fastrtps_c.h
+[2.262s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/detail/motion_prediction_result__rosidl_typesupport_fastrtps_c.h
+[2.264s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+[2.268s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/detail/human_trajectory__builder.hpp
+[2.272s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/detail/human_trajectory__struct.hpp
+[2.276s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/detail/human_trajectory__traits.hpp
+[2.280s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/detail/human_trajectory__type_support.hpp
+[2.284s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/detail/human_trajectory_array__builder.hpp
+[2.287s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/detail/human_trajectory_array__struct.hpp
+[2.294s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/detail/human_trajectory_array__traits.hpp
+[2.295s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/detail/human_trajectory_array__type_support.hpp
+[2.299s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/detail/motion_prediction_result__builder.hpp
+[2.302s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/detail/motion_prediction_result__struct.hpp
+[2.306s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/detail/motion_prediction_result__traits.hpp
+[2.310s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/detail/motion_prediction_result__type_support.hpp
+[2.314s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/human_trajectory.hpp
+[2.317s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/human_trajectory_array.hpp
+[2.325s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/motion_prediction_result.hpp
+[2.327s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/rosidl_generator_cpp__visibility_control.hpp
+[2.334s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/detail/human_trajectory__rosidl_typesupport_fastrtps_cpp.hpp
+[2.338s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/detail/human_trajectory_array__rosidl_typesupport_fastrtps_cpp.hpp
+[2.341s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/detail/motion_prediction_result__rosidl_typesupport_fastrtps_cpp.hpp
+[2.344s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+[2.348s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/detail/human_trajectory__rosidl_typesupport_introspection_c.h
+[2.353s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/detail/human_trajectory_array__rosidl_typesupport_introspection_c.h
+[2.355s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/detail/motion_prediction_result__rosidl_typesupport_introspection_c.h
+[2.359s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/rosidl_typesupport_introspection_c__visibility_control.h
+[2.364s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/detail/human_trajectory__rosidl_typesupport_introspection_cpp.hpp
+[2.366s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/detail/human_trajectory_array__rosidl_typesupport_introspection_cpp.hpp
+[2.371s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/include/mmp_interfaces/mmp_interfaces/msg/detail/motion_prediction_result__rosidl_typesupport_introspection_cpp.hpp
+[2.375s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/environment/pythonpath.sh
+[2.378s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/environment/pythonpath.dsv
+[2.382s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/local/lib/python3.10/dist-packages/mmp_interfaces-0.0.0-py3.10.egg-info/PKG-INFO
+[2.386s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/local/lib/python3.10/dist-packages/mmp_interfaces-0.0.0-py3.10.egg-info/SOURCES.txt
+[2.392s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/local/lib/python3.10/dist-packages/mmp_interfaces-0.0.0-py3.10.egg-info/dependency_links.txt
+[2.395s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/local/lib/python3.10/dist-packages/mmp_interfaces-0.0.0-py3.10.egg-info/top_level.txt
+[2.400s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/local/lib/python3.10/dist-packages/mmp_interfaces/__init__.py
+[2.404s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/local/lib/python3.10/dist-packages/mmp_interfaces/_mmp_interfaces_s.ep.rosidl_typesupport_c.c
+[2.408s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/local/lib/python3.10/dist-packages/mmp_interfaces/_mmp_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c
+[2.412s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/local/lib/python3.10/dist-packages/mmp_interfaces/_mmp_interfaces_s.ep.rosidl_typesupport_introspection_c.c
+[2.416s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/local/lib/python3.10/dist-packages/mmp_interfaces/libmmp_interfaces__rosidl_generator_py.so
+[2.420s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/local/lib/python3.10/dist-packages/mmp_interfaces/mmp_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[2.424s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/local/lib/python3.10/dist-packages/mmp_interfaces/mmp_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[2.428s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/local/lib/python3.10/dist-packages/mmp_interfaces/mmp_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[2.433s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/local/lib/python3.10/dist-packages/mmp_interfaces/msg/__init__.py
+[2.437s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/local/lib/python3.10/dist-packages/mmp_interfaces/msg/_human_trajectory.py
+[2.441s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/local/lib/python3.10/dist-packages/mmp_interfaces/msg/_human_trajectory_array.py
+[2.445s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/local/lib/python3.10/dist-packages/mmp_interfaces/msg/_human_trajectory_array_s.c
+[2.448s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/local/lib/python3.10/dist-packages/mmp_interfaces/msg/_human_trajectory_s.c
+[2.452s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/local/lib/python3.10/dist-packages/mmp_interfaces/msg/_motion_prediction_result.py
+[2.457s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/local/lib/python3.10/dist-packages/mmp_interfaces/msg/_motion_prediction_result_s.c
+[2.461s] -- Up-to-date symlink: /home/michael/ros2_ws_test/install/mmp_interfaces/local/lib/python3.10/dist-packages/mmp_interfaces/mmp_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[2.461s] -- Up-to-date symlink: /home/michael/ros2_ws_test/install/mmp_interfaces/local/lib/python3.10/dist-packages/mmp_interfaces/mmp_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[2.461s] -- Up-to-date symlink: /home/michael/ros2_ws_test/install/mmp_interfaces/local/lib/python3.10/dist-packages/mmp_interfaces/mmp_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[2.461s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/msg/HumanTrajectory.idl
+[2.465s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/msg/HumanTrajectoryArray.idl
+[2.469s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/msg/MotionPredictionResult.idl
+[2.473s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/msg/HumanTrajectory.msg
+[2.478s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/msg/HumanTrajectoryArray.msg
+[2.482s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/msg/MotionPredictionResult.msg
+[2.486s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/share/ament_index/resource_index/package_run_dependencies/mmp_interfaces
+[2.489s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/share/ament_index/resource_index/parent_prefix_path/mmp_interfaces
+[2.499s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/environment/ament_prefix_path.sh
+[2.501s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/environment/ament_prefix_path.dsv
+[2.506s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/environment/path.sh
+[2.516s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/environment/path.dsv
+[2.522s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/local_setup.bash
+[2.527s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/local_setup.sh
+[2.531s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/local_setup.zsh
+[2.538s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/local_setup.dsv
+[2.543s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/package.dsv
+[2.548s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/share/ament_index/resource_index/packages/mmp_interfaces
+[2.552s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/cmake/rosidl_cmake-extras.cmake
+[2.560s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/cmake/ament_cmake_export_dependencies-extras.cmake
+[2.561s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/cmake/ament_cmake_export_include_directories-extras.cmake
+[2.565s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/cmake/ament_cmake_export_libraries-extras.cmake
+[2.569s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/cmake/ament_cmake_export_targets-extras.cmake
+[2.573s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+[2.578s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+[2.581s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/cmake/mmp_interfacesConfig.cmake
+[2.586s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/cmake/mmp_interfacesConfig-version.cmake
+[2.590s] -- Symlinking: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/package.xml
+[2.595s] -- Installing: /home/michael/ros2_ws_test/install/mmp_interfaces/lib/libmmp_interfaces__rosidl_generator_c.so
+[2.595s] -- Set runtime path of "/home/michael/ros2_ws_test/install/mmp_interfaces/lib/libmmp_interfaces__rosidl_generator_c.so" to ""
+[2.595s] -- Installing: /home/michael/ros2_ws_test/install/mmp_interfaces/lib/libmmp_interfaces__rosidl_typesupport_fastrtps_c.so
+[2.595s] -- Set runtime path of "/home/michael/ros2_ws_test/install/mmp_interfaces/lib/libmmp_interfaces__rosidl_typesupport_fastrtps_c.so" to ""
+[2.595s] -- Installing: /home/michael/ros2_ws_test/install/mmp_interfaces/lib/libmmp_interfaces__rosidl_typesupport_fastrtps_cpp.so
+[2.595s] -- Set runtime path of "/home/michael/ros2_ws_test/install/mmp_interfaces/lib/libmmp_interfaces__rosidl_typesupport_fastrtps_cpp.so" to ""
+[2.595s] -- Installing: /home/michael/ros2_ws_test/install/mmp_interfaces/lib/libmmp_interfaces__rosidl_typesupport_introspection_c.so
+[2.603s] -- Set runtime path of "/home/michael/ros2_ws_test/install/mmp_interfaces/lib/libmmp_interfaces__rosidl_typesupport_introspection_c.so" to ""
+[2.603s] -- Installing: /home/michael/ros2_ws_test/install/mmp_interfaces/lib/libmmp_interfaces__rosidl_typesupport_c.so
+[2.603s] -- Set runtime path of "/home/michael/ros2_ws_test/install/mmp_interfaces/lib/libmmp_interfaces__rosidl_typesupport_c.so" to ""
+[2.603s] -- Installing: /home/michael/ros2_ws_test/install/mmp_interfaces/lib/libmmp_interfaces__rosidl_typesupport_introspection_cpp.so
+[2.603s] -- Set runtime path of "/home/michael/ros2_ws_test/install/mmp_interfaces/lib/libmmp_interfaces__rosidl_typesupport_introspection_cpp.so" to ""
+[2.603s] -- Installing: /home/michael/ros2_ws_test/install/mmp_interfaces/lib/libmmp_interfaces__rosidl_typesupport_cpp.so
+[2.603s] -- Set runtime path of "/home/michael/ros2_ws_test/install/mmp_interfaces/lib/libmmp_interfaces__rosidl_typesupport_cpp.so" to ""
+[2.621s] Listing '/home/michael/ros2_ws_test/install/mmp_interfaces/local/lib/python3.10/dist-packages/mmp_interfaces'...
+[2.621s] Compiling '/home/michael/ros2_ws_test/install/mmp_interfaces/local/lib/python3.10/dist-packages/mmp_interfaces/__init__.py'...
+[2.621s] Listing '/home/michael/ros2_ws_test/install/mmp_interfaces/local/lib/python3.10/dist-packages/mmp_interfaces/msg'...
+[2.621s] Compiling '/home/michael/ros2_ws_test/install/mmp_interfaces/local/lib/python3.10/dist-packages/mmp_interfaces/msg/__init__.py'...
+[2.621s] Compiling '/home/michael/ros2_ws_test/install/mmp_interfaces/local/lib/python3.10/dist-packages/mmp_interfaces/msg/_human_trajectory.py'...
+[2.622s] Compiling '/home/michael/ros2_ws_test/install/mmp_interfaces/local/lib/python3.10/dist-packages/mmp_interfaces/msg/_human_trajectory_array.py'...
+[2.622s] Compiling '/home/michael/ros2_ws_test/install/mmp_interfaces/local/lib/python3.10/dist-packages/mmp_interfaces/msg/_motion_prediction_result.py'...
+[2.624s] -- Installing: /home/michael/ros2_ws_test/install/mmp_interfaces/lib/libmmp_interfaces__rosidl_generator_py.so
+[2.624s] -- Set runtime path of "/home/michael/ros2_ws_test/install/mmp_interfaces/lib/libmmp_interfaces__rosidl_generator_py.so" to ""
+[2.624s] -- Installing: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/cmake/export_mmp_interfaces__rosidl_generator_cExport.cmake
+[2.624s] -- Installing: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/cmake/export_mmp_interfaces__rosidl_generator_cExport-noconfig.cmake
+[2.624s] -- Installing: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/cmake/export_mmp_interfaces__rosidl_typesupport_fastrtps_cExport.cmake
+[2.625s] -- Installing: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/cmake/export_mmp_interfaces__rosidl_typesupport_fastrtps_cExport-noconfig.cmake
+[2.628s] -- Installing: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/cmake/export_mmp_interfaces__rosidl_generator_cppExport.cmake
+[2.628s] -- Installing: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/cmake/export_mmp_interfaces__rosidl_typesupport_fastrtps_cppExport.cmake
+[2.628s] -- Installing: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/cmake/export_mmp_interfaces__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake
+[2.628s] -- Installing: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/cmake/mmp_interfaces__rosidl_typesupport_introspection_cExport.cmake
+[2.628s] -- Installing: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/cmake/mmp_interfaces__rosidl_typesupport_introspection_cExport-noconfig.cmake
+[2.628s] -- Installing: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/cmake/mmp_interfaces__rosidl_typesupport_cExport.cmake
+[2.628s] -- Installing: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/cmake/mmp_interfaces__rosidl_typesupport_cExport-noconfig.cmake
+[2.628s] -- Installing: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/cmake/mmp_interfaces__rosidl_typesupport_introspection_cppExport.cmake
+[2.628s] -- Installing: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/cmake/mmp_interfaces__rosidl_typesupport_introspection_cppExport-noconfig.cmake
+[2.628s] -- Installing: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/cmake/mmp_interfaces__rosidl_typesupport_cppExport.cmake
+[2.628s] -- Installing: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/cmake/mmp_interfaces__rosidl_typesupport_cppExport-noconfig.cmake
+[2.628s] -- Installing: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/cmake/export_mmp_interfaces__rosidl_generator_pyExport.cmake
+[2.628s] -- Installing: /home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/cmake/export_mmp_interfaces__rosidl_generator_pyExport-noconfig.cmake
+[2.705s] Invoked command in '/home/michael/ros2_ws_test/build/mmp_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/michael/ros2_ws_test/install/zmr_pure_pursuit:/home/michael/ros2_ws_test/install/zmr_mpc:/home/michael/ros2_ws_test/install/zmr_manager:/home/michael/ros2_ws_test/install/zmr_drive_model:/home/michael/ros2_ws_test/install/zmr_description:/home/michael/ros2_ws_test/install/mps_motion_plan:/home/michael/ros2_ws_test/install/map_description:/home/michael/ros2_ws_test/install/zmr_demo:/home/michael/ros2_ws_test/install/mmp_motion_predict:/opt/ros/humble /usr/bin/cmake --install /home/michael/ros2_ws_test/build/mmp_interfaces

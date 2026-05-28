@@ -1,0 +1,1 @@
+/home/michael/ros2_ws_test/src/DyObAv-MPCnEBM-Warehouse-ROS2/src/gazebo_worlds/launch/warehouse_camera.launch.py

@@ -1,0 +1,2 @@
+/home/michael/ros2_ws_test/build/zmr_mpc/zmr_mpc/local_traj_plan.py:101: RuntimeWarning: invalid value encountered in divide
+  distances = np.insert(distances, 0, 0)/distances[-1] # normalize distances to [0, 1]

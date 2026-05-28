@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "map_interfaces__py",
+		"source" : "/home/michael/ros2_ws_test/build/map_interfaces/map_interfaces__py"
+	}
+}

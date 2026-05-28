@@ -1,0 +1,13 @@
+{
+  "package_name": "map_interfaces",
+  "non_idl_tuples": [
+    "/home/michael/ros2_ws_test/src/DyObAv-MPCnEBM-Warehouse-ROS2/src/map_interfaces:msg/ObjectMotionType.msg",
+    "/home/michael/ros2_ws_test/src/DyObAv-MPCnEBM-Warehouse-ROS2/src/map_interfaces:msg/ObjectSemanticType.msg",
+    "/home/michael/ros2_ws_test/src/DyObAv-MPCnEBM-Warehouse-ROS2/src/map_interfaces:msg/ObjectShapeType.msg",
+    "/home/michael/ros2_ws_test/src/DyObAv-MPCnEBM-Warehouse-ROS2/src/map_interfaces:msg/PolygonObject.msg",
+    "/home/michael/ros2_ws_test/src/DyObAv-MPCnEBM-Warehouse-ROS2/src/map_interfaces:msg/PolygonObjectStamped.msg",
+    "/home/michael/ros2_ws_test/src/DyObAv-MPCnEBM-Warehouse-ROS2/src/map_interfaces:msg/PolygonObjectArray.msg",
+    "/home/michael/ros2_ws_test/src/DyObAv-MPCnEBM-Warehouse-ROS2/src/map_interfaces:msg/PolygonObjectArrayStamped.msg",
+    "/home/michael/ros2_ws_test/src/DyObAv-MPCnEBM-Warehouse-ROS2/src/map_interfaces:msg/GeometricMap.msg"
+  ]
+}

@@ -1,0 +1,15 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from zmr_interfaces/srv/GetOtherRobotStates.srv
+// generated code does not contain a copyright notice
+
+
+module zmr_interfaces {
+  module srv {
+    struct GetOtherRobotStates_Request {
+      int64 ego_robot_id;
+    };
+    struct GetOtherRobotStates_Response {
+      sequence<double> other_robot_states_in_order;
+    };
+  };
+};

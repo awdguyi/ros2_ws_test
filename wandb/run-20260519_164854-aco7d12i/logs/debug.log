@@ -1,0 +1,62 @@
+2026-05-19 16:48:54,549 INFO    Thread-1 (test_init):53048 [wandb_setup.py:_flush():81] Current SDK version is 0.27.0
+2026-05-19 16:48:54,549 INFO    Thread-1 (test_init):53048 [wandb_setup.py:_flush():81] Configure stats pid to 53048
+2026-05-19 16:48:54,549 INFO    Thread-1 (test_init):53048 [wandb_setup.py:_flush():81] Loading settings from environment variables
+2026-05-19 16:48:54,549 INFO    Thread-1 (test_init):53048 [wandb_init.py:setup_run_log_directory():723] Logging user logs to /home/michael/ros2_ws_test/wandb/run-20260519_164854-aco7d12i/logs/debug.log
+2026-05-19 16:48:54,549 INFO    Thread-1 (test_init):53048 [wandb_init.py:setup_run_log_directory():724] Logging internal logs to /home/michael/ros2_ws_test/wandb/run-20260519_164854-aco7d12i/logs/debug-internal.log
+2026-05-19 16:48:54,549 INFO    Thread-1 (test_init):53048 [wandb_init.py:init():851] calling init triggers
+2026-05-19 16:48:54,549 INFO    Thread-1 (test_init):53048 [wandb_init.py:init():856] wandb.init called with sweep_config: {}
+config: {'test': True, '_wandb': {}}
+2026-05-19 16:48:54,549 INFO    Thread-1 (test_init):53048 [wandb_init.py:init():899] starting backend
+2026-05-19 16:48:54,760 INFO    Thread-1 (test_init):53048 [wandb_init.py:init():914] sending inform_init request
+2026-05-19 16:48:55,092 INFO    Thread-1 (test_init):53048 [wandb_init.py:init():919] backend started and connected
+2026-05-19 16:48:55,098 INFO    Thread-1 (test_init):53048 [wandb_init.py:init():989] updated telemetry
+2026-05-19 16:48:55,115 INFO    Thread-1 (test_init):53048 [wandb_init.py:init():1012] communicating run to backend with 90.0 second timeout
+2026-05-19 16:49:00,074 INFO    Thread-1 (test_init):53048 [wandb_init.py:init():1057] starting run threads in backend
+2026-05-19 16:49:00,154 INFO    Thread-1 (test_init):53048 [wandb_run.py:_console_start():2509] atexit reg
+2026-05-19 16:49:00,154 INFO    Thread-1 (test_init):53048 [wandb_run.py:_redirect():2359] redirect: wrap_raw
+2026-05-19 16:49:00,154 INFO    Thread-1 (test_init):53048 [wandb_run.py:_redirect():2428] Wrapping output streams.
+2026-05-19 16:49:00,155 INFO    Thread-1 (test_init):53048 [wandb_run.py:_redirect():2451] Redirects installed.
+2026-05-19 16:49:00,155 INFO    Thread-1 (test_init):53048 [wandb_init.py:init():1095] run started, returning control to user process
+2026-05-19 16:49:00,155 INFO    Thread-1 (test_init):53048 [wandb_run.py:_finish():2271] finishing run awdguyi0208-123/mpc-warehouse-navigation/aco7d12i
+2026-05-19 16:49:00,156 INFO    Thread-1 (test_init):53048 [wandb_run.py:_atexit_cleanup():2476] got exitcode: 0
+2026-05-19 16:49:00,156 INFO    Thread-1 (test_init):53048 [wandb_run.py:_restore():2458] restore
+2026-05-19 16:49:00,156 INFO    Thread-1 (test_init):53048 [wandb_run.py:_restore():2464] restore done
+2026-05-19 16:49:16,535 INFO    wandb-AsyncioManager-main:53048 [service_client.py:_forward_responses():122] Reached EOF.
+2026-05-19 16:49:16,536 INFO    wandb-AsyncioManager-main:53048 [mailbox.py:close():154] Closing mailbox, abandoning 2 handles.
+2026-05-19 16:49:16,536 INFO    Thread-1 (test_init):53048 [wandb_run.py:_restore():2458] restore
+2026-05-19 16:49:16,536 INFO    Thread-1 (test_init):53048 [wandb_run.py:_restore():2464] restore done
+2026-05-19 16:49:16,536 ERROR   Thread-1 (test_init):53048 [wandb_run.py:_atexit_cleanup():2496] Problem finishing run
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/dist-packages/wandb/sdk/wandb_run.py", line 2487, in _atexit_cleanup
+    self._on_finish()
+  File "/usr/local/lib/python3.10/dist-packages/wandb/sdk/wandb_run.py", line 2744, in _on_finish
+    result = wait_with_progress(
+  File "/usr/local/lib/python3.10/dist-packages/wandb/sdk/mailbox/wait_with_progress.py", line 24, in wait_with_progress
+    return wait_all_with_progress(
+  File "/usr/local/lib/python3.10/dist-packages/wandb/sdk/mailbox/wait_with_progress.py", line 78, in wait_all_with_progress
+    return asyncer.run(progress_loop_with_timeout)
+  File "/usr/local/lib/python3.10/dist-packages/wandb/sdk/lib/asyncio_manager.py", line 137, in run
+    return future.result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 458, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/local/lib/python3.10/dist-packages/wandb/sdk/lib/asyncio_manager.py", line 223, in _wrap
+    return await fn()
+  File "/usr/local/lib/python3.10/dist-packages/wandb/sdk/mailbox/wait_with_progress.py", line 73, in progress_loop_with_timeout
+    return await _wait_handles_async(
+  File "/usr/local/lib/python3.10/dist-packages/wandb/sdk/mailbox/wait_with_progress.py", line 96, in _wait_handles_async
+    async with asyncio_compat.open_task_group() as task_group:
+  File "/usr/lib/python3.10/contextlib.py", line 206, in __aexit__
+    await anext(self.gen)
+  File "/usr/local/lib/python3.10/dist-packages/wandb/sdk/lib/asyncio_compat.py", line 241, in open_task_group
+    await task_group._wait_all(race=race, timeout=exit_timeout)
+  File "/usr/local/lib/python3.10/dist-packages/wandb/sdk/lib/asyncio_compat.py", line 181, in _wait_all
+    raise exc
+  File "/usr/local/lib/python3.10/dist-packages/wandb/sdk/mailbox/wait_with_progress.py", line 94, in wait_single
+    results[index] = await handle.wait_async(timeout=timeout)
+  File "/usr/local/lib/python3.10/dist-packages/wandb/sdk/mailbox/mailbox_handle.py", line 127, in wait_async
+    response = await self._handle.wait_async(timeout=timeout)
+  File "/usr/local/lib/python3.10/dist-packages/wandb/sdk/mailbox/response_handle.py", line 123, in wait_async
+    raise HandleAbandonedError()
+wandb.sdk.mailbox.mailbox_handle.HandleAbandonedError

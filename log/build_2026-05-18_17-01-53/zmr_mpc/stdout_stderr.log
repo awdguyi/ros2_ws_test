@@ -1,0 +1,22 @@
+running egg_info
+writing ../../../../build/zmr_mpc/zmr_mpc.egg-info/PKG-INFO
+writing dependency_links to ../../../../build/zmr_mpc/zmr_mpc.egg-info/dependency_links.txt
+writing entry points to ../../../../build/zmr_mpc/zmr_mpc.egg-info/entry_points.txt
+writing requirements to ../../../../build/zmr_mpc/zmr_mpc.egg-info/requires.txt
+writing top-level names to ../../../../build/zmr_mpc/zmr_mpc.egg-info/top_level.txt
+reading manifest file '../../../../build/zmr_mpc/zmr_mpc.egg-info/SOURCES.txt'
+writing manifest file '../../../../build/zmr_mpc/zmr_mpc.egg-info/SOURCES.txt'
+running build
+running build_py
+copying zmr_mpc/mpc_trajectory_tracker_node.py -> /home/michael/ros2_ws_test/build/zmr_mpc/build/lib/zmr_mpc
+running install
+running install_lib
+copying /home/michael/ros2_ws_test/build/zmr_mpc/build/lib/zmr_mpc/mpc_trajectory_tracker_node.py -> /home/michael/ros2_ws_test/install/zmr_mpc/lib/python3.10/site-packages/zmr_mpc
+byte-compiling /home/michael/ros2_ws_test/install/zmr_mpc/lib/python3.10/site-packages/zmr_mpc/mpc_trajectory_tracker_node.py to mpc_trajectory_tracker_node.cpython-310.pyc
+running install_data
+running install_egg_info
+removing '/home/michael/ros2_ws_test/install/zmr_mpc/lib/python3.10/site-packages/zmr_mpc-0.0.0-py3.10.egg-info' (and everything under it)
+Copying ../../../../build/zmr_mpc/zmr_mpc.egg-info to /home/michael/ros2_ws_test/install/zmr_mpc/lib/python3.10/site-packages/zmr_mpc-0.0.0-py3.10.egg-info
+running install_scripts
+Installing mpc_trajectory_tracker_node script to /home/michael/ros2_ws_test/install/zmr_mpc/lib/zmr_mpc
+writing list of installed files to '/home/michael/ros2_ws_test/build/zmr_mpc/install.log'

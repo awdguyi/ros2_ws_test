@@ -1,0 +1,15 @@
+digraph G {
+"world" -> "zmr_X/odom"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"world" -> "map"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"zmr_X/base_footprint" -> "zmr_X/base_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"zmr_X/odom" -> "zmr_X/base_footprint"[label=" Broadcaster: default_authority\nAverage rate: 100.794\nBuffer length: 1.26\nMost recent transform: 130.42\nOldest transform: 129.16\n"];
+"zmr_X/base_link" -> "zmr_X/caster_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"zmr_X/base_link" -> "zmr_X/imu_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"zmr_X/base_link" -> "zmr_X/laser_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"zmr_X/base_link" -> "zmr_X/left_wheel_link"[label=" Broadcaster: default_authority\nAverage rate: 15.571\nBuffer length: 1.156\nMost recent transform: 130.356\nOldest transform: 129.2\n"];
+"zmr_X/base_link" -> "zmr_X/right_wheel_link"[label=" Broadcaster: default_authority\nAverage rate: 15.571\nBuffer length: 1.156\nMost recent transform: 130.356\nOldest transform: 129.2\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1773729706.1305618"[ shape=plaintext ] ;
+}->"world";
+}

@@ -1,0 +1,14 @@
+package.xml
+setup.cfg
+setup.py
+launch/zmr_manager.launch.py
+resource/zmr_manager
+zmr_manager/__init__.py
+zmr_manager/robot_manager_node.py
+zmr_manager.egg-info/PKG-INFO
+zmr_manager.egg-info/SOURCES.txt
+zmr_manager.egg-info/dependency_links.txt
+zmr_manager.egg-info/entry_points.txt
+zmr_manager.egg-info/requires.txt
+zmr_manager.egg-info/top_level.txt
+zmr_manager.egg-info/zip-safe

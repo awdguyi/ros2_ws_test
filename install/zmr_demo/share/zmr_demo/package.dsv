@@ -1,0 +1,9 @@
+source;share/zmr_demo/hook/pythonpath.ps1
+source;share/zmr_demo/hook/pythonpath.dsv
+source;share/zmr_demo/hook/pythonpath.sh
+source;share/zmr_demo/hook/ament_prefix_path.ps1
+source;share/zmr_demo/hook/ament_prefix_path.dsv
+source;share/zmr_demo/hook/ament_prefix_path.sh
+source;../../build/zmr_demo/share/zmr_demo/hook/pythonpath_develop.ps1
+source;../../build/zmr_demo/share/zmr_demo/hook/pythonpath_develop.dsv
+source;../../build/zmr_demo/share/zmr_demo/hook/pythonpath_develop.sh

@@ -1,0 +1,91 @@
+_wandb:
+    value:
+        cli_version: 0.27.0
+        e:
+            6wdtiviguixoflx6d2f8155tzfsqdqqt:
+                args:
+                    - --ros-args
+                    - -r
+                    - __node:=mpc_trajectory_tracker_node
+                    - -r
+                    - __ns:=/zmr_X
+                    - --params-file
+                    - /tmp/launch_params_6ith0ihv
+                    - --params-file
+                    - /tmp/launch_params_dd8fvjuw
+                    - --params-file
+                    - /tmp/launch_params_gbvaxz7r
+                    - --params-file
+                    - /tmp/launch_params_p28kczuz
+                    - --params-file
+                    - /tmp/launch_params_qpv6iwsn
+                    - --params-file
+                    - /tmp/launch_params_6_t1b7y3
+                    - --params-file
+                    - /tmp/launch_params_d5sl4qc5
+                    - --params-file
+                    - /tmp/launch_params_3b65oi8k
+                    - --params-file
+                    - /tmp/launch_params_x_fdwge2
+                    - --params-file
+                    - /tmp/launch_params_kagcanm_
+                    - --params-file
+                    - /tmp/launch_params_ge1h3hpg
+                codePath: install/zmr_mpc/lib/zmr_mpc/mpc_trajectory_tracker_node
+                codePathLocal: install/zmr_mpc/lib/zmr_mpc/mpc_trajectory_tracker_node
+                cpu_count: 24
+                cpu_count_logical: 24
+                cudaVersion: "13.0"
+                disk:
+                    /:
+                        total: "982795165696"
+                        used: "112379863040"
+                email: awdguyi0208@gmail.com
+                executable: /usr/bin/python3
+                gpu: NVIDIA GeForce RTX 4090
+                gpu_count: 1
+                gpu_nvidia:
+                    - architecture: Ada
+                      cudaCores: 16384
+                      memoryTotal: "25757220864"
+                      name: NVIDIA GeForce RTX 4090
+                      uuid: GPU-addf9c25-6a6b-322b-5099-6afc943dccb4
+                host: michael-system-product-name-local
+                memory:
+                    total: "32877015040"
+                os: Linux-6.8.0-111-generic-x86_64-with-glibc2.35
+                program: /home/michael/ros2_ws_test/install/zmr_mpc/lib/zmr_mpc/mpc_trajectory_tracker_node
+                python: CPython 3.10.12
+                root: /home/michael/ros2_ws_test
+                startedAt: "2026-05-20T14:43:59.861741Z"
+                writerId: 6wdtiviguixoflx6d2f8155tzfsqdqqt
+        m: []
+        python_version: 3.10.12
+        t:
+            "3":
+                - 2
+                - 13
+                - 16
+                - 62
+            "4": 3.10.12
+            "5": 0.27.0
+            "12": 0.27.0
+            "13": linux-x86_64
+N_hor:
+    value: 20
+ang_acc_penalty:
+    value: 2
+predictor_variant:
+    value: ST-warehouse-progress
+qdynobs:
+    value: 250
+qrpd:
+    value: 30
+qstcobs:
+    value: 300
+qvel:
+    value: 10
+scenario:
+    value: ST_progress
+ts:
+    value: 0.2

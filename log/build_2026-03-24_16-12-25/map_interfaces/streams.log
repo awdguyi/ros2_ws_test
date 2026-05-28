@@ -1,0 +1,388 @@
+[0.024s] Invoking command in '/home/michael/ros2_ws_test/build/map_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/michael/ros2_ws_test/install/zmr_pure_pursuit:/home/michael/ros2_ws_test/install/zmr_mpc:/home/michael/ros2_ws_test/install/zmr_manager:/home/michael/ros2_ws_test/install/zmr_drive_model:/home/michael/ros2_ws_test/install/zmr_description:/home/michael/ros2_ws_test/install/mps_motion_plan:/home/michael/ros2_ws_test/install/map_description:/home/michael/ros2_ws_test/install/zmr_demo:/home/michael/ros2_ws_test/install/mmp_motion_predict:/opt/ros/humble /usr/bin/cmake /home/michael/ros2_ws_test/src/DyObAv-MPCnEBM-Warehouse-ROS2/src/map_interfaces -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/michael/ros2_ws_test/install/map_interfaces
+[0.353s] -- The C compiler identification is GNU 11.4.0
+[0.353s] -- The CXX compiler identification is GNU 11.4.0
+[0.353s] -- Detecting C compiler ABI info
+[0.353s] -- Detecting C compiler ABI info - done
+[0.353s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.353s] -- Detecting C compile features
+[0.353s] -- Detecting C compile features - done
+[0.353s] -- Detecting CXX compiler ABI info
+[0.353s] -- Detecting CXX compiler ABI info - done
+[0.353s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.353s] -- Detecting CXX compile features
+[0.353s] -- Detecting CXX compile features - done
+[0.353s] -- Found ament_cmake: 1.3.13 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.353s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[0.353s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.353s] -- Found builtin_interfaces: 1.2.2 (/opt/ros/humble/share/builtin_interfaces/cmake)
+[0.353s] -- Found rosidl_generator_c: 3.1.8 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.353s] -- Found rosidl_adapter: 3.1.8 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.353s] -- Found rosidl_generator_cpp: 3.1.8 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.353s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.353s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.354s] -- Found rosidl_default_generators: 1.2.0 (/opt/ros/humble/share/rosidl_default_generators/cmake)
+[0.354s] -- Found std_msgs: 4.9.1 (/opt/ros/humble/share/std_msgs/cmake)
+[0.354s] -- Found geometry_msgs: 4.9.1 (/opt/ros/humble/share/geometry_msgs/cmake)
+[0.490s] -- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)
+[0.720s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.802s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.814s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.6") 
+[0.815s] -- Found python_cmake_module: 0.10.0 (/opt/ros/humble/share/python_cmake_module/cmake)
+[0.834s] -- Found PythonLibs: /usr/lib/x86_64-linux-gnu/libpython3.10.so (found suitable version "3.10.12", minimum required is "3.5") 
+[0.834s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[0.834s] -- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.10
+[0.834s] -- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.10.so
+[0.845s] -- Found PythonExtra: .so  
+[0.877s] -- Found ament_lint_auto: 0.12.15 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[0.884s] -- Added test 'lint_cmake' to check CMake code style
+[0.885s] -- Added test 'xmllint' to check XML markup files
+[0.886s] -- Configuring done
+[0.906s] -- Generating done
+[0.910s] -- Build files have been written to: /home/michael/ros2_ws_test/build/map_interfaces
+[0.919s] Invoked command in '/home/michael/ros2_ws_test/build/map_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/michael/ros2_ws_test/install/zmr_pure_pursuit:/home/michael/ros2_ws_test/install/zmr_mpc:/home/michael/ros2_ws_test/install/zmr_manager:/home/michael/ros2_ws_test/install/zmr_drive_model:/home/michael/ros2_ws_test/install/zmr_description:/home/michael/ros2_ws_test/install/mps_motion_plan:/home/michael/ros2_ws_test/install/map_description:/home/michael/ros2_ws_test/install/zmr_demo:/home/michael/ros2_ws_test/install/mmp_motion_predict:/opt/ros/humble /usr/bin/cmake /home/michael/ros2_ws_test/src/DyObAv-MPCnEBM-Warehouse-ROS2/src/map_interfaces -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/michael/ros2_ws_test/install/map_interfaces
+[0.919s] Invoking command in '/home/michael/ros2_ws_test/build/map_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/michael/ros2_ws_test/install/zmr_pure_pursuit:/home/michael/ros2_ws_test/install/zmr_mpc:/home/michael/ros2_ws_test/install/zmr_manager:/home/michael/ros2_ws_test/install/zmr_drive_model:/home/michael/ros2_ws_test/install/zmr_description:/home/michael/ros2_ws_test/install/mps_motion_plan:/home/michael/ros2_ws_test/install/map_description:/home/michael/ros2_ws_test/install/zmr_demo:/home/michael/ros2_ws_test/install/mmp_motion_predict:/opt/ros/humble /usr/bin/cmake --build /home/michael/ros2_ws_test/build/map_interfaces -- -j24 -l24
+[0.943s] [  1%] [34m[1mGenerating C code for ROS interfaces[0m
+[0.945s] [  2%] [34m[1mGenerating C++ code for ROS interfaces[0m
+[0.949s] [  2%] Built target ament_cmake_python_symlink_map_interfaces
+[1.082s] running egg_info
+[1.083s] creating map_interfaces.egg-info
+[1.083s] writing map_interfaces.egg-info/PKG-INFO
+[1.083s] writing dependency_links to map_interfaces.egg-info/dependency_links.txt
+[1.083s] writing top-level names to map_interfaces.egg-info/top_level.txt
+[1.083s] writing manifest file 'map_interfaces.egg-info/SOURCES.txt'
+[1.085s] reading manifest file 'map_interfaces.egg-info/SOURCES.txt'
+[1.085s] writing manifest file 'map_interfaces.egg-info/SOURCES.txt'
+[1.109s] [  2%] Built target ament_cmake_python_build_map_interfaces_egg
+[1.302s] [  2%] Built target map_interfaces__cpp
+[1.310s] [  3%] [34m[1mGenerating C++ type support dispatch for ROS interfaces[0m
+[1.315s] [  4%] [34m[1mGenerating C++ introspection for ROS interfaces[0m
+[1.316s] [ 11%] [32mBuilding C object CMakeFiles/map_interfaces__rosidl_generator_c.dir/rosidl_generator_c/map_interfaces/msg/detail/polygon_object_stamped__functions.c.o[0m
+[1.316s] [  5%] [32mBuilding C object CMakeFiles/map_interfaces__rosidl_generator_c.dir/rosidl_generator_c/map_interfaces/msg/detail/object_semantic_type__functions.c.o[0m
+[1.316s] [ 12%] [32mBuilding C object CMakeFiles/map_interfaces__rosidl_generator_c.dir/rosidl_generator_c/map_interfaces/msg/detail/polygon_object__functions.c.o[0m
+[1.319s] [ 13%] [32mBuilding C object CMakeFiles/map_interfaces__rosidl_generator_c.dir/rosidl_generator_c/map_interfaces/msg/detail/polygon_object_array_stamped__functions.c.o[0m
+[1.319s] [ 14%] [32mBuilding C object CMakeFiles/map_interfaces__rosidl_generator_c.dir/rosidl_generator_c/map_interfaces/msg/detail/geometric_map__functions.c.o[0m
+[1.320s] [  6%] [32mBuilding C object CMakeFiles/map_interfaces__rosidl_generator_c.dir/rosidl_generator_c/map_interfaces/msg/detail/object_motion_type__functions.c.o[0m
+[1.320s] [  8%] [32mBuilding C object CMakeFiles/map_interfaces__rosidl_generator_c.dir/rosidl_generator_c/map_interfaces/msg/detail/object_shape_type__functions.c.o[0m
+[1.320s] [  9%] [34m[1mGenerating C++ type support for eProsima Fast-RTPS[0m
+[1.320s] [ 10%] [32mBuilding C object CMakeFiles/map_interfaces__rosidl_generator_c.dir/rosidl_generator_c/map_interfaces/msg/detail/polygon_object_array__functions.c.o[0m
+[1.389s] [ 16%] [32m[1mLinking C shared library libmap_interfaces__rosidl_generator_c.so[0m
+[1.420s] [ 16%] Built target map_interfaces__rosidl_generator_c
+[1.433s] [ 17%] [34m[1mGenerating C introspection for ROS interfaces[0m
+[1.434s] [ 18%] [34m[1mGenerating C type support dispatch for ROS interfaces[0m
+[1.437s] [ 19%] [34m[1mGenerating C type support for eProsima Fast-RTPS[0m
+[1.562s] [ 20%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/map_interfaces/msg/object_semantic_type__type_support.cpp.o[0m
+[1.562s] [ 21%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/map_interfaces/msg/object_motion_type__type_support.cpp.o[0m
+[1.563s] [ 22%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/map_interfaces/msg/polygon_object__type_support.cpp.o[0m
+[1.563s] [ 24%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/map_interfaces/msg/polygon_object_stamped__type_support.cpp.o[0m
+[1.564s] [ 25%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/map_interfaces/msg/object_shape_type__type_support.cpp.o[0m
+[1.568s] [ 26%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/map_interfaces/msg/polygon_object_array_stamped__type_support.cpp.o[0m
+[1.568s] [ 28%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/map_interfaces/msg/geometric_map__type_support.cpp.o[0m
+[1.568s] [ 28%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/map_interfaces/msg/polygon_object_array__type_support.cpp.o[0m
+[1.632s] [ 31%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/map_interfaces/msg/detail/object_semantic_type__type_support.cpp.o[0m
+[1.632s] [ 31%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/map_interfaces/msg/detail/object_motion_type__type_support.cpp.o[0m
+[1.632s] [ 33%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/map_interfaces/msg/detail/polygon_object_stamped__type_support.cpp.o[0m
+[1.633s] [ 34%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/map_interfaces/msg/detail/polygon_object_array__type_support.cpp.o[0m
+[1.633s] [ 32%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/map_interfaces/msg/detail/polygon_object__type_support.cpp.o[0m
+[1.637s] [ 35%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/map_interfaces/msg/detail/object_shape_type__type_support.cpp.o[0m
+[1.637s] [ 36%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/map_interfaces/msg/detail/geometric_map__type_support.cpp.o[0m
+[1.637s] [ 37%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/map_interfaces/msg/detail/polygon_object_array_stamped__type_support.cpp.o[0m
+[1.719s] [ 39%] [32mBuilding C object CMakeFiles/map_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/map_interfaces/msg/detail/object_semantic_type__type_support.c.o[0m
+[1.719s] [ 40%] [32mBuilding C object CMakeFiles/map_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/map_interfaces/msg/detail/object_motion_type__type_support.c.o[0m
+[1.720s] [ 42%] [32mBuilding C object CMakeFiles/map_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/map_interfaces/msg/detail/polygon_object_stamped__type_support.c.o[0m
+[1.720s] [ 42%] [32mBuilding C object CMakeFiles/map_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/map_interfaces/msg/detail/polygon_object__type_support.c.o[0m
+[1.720s] [ 43%] [32mBuilding C object CMakeFiles/map_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/map_interfaces/msg/detail/object_shape_type__type_support.c.o[0m
+[1.722s] [ 44%] [32mBuilding C object CMakeFiles/map_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/map_interfaces/msg/detail/geometric_map__type_support.c.o[0m
+[1.724s] [ 45%] [32mBuilding C object CMakeFiles/map_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/map_interfaces/msg/detail/polygon_object_array_stamped__type_support.c.o[0m
+[1.724s] [ 47%] [32mBuilding C object CMakeFiles/map_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/map_interfaces/msg/detail/polygon_object_array__type_support.c.o[0m
+[1.741s] [ 48%] [32m[1mLinking CXX shared library libmap_interfaces__rosidl_typesupport_cpp.so[0m
+[1.753s] [ 49%] [32m[1mLinking C shared library libmap_interfaces__rosidl_typesupport_introspection_c.so[0m
+[1.774s] [ 49%] Built target map_interfaces__rosidl_typesupport_cpp
+[1.774s] [ 49%] Built target map_interfaces__rosidl_typesupport_introspection_c
+[1.785s] [ 54%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/map_interfaces/msg/object_shape_type__type_support.cpp.o[0m
+[1.785s] [ 54%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/map_interfaces/msg/object_semantic_type__type_support.cpp.o[0m
+[1.785s] [ 54%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/map_interfaces/msg/object_motion_type__type_support.cpp.o[0m
+[1.785s] [ 54%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/map_interfaces/msg/polygon_object__type_support.cpp.o[0m
+[1.787s] [ 55%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/map_interfaces/msg/polygon_object_stamped__type_support.cpp.o[0m
+[1.787s] [ 56%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/map_interfaces/msg/polygon_object_array__type_support.cpp.o[0m
+[1.788s] [ 57%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/map_interfaces/msg/polygon_object_array_stamped__type_support.cpp.o[0m
+[1.801s] [ 58%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/map_interfaces/msg/geometric_map__type_support.cpp.o[0m
+[1.804s] [ 59%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/map_interfaces/msg/detail/dds_fastrtps/object_motion_type__type_support.cpp.o[0m
+[1.806s] [ 60%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/map_interfaces/msg/detail/dds_fastrtps/polygon_object__type_support.cpp.o[0m
+[1.809s] [ 63%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/map_interfaces/msg/detail/dds_fastrtps/polygon_object_array_stamped__type_support.cpp.o[0m
+[1.809s] [ 63%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/map_interfaces/msg/detail/dds_fastrtps/geometric_map__type_support.cpp.o[0m
+[1.809s] [ 64%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/map_interfaces/msg/detail/dds_fastrtps/object_semantic_type__type_support.cpp.o[0m
+[1.809s] [ 65%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/map_interfaces/msg/detail/dds_fastrtps/polygon_object_array__type_support.cpp.o[0m
+[1.809s] [ 67%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/map_interfaces/msg/detail/dds_fastrtps/object_shape_type__type_support.cpp.o[0m
+[1.810s] [ 67%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/map_interfaces/msg/detail/dds_fastrtps/polygon_object_stamped__type_support.cpp.o[0m
+[1.827s] [ 68%] [32m[1mLinking CXX shared library libmap_interfaces__rosidl_typesupport_c.so[0m
+[1.845s] [ 70%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/object_semantic_type__type_support_c.cpp.o[0m
+[1.845s] [ 71%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/object_motion_type__type_support_c.cpp.o[0m
+[1.847s] [ 72%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/object_shape_type__type_support_c.cpp.o[0m
+[1.850s] [ 73%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/polygon_object_stamped__type_support_c.cpp.o[0m
+[1.856s] [ 74%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/polygon_object__type_support_c.cpp.o[0m
+[1.856s] [ 75%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/polygon_object_array__type_support_c.cpp.o[0m
+[1.856s] [ 77%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/geometric_map__type_support_c.cpp.o[0m
+[1.856s] [ 78%] [32mBuilding CXX object CMakeFiles/map_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/polygon_object_array_stamped__type_support_c.cpp.o[0m
+[1.871s] [ 78%] Built target map_interfaces__rosidl_typesupport_c
+[1.898s] [ 79%] [32m[1mLinking CXX shared library libmap_interfaces__rosidl_typesupport_introspection_cpp.so[0m
+[1.968s] [ 79%] Built target map_interfaces__rosidl_typesupport_introspection_cpp
+[2.062s] [ 80%] [32m[1mLinking CXX shared library libmap_interfaces__rosidl_typesupport_fastrtps_cpp.so[0m
+[2.075s] [ 81%] [32m[1mLinking CXX shared library libmap_interfaces__rosidl_typesupport_fastrtps_c.so[0m
+[2.101s] [ 81%] Built target map_interfaces__rosidl_typesupport_fastrtps_cpp
+[2.120s] [ 81%] Built target map_interfaces__rosidl_typesupport_fastrtps_c
+[2.130s] [ 81%] Built target map_interfaces
+[2.142s] [ 82%] [34m[1mGenerating Python code for ROS interfaces[0m
+[2.616s] [ 82%] Built target map_interfaces__py
+[2.627s] [ 83%] [32mBuilding C object CMakeFiles/map_interfaces__rosidl_generator_py.dir/rosidl_generator_py/map_interfaces/msg/_object_semantic_type_s.c.o[0m
+[2.628s] [ 85%] [32mBuilding C object CMakeFiles/map_interfaces__rosidl_generator_py.dir/rosidl_generator_py/map_interfaces/msg/_object_motion_type_s.c.o[0m
+[2.628s] [ 86%] [32mBuilding C object CMakeFiles/map_interfaces__rosidl_generator_py.dir/rosidl_generator_py/map_interfaces/msg/_object_shape_type_s.c.o[0m
+[2.629s] [ 87%] [32mBuilding C object CMakeFiles/map_interfaces__rosidl_generator_py.dir/rosidl_generator_py/map_interfaces/msg/_polygon_object_array_s.c.o[0m
+[2.632s] [ 88%] [32mBuilding C object CMakeFiles/map_interfaces__rosidl_generator_py.dir/rosidl_generator_py/map_interfaces/msg/_polygon_object_stamped_s.c.o[0m
+[2.632s] [ 89%] [32mBuilding C object CMakeFiles/map_interfaces__rosidl_generator_py.dir/rosidl_generator_py/map_interfaces/msg/_polygon_object_array_stamped_s.c.o[0m
+[2.632s] [ 90%] [32mBuilding C object CMakeFiles/map_interfaces__rosidl_generator_py.dir/rosidl_generator_py/map_interfaces/msg/_geometric_map_s.c.o[0m
+[2.632s] [ 91%] [32mBuilding C object CMakeFiles/map_interfaces__rosidl_generator_py.dir/rosidl_generator_py/map_interfaces/msg/_polygon_object_s.c.o[0m
+[2.681s] [ 93%] [32m[1mLinking C shared library rosidl_generator_py/map_interfaces/libmap_interfaces__rosidl_generator_py.so[0m
+[2.703s] [ 93%] Built target map_interfaces__rosidl_generator_py
+[2.713s] [ 94%] [32mBuilding C object CMakeFiles/map_interfaces__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator_py/map_interfaces/_map_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c.o[0m
+[2.713s] [ 95%] [32mBuilding C object CMakeFiles/map_interfaces__rosidl_typesupport_c__pyext.dir/rosidl_generator_py/map_interfaces/_map_interfaces_s.ep.rosidl_typesupport_c.c.o[0m
+[2.714s] [ 96%] [32mBuilding C object CMakeFiles/map_interfaces__rosidl_typesupport_introspection_c__pyext.dir/rosidl_generator_py/map_interfaces/_map_interfaces_s.ep.rosidl_typesupport_introspection_c.c.o[0m
+[2.765s] [ 97%] [32m[1mLinking C shared library rosidl_generator_py/map_interfaces/map_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so[0m
+[2.765s] [ 98%] [32m[1mLinking C shared library rosidl_generator_py/map_interfaces/map_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so[0m
+[2.779s] [100%] [32m[1mLinking C shared library rosidl_generator_py/map_interfaces/map_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so[0m
+[2.780s] [100%] Built target map_interfaces__rosidl_typesupport_c__pyext
+[2.781s] [100%] Built target map_interfaces__rosidl_typesupport_fastrtps_c__pyext
+[2.801s] [100%] Built target map_interfaces__rosidl_typesupport_introspection_c__pyext
+[2.832s] Invoked command in '/home/michael/ros2_ws_test/build/map_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/michael/ros2_ws_test/install/zmr_pure_pursuit:/home/michael/ros2_ws_test/install/zmr_mpc:/home/michael/ros2_ws_test/install/zmr_manager:/home/michael/ros2_ws_test/install/zmr_drive_model:/home/michael/ros2_ws_test/install/zmr_description:/home/michael/ros2_ws_test/install/mps_motion_plan:/home/michael/ros2_ws_test/install/map_description:/home/michael/ros2_ws_test/install/zmr_demo:/home/michael/ros2_ws_test/install/mmp_motion_predict:/opt/ros/humble /usr/bin/cmake --build /home/michael/ros2_ws_test/build/map_interfaces -- -j24 -l24
+[2.834s] Invoking command in '/home/michael/ros2_ws_test/build/map_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/michael/ros2_ws_test/install/zmr_pure_pursuit:/home/michael/ros2_ws_test/install/zmr_mpc:/home/michael/ros2_ws_test/install/zmr_manager:/home/michael/ros2_ws_test/install/zmr_drive_model:/home/michael/ros2_ws_test/install/zmr_description:/home/michael/ros2_ws_test/install/mps_motion_plan:/home/michael/ros2_ws_test/install/map_description:/home/michael/ros2_ws_test/install/zmr_demo:/home/michael/ros2_ws_test/install/mmp_motion_predict:/opt/ros/humble /usr/bin/cmake --install /home/michael/ros2_ws_test/build/map_interfaces
+[2.837s] -- Install configuration: ""
+[2.837s] -- Execute custom install script
+[2.837s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/ament_index/resource_index/rosidl_interfaces/map_interfaces
+[2.843s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/geometric_map__functions.h
+[2.844s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/geometric_map__struct.h
+[2.851s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/geometric_map__type_support.h
+[2.853s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/object_motion_type__functions.h
+[2.856s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/object_motion_type__struct.h
+[2.862s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/object_motion_type__type_support.h
+[2.864s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/object_semantic_type__functions.h
+[2.868s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/object_semantic_type__struct.h
+[2.873s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/object_semantic_type__type_support.h
+[2.882s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/object_shape_type__functions.h
+[2.882s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/object_shape_type__struct.h
+[2.884s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/object_shape_type__type_support.h
+[2.889s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object__functions.h
+[2.893s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object__struct.h
+[2.896s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object__type_support.h
+[2.900s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object_array__functions.h
+[2.903s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object_array__struct.h
+[2.907s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object_array__type_support.h
+[2.910s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object_array_stamped__functions.h
+[2.913s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object_array_stamped__struct.h
+[2.917s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object_array_stamped__type_support.h
+[2.920s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object_stamped__functions.h
+[2.925s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object_stamped__struct.h
+[2.929s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object_stamped__type_support.h
+[2.933s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/geometric_map.h
+[2.936s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/object_motion_type.h
+[2.944s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/object_semantic_type.h
+[2.948s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/object_shape_type.h
+[2.952s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/polygon_object.h
+[2.957s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/polygon_object_array.h
+[2.962s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/polygon_object_array_stamped.h
+[2.966s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/polygon_object_stamped.h
+[2.970s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/rosidl_generator_c__visibility_control.h
+[2.974s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/environment/library_path.sh
+[2.977s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/environment/library_path.dsv
+[2.982s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/geometric_map__rosidl_typesupport_fastrtps_c.h
+[2.986s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/object_motion_type__rosidl_typesupport_fastrtps_c.h
+[2.992s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/object_semantic_type__rosidl_typesupport_fastrtps_c.h
+[2.993s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/object_shape_type__rosidl_typesupport_fastrtps_c.h
+[2.997s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object__rosidl_typesupport_fastrtps_c.h
+[3.002s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object_array__rosidl_typesupport_fastrtps_c.h
+[3.005s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object_array_stamped__rosidl_typesupport_fastrtps_c.h
+[3.012s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object_stamped__rosidl_typesupport_fastrtps_c.h
+[3.013s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+[3.017s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/geometric_map__builder.hpp
+[3.020s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/geometric_map__struct.hpp
+[3.025s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/geometric_map__traits.hpp
+[3.031s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/geometric_map__type_support.hpp
+[3.035s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/object_motion_type__builder.hpp
+[3.038s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/object_motion_type__struct.hpp
+[3.042s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/object_motion_type__traits.hpp
+[3.045s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/object_motion_type__type_support.hpp
+[3.049s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/object_semantic_type__builder.hpp
+[3.052s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/object_semantic_type__struct.hpp
+[3.057s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/object_semantic_type__traits.hpp
+[3.059s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/object_semantic_type__type_support.hpp
+[3.064s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/object_shape_type__builder.hpp
+[3.066s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/object_shape_type__struct.hpp
+[3.069s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/object_shape_type__traits.hpp
+[3.074s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/object_shape_type__type_support.hpp
+[3.078s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object__builder.hpp
+[3.084s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object__struct.hpp
+[3.087s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object__traits.hpp
+[3.091s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object__type_support.hpp
+[3.095s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object_array__builder.hpp
+[3.099s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object_array__struct.hpp
+[3.105s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object_array__traits.hpp
+[3.108s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object_array__type_support.hpp
+[3.113s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object_array_stamped__builder.hpp
+[3.117s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object_array_stamped__struct.hpp
+[3.121s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object_array_stamped__traits.hpp
+[3.127s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object_array_stamped__type_support.hpp
+[3.131s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object_stamped__builder.hpp
+[3.135s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object_stamped__struct.hpp
+[3.138s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object_stamped__traits.hpp
+[3.142s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object_stamped__type_support.hpp
+[3.146s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/geometric_map.hpp
+[3.150s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/object_motion_type.hpp
+[3.154s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/object_semantic_type.hpp
+[3.160s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/object_shape_type.hpp
+[3.160s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/polygon_object.hpp
+[3.164s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/polygon_object_array.hpp
+[3.167s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/polygon_object_array_stamped.hpp
+[3.171s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/polygon_object_stamped.hpp
+[3.175s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/rosidl_generator_cpp__visibility_control.hpp
+[3.181s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/geometric_map__rosidl_typesupport_fastrtps_cpp.hpp
+[3.184s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/object_motion_type__rosidl_typesupport_fastrtps_cpp.hpp
+[3.188s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/object_semantic_type__rosidl_typesupport_fastrtps_cpp.hpp
+[3.191s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/object_shape_type__rosidl_typesupport_fastrtps_cpp.hpp
+[3.195s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object__rosidl_typesupport_fastrtps_cpp.hpp
+[3.198s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object_array__rosidl_typesupport_fastrtps_cpp.hpp
+[3.202s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object_array_stamped__rosidl_typesupport_fastrtps_cpp.hpp
+[3.205s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object_stamped__rosidl_typesupport_fastrtps_cpp.hpp
+[3.209s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+[3.212s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/geometric_map__rosidl_typesupport_introspection_c.h
+[3.216s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/object_motion_type__rosidl_typesupport_introspection_c.h
+[3.219s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/object_semantic_type__rosidl_typesupport_introspection_c.h
+[3.223s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/object_shape_type__rosidl_typesupport_introspection_c.h
+[3.226s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object__rosidl_typesupport_introspection_c.h
+[3.229s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object_array__rosidl_typesupport_introspection_c.h
+[3.233s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object_array_stamped__rosidl_typesupport_introspection_c.h
+[3.236s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object_stamped__rosidl_typesupport_introspection_c.h
+[3.239s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/rosidl_typesupport_introspection_c__visibility_control.h
+[3.243s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/geometric_map__rosidl_typesupport_introspection_cpp.hpp
+[3.247s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/object_motion_type__rosidl_typesupport_introspection_cpp.hpp
+[3.252s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/object_semantic_type__rosidl_typesupport_introspection_cpp.hpp
+[3.256s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/object_shape_type__rosidl_typesupport_introspection_cpp.hpp
+[3.259s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object__rosidl_typesupport_introspection_cpp.hpp
+[3.263s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object_array__rosidl_typesupport_introspection_cpp.hpp
+[3.267s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object_array_stamped__rosidl_typesupport_introspection_cpp.hpp
+[3.270s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/include/map_interfaces/map_interfaces/msg/detail/polygon_object_stamped__rosidl_typesupport_introspection_cpp.hpp
+[3.274s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/environment/pythonpath.sh
+[3.277s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/environment/pythonpath.dsv
+[3.280s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces-0.0.0-py3.10.egg-info/PKG-INFO
+[3.284s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces-0.0.0-py3.10.egg-info/SOURCES.txt
+[3.286s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces-0.0.0-py3.10.egg-info/dependency_links.txt
+[3.290s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces-0.0.0-py3.10.egg-info/top_level.txt
+[3.294s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/__init__.py
+[3.297s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/_map_interfaces_s.ep.rosidl_typesupport_c.c
+[3.301s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/_map_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c
+[3.305s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/_map_interfaces_s.ep.rosidl_typesupport_introspection_c.c
+[3.310s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/libmap_interfaces__rosidl_generator_py.so
+[3.312s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/map_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[3.317s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/map_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[3.319s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/map_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[3.324s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/msg/__init__.py
+[3.327s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/msg/_geometric_map.py
+[3.331s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/msg/_geometric_map_s.c
+[3.335s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/msg/_object_motion_type.py
+[3.339s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/msg/_object_motion_type_s.c
+[3.346s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/msg/_object_semantic_type.py
+[3.348s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/msg/_object_semantic_type_s.c
+[3.351s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/msg/_object_shape_type.py
+[3.357s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/msg/_object_shape_type_s.c
+[3.357s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/msg/_polygon_object.py
+[3.361s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/msg/_polygon_object_array.py
+[3.365s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/msg/_polygon_object_array_s.c
+[3.369s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/msg/_polygon_object_array_stamped.py
+[3.374s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/msg/_polygon_object_array_stamped_s.c
+[3.377s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/msg/_polygon_object_s.c
+[3.381s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/msg/_polygon_object_stamped.py
+[3.384s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/msg/_polygon_object_stamped_s.c
+[3.387s] -- Up-to-date symlink: /home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/map_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[3.387s] -- Up-to-date symlink: /home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/map_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[3.387s] -- Up-to-date symlink: /home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/map_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[3.387s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/msg/ObjectMotionType.idl
+[3.391s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/msg/ObjectSemanticType.idl
+[3.394s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/msg/ObjectShapeType.idl
+[3.400s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/msg/PolygonObject.idl
+[3.401s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/msg/PolygonObjectStamped.idl
+[3.406s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/msg/PolygonObjectArray.idl
+[3.411s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/msg/PolygonObjectArrayStamped.idl
+[3.416s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/msg/GeometricMap.idl
+[3.419s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/msg/ObjectMotionType.msg
+[3.424s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/msg/ObjectSemanticType.msg
+[3.428s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/msg/ObjectShapeType.msg
+[3.434s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/msg/PolygonObject.msg
+[3.438s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/msg/PolygonObjectStamped.msg
+[3.442s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/msg/PolygonObjectArray.msg
+[3.444s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/msg/PolygonObjectArrayStamped.msg
+[3.451s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/msg/GeometricMap.msg
+[3.455s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/ament_index/resource_index/package_run_dependencies/map_interfaces
+[3.459s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/ament_index/resource_index/parent_prefix_path/map_interfaces
+[3.462s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/environment/ament_prefix_path.sh
+[3.467s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/environment/ament_prefix_path.dsv
+[3.472s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/environment/path.sh
+[3.477s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/environment/path.dsv
+[3.481s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/local_setup.bash
+[3.489s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/local_setup.sh
+[3.489s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/local_setup.zsh
+[3.496s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/local_setup.dsv
+[3.500s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/package.dsv
+[3.504s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/ament_index/resource_index/packages/map_interfaces
+[3.509s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/cmake/rosidl_cmake-extras.cmake
+[3.513s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/cmake/ament_cmake_export_dependencies-extras.cmake
+[3.516s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/cmake/ament_cmake_export_include_directories-extras.cmake
+[3.520s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/cmake/ament_cmake_export_libraries-extras.cmake
+[3.523s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/cmake/ament_cmake_export_targets-extras.cmake
+[3.527s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+[3.531s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+[3.534s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/cmake/map_interfacesConfig.cmake
+[3.538s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/cmake/map_interfacesConfig-version.cmake
+[3.542s] -- Symlinking: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/package.xml
+[3.546s] -- Installing: /home/michael/ros2_ws_test/install/map_interfaces/lib/libmap_interfaces__rosidl_generator_c.so
+[3.546s] -- Set runtime path of "/home/michael/ros2_ws_test/install/map_interfaces/lib/libmap_interfaces__rosidl_generator_c.so" to ""
+[3.546s] -- Installing: /home/michael/ros2_ws_test/install/map_interfaces/lib/libmap_interfaces__rosidl_typesupport_fastrtps_c.so
+[3.548s] -- Set runtime path of "/home/michael/ros2_ws_test/install/map_interfaces/lib/libmap_interfaces__rosidl_typesupport_fastrtps_c.so" to ""
+[3.548s] -- Installing: /home/michael/ros2_ws_test/install/map_interfaces/lib/libmap_interfaces__rosidl_typesupport_fastrtps_cpp.so
+[3.548s] -- Set runtime path of "/home/michael/ros2_ws_test/install/map_interfaces/lib/libmap_interfaces__rosidl_typesupport_fastrtps_cpp.so" to ""
+[3.548s] -- Installing: /home/michael/ros2_ws_test/install/map_interfaces/lib/libmap_interfaces__rosidl_typesupport_introspection_c.so
+[3.548s] -- Set runtime path of "/home/michael/ros2_ws_test/install/map_interfaces/lib/libmap_interfaces__rosidl_typesupport_introspection_c.so" to ""
+[3.548s] -- Installing: /home/michael/ros2_ws_test/install/map_interfaces/lib/libmap_interfaces__rosidl_typesupport_c.so
+[3.548s] -- Set runtime path of "/home/michael/ros2_ws_test/install/map_interfaces/lib/libmap_interfaces__rosidl_typesupport_c.so" to ""
+[3.548s] -- Installing: /home/michael/ros2_ws_test/install/map_interfaces/lib/libmap_interfaces__rosidl_typesupport_introspection_cpp.so
+[3.548s] -- Set runtime path of "/home/michael/ros2_ws_test/install/map_interfaces/lib/libmap_interfaces__rosidl_typesupport_introspection_cpp.so" to ""
+[3.548s] -- Installing: /home/michael/ros2_ws_test/install/map_interfaces/lib/libmap_interfaces__rosidl_typesupport_cpp.so
+[3.548s] -- Set runtime path of "/home/michael/ros2_ws_test/install/map_interfaces/lib/libmap_interfaces__rosidl_typesupport_cpp.so" to ""
+[3.577s] Listing '/home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces'...
+[3.577s] Compiling '/home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/__init__.py'...
+[3.577s] Listing '/home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/msg'...
+[3.577s] Compiling '/home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/msg/__init__.py'...
+[3.578s] Compiling '/home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/msg/_geometric_map.py'...
+[3.578s] Compiling '/home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/msg/_object_motion_type.py'...
+[3.578s] Compiling '/home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/msg/_object_semantic_type.py'...
+[3.578s] Compiling '/home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/msg/_object_shape_type.py'...
+[3.578s] Compiling '/home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/msg/_polygon_object.py'...
+[3.578s] Compiling '/home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/msg/_polygon_object_array.py'...
+[3.578s] Compiling '/home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/msg/_polygon_object_array_stamped.py'...
+[3.578s] Compiling '/home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages/map_interfaces/msg/_polygon_object_stamped.py'...
+[3.580s] -- Installing: /home/michael/ros2_ws_test/install/map_interfaces/lib/libmap_interfaces__rosidl_generator_py.so
+[3.580s] -- Set runtime path of "/home/michael/ros2_ws_test/install/map_interfaces/lib/libmap_interfaces__rosidl_generator_py.so" to ""
+[3.580s] -- Installing: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/cmake/export_map_interfaces__rosidl_generator_cExport.cmake
+[3.580s] -- Installing: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/cmake/export_map_interfaces__rosidl_generator_cExport-noconfig.cmake
+[3.580s] -- Installing: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/cmake/export_map_interfaces__rosidl_typesupport_fastrtps_cExport.cmake
+[3.580s] -- Installing: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/cmake/export_map_interfaces__rosidl_typesupport_fastrtps_cExport-noconfig.cmake
+[3.580s] -- Installing: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/cmake/export_map_interfaces__rosidl_generator_cppExport.cmake
+[3.580s] -- Installing: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/cmake/export_map_interfaces__rosidl_typesupport_fastrtps_cppExport.cmake
+[3.580s] -- Installing: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/cmake/export_map_interfaces__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake
+[3.580s] -- Installing: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/cmake/map_interfaces__rosidl_typesupport_introspection_cExport.cmake
+[3.580s] -- Installing: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/cmake/map_interfaces__rosidl_typesupport_introspection_cExport-noconfig.cmake
+[3.580s] -- Installing: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/cmake/map_interfaces__rosidl_typesupport_cExport.cmake
+[3.580s] -- Installing: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/cmake/map_interfaces__rosidl_typesupport_cExport-noconfig.cmake
+[3.580s] -- Installing: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/cmake/map_interfaces__rosidl_typesupport_introspection_cppExport.cmake
+[3.580s] -- Installing: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/cmake/map_interfaces__rosidl_typesupport_introspection_cppExport-noconfig.cmake
+[3.580s] -- Installing: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/cmake/map_interfaces__rosidl_typesupport_cppExport.cmake
+[3.580s] -- Installing: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/cmake/map_interfaces__rosidl_typesupport_cppExport-noconfig.cmake
+[3.581s] -- Installing: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/cmake/export_map_interfaces__rosidl_generator_pyExport.cmake
+[3.581s] -- Installing: /home/michael/ros2_ws_test/install/map_interfaces/share/map_interfaces/cmake/export_map_interfaces__rosidl_generator_pyExport-noconfig.cmake
+[3.585s] Invoked command in '/home/michael/ros2_ws_test/build/map_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/michael/ros2_ws_test/install/zmr_pure_pursuit:/home/michael/ros2_ws_test/install/zmr_mpc:/home/michael/ros2_ws_test/install/zmr_manager:/home/michael/ros2_ws_test/install/zmr_drive_model:/home/michael/ros2_ws_test/install/zmr_description:/home/michael/ros2_ws_test/install/mps_motion_plan:/home/michael/ros2_ws_test/install/map_description:/home/michael/ros2_ws_test/install/zmr_demo:/home/michael/ros2_ws_test/install/mmp_motion_predict:/opt/ros/humble /usr/bin/cmake --install /home/michael/ros2_ws_test/build/map_interfaces

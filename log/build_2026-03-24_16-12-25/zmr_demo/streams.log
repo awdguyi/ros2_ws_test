@@ -1,0 +1,47 @@
+[0.609s] Invoking command in '/home/michael/ros2_ws_test/build/zmr_demo': PYTHONPATH=/home/michael/ros2_ws_test/build/zmr_demo/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/michael/ros2_ws_test/install/zmr_demo/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/michael/ros2_ws_test/build/zmr_demo/build --no-deps symlink_data
+[0.713s] running develop
+[0.769s] running egg_info
+[0.769s] creating zmr_demo.egg-info
+[0.770s] writing zmr_demo.egg-info/PKG-INFO
+[0.770s] writing dependency_links to zmr_demo.egg-info/dependency_links.txt
+[0.770s] writing entry points to zmr_demo.egg-info/entry_points.txt
+[0.770s] writing requirements to zmr_demo.egg-info/requires.txt
+[0.770s] writing top-level names to zmr_demo.egg-info/top_level.txt
+[0.770s] writing manifest file 'zmr_demo.egg-info/SOURCES.txt'
+[0.770s] reading manifest file 'zmr_demo.egg-info/SOURCES.txt'
+[0.771s] writing manifest file 'zmr_demo.egg-info/SOURCES.txt'
+[0.772s] running build_ext
+[0.772s] Creating /home/michael/ros2_ws_test/install/zmr_demo/lib/python3.10/site-packages/zmr-demo.egg-link (link to .)
+[0.772s] 
+[0.772s] Installed /home/michael/ros2_ws_test/build/zmr_demo
+[0.772s] running symlink_data
+[0.772s] creating /home/michael/ros2_ws_test/install/zmr_demo/share/ament_index
+[0.772s] creating /home/michael/ros2_ws_test/install/zmr_demo/share/ament_index/resource_index
+[0.772s] creating /home/michael/ros2_ws_test/install/zmr_demo/share/ament_index/resource_index/packages
+[0.772s] symbolically linking /home/michael/ros2_ws_test/build/zmr_demo/resource/zmr_demo -> /home/michael/ros2_ws_test/install/zmr_demo/share/ament_index/resource_index/packages
+[0.772s] symbolically linking /home/michael/ros2_ws_test/build/zmr_demo/package.xml -> /home/michael/ros2_ws_test/install/zmr_demo/share/zmr_demo
+[0.772s] creating /home/michael/ros2_ws_test/install/zmr_demo/share/zmr_demo/launch
+[0.772s] symbolically linking /home/michael/ros2_ws_test/build/zmr_demo/launch/single_robot_mpc_rviz.launch.py -> /home/michael/ros2_ws_test/install/zmr_demo/share/zmr_demo/launch
+[0.772s] symbolically linking /home/michael/ros2_ws_test/build/zmr_demo/launch/demo_mir_hospital_single_robot_gazebo_mpc_mmp.launch.py -> /home/michael/ros2_ws_test/install/zmr_demo/share/zmr_demo/launch
+[0.772s] symbolically linking /home/michael/ros2_ws_test/build/zmr_demo/launch/demo_warehouse_single_robot_gazebo_mpc_mmp.launch.py -> /home/michael/ros2_ws_test/install/zmr_demo/share/zmr_demo/launch
+[0.772s] symbolically linking /home/michael/ros2_ws_test/build/zmr_demo/launch/warehouse_single_robot_mpc_rviz.launch.py -> /home/michael/ros2_ws_test/install/zmr_demo/share/zmr_demo/launch
+[0.772s] symbolically linking /home/michael/ros2_ws_test/build/zmr_demo/launch/demo_mir_warehouse_single_robot_gazebo_mpc_mmp.launch.py -> /home/michael/ros2_ws_test/install/zmr_demo/share/zmr_demo/launch
+[0.772s] symbolically linking /home/michael/ros2_ws_test/build/zmr_demo/launch/dual_robot_rviz.launch.py -> /home/michael/ros2_ws_test/install/zmr_demo/share/zmr_demo/launch
+[0.772s] symbolically linking /home/michael/ros2_ws_test/build/zmr_demo/launch/single_robot_pp_gazebo.launch.py -> /home/michael/ros2_ws_test/install/zmr_demo/share/zmr_demo/launch
+[0.772s] symbolically linking /home/michael/ros2_ws_test/build/zmr_demo/launch/single_robot_mpc_gazebo.launch.py -> /home/michael/ros2_ws_test/install/zmr_demo/share/zmr_demo/launch
+[0.772s] symbolically linking /home/michael/ros2_ws_test/build/zmr_demo/launch/warehouse_single_robot_mpc_gazebo.launch.py -> /home/michael/ros2_ws_test/install/zmr_demo/share/zmr_demo/launch
+[0.772s] symbolically linking /home/michael/ros2_ws_test/build/zmr_demo/launch/static_robot.launch.py -> /home/michael/ros2_ws_test/install/zmr_demo/share/zmr_demo/launch
+[0.772s] symbolically linking /home/michael/ros2_ws_test/build/zmr_demo/launch/dual_robot_mpc.launch.py -> /home/michael/ros2_ws_test/install/zmr_demo/share/zmr_demo/launch
+[0.772s] symbolically linking /home/michael/ros2_ws_test/build/zmr_demo/launch/demo_mir_warehouse_dual_robot_gazebo_mpc_mmp.launch.py -> /home/michael/ros2_ws_test/install/zmr_demo/share/zmr_demo/launch
+[0.772s] symbolically linking /home/michael/ros2_ws_test/build/zmr_demo/launch/single_robot_pp_rviz.launch.py -> /home/michael/ros2_ws_test/install/zmr_demo/share/zmr_demo/launch
+[0.772s] symbolically linking /home/michael/ros2_ws_test/build/zmr_demo/launch/dual_robot_pp_gazebo.launch.py -> /home/michael/ros2_ws_test/install/zmr_demo/share/zmr_demo/launch
+[0.773s] symbolically linking /home/michael/ros2_ws_test/build/zmr_demo/launch/dual_robot_pp.launch.py -> /home/michael/ros2_ws_test/install/zmr_demo/share/zmr_demo/launch
+[0.773s] symbolically linking /home/michael/ros2_ws_test/build/zmr_demo/launch/dual_robot_mpc_gazebo.launch.py -> /home/michael/ros2_ws_test/install/zmr_demo/share/zmr_demo/launch
+[0.773s] creating /home/michael/ros2_ws_test/install/zmr_demo/share/zmr_demo/rviz
+[0.773s] symbolically linking /home/michael/ros2_ws_test/build/zmr_demo/rviz/mmp_single_mir_robot_surroundings.rviz -> /home/michael/ros2_ws_test/install/zmr_demo/share/zmr_demo/rviz
+[0.773s] symbolically linking /home/michael/ros2_ws_test/build/zmr_demo/rviz/mmp_single_robot_surroundings.rviz -> /home/michael/ros2_ws_test/install/zmr_demo/share/zmr_demo/rviz
+[0.773s] symbolically linking /home/michael/ros2_ws_test/build/zmr_demo/rviz/dual_robot_surroundings.rviz -> /home/michael/ros2_ws_test/install/zmr_demo/share/zmr_demo/rviz
+[0.773s] symbolically linking /home/michael/ros2_ws_test/build/zmr_demo/rviz/mmp_dual_mir_robot_surroundings.rviz -> /home/michael/ros2_ws_test/install/zmr_demo/share/zmr_demo/rviz
+[0.773s] symbolically linking /home/michael/ros2_ws_test/build/zmr_demo/rviz/single_robot_surroundings.rviz -> /home/michael/ros2_ws_test/install/zmr_demo/share/zmr_demo/rviz
+[0.773s] symbolically linking /home/michael/ros2_ws_test/build/zmr_demo/rviz/static_robot.rviz -> /home/michael/ros2_ws_test/install/zmr_demo/share/zmr_demo/rviz
+[0.789s] Invoked command in '/home/michael/ros2_ws_test/build/zmr_demo' returned '0': PYTHONPATH=/home/michael/ros2_ws_test/build/zmr_demo/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/michael/ros2_ws_test/install/zmr_demo/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/michael/ros2_ws_test/build/zmr_demo/build --no-deps symlink_data

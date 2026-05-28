@@ -1,0 +1,47 @@
+[0.277s] Invoking command in '/home/michael/ros2_ws_test/build/map_description': CMAKE_PREFIX_PATH=/home/michael/ros2_ws_test/install/map_interfaces:/home/michael/ros2_ws_test/install/zmr_interfaces:/home/michael/ros2_ws_test/install/mps_interfaces:/home/michael/ros2_ws_test/install/mmp_interfaces:/home/michael/ros2_ws_test/install/mir_description:/home/michael/ros2_ws_test/install/gazebo_worlds:/home/michael/ros2_ws_test/install/gazebo_ros_actor_pose_plugin LD_LIBRARY_PATH=/home/michael/ros2_ws_test/install/map_interfaces/lib:/home/michael/ros2_ws_test/install/zmr_interfaces/lib:/home/michael/ros2_ws_test/install/mps_interfaces/lib:/home/michael/ros2_ws_test/install/gazebo_ros_actor_pose_plugin/lib:/home/michael/ros2_ws_test/install/mmp_interfaces/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib PYTHONPATH=/home/michael/ros2_ws_test/build/map_description/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/michael/ros2_ws_test/install/map_description/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/michael/ros2_ws_test/build/map_description/build --no-deps symlink_data
+[0.395s] running develop
+[0.456s] running egg_info
+[0.456s] creating map_description.egg-info
+[0.456s] writing map_description.egg-info/PKG-INFO
+[0.456s] writing dependency_links to map_description.egg-info/dependency_links.txt
+[0.456s] writing entry points to map_description.egg-info/entry_points.txt
+[0.456s] writing requirements to map_description.egg-info/requires.txt
+[0.456s] writing top-level names to map_description.egg-info/top_level.txt
+[0.456s] writing manifest file 'map_description.egg-info/SOURCES.txt'
+[0.456s] reading manifest file 'map_description.egg-info/SOURCES.txt'
+[0.457s] writing manifest file 'map_description.egg-info/SOURCES.txt'
+[0.460s] running build_ext
+[0.460s] Creating /home/michael/ros2_ws_test/install/map_description/lib/python3.10/site-packages/map-description.egg-link (link to .)
+[0.460s] Installing geometric_map_node script to /home/michael/ros2_ws_test/install/map_description/lib/map_description
+[0.460s] 
+[0.460s] Installed /home/michael/ros2_ws_test/build/map_description
+[0.460s] running symlink_data
+[0.460s] creating /home/michael/ros2_ws_test/install/map_description/share/ament_index
+[0.460s] creating /home/michael/ros2_ws_test/install/map_description/share/ament_index/resource_index
+[0.460s] creating /home/michael/ros2_ws_test/install/map_description/share/ament_index/resource_index/packages
+[0.460s] symbolically linking /home/michael/ros2_ws_test/build/map_description/resource/map_description -> /home/michael/ros2_ws_test/install/map_description/share/ament_index/resource_index/packages
+[0.461s] symbolically linking /home/michael/ros2_ws_test/build/map_description/package.xml -> /home/michael/ros2_ws_test/install/map_description/share/map_description
+[0.461s] creating /home/michael/ros2_ws_test/install/map_description/share/map_description/data
+[0.461s] symbolically linking /home/michael/ros2_ws_test/build/map_description/data/zospital_img_map.json -> /home/michael/ros2_ws_test/install/map_description/share/map_description/data
+[0.461s] symbolically linking /home/michael/ros2_ws_test/build/map_description/data/zospital_map.json -> /home/michael/ros2_ws_test/install/map_description/share/map_description/data
+[0.461s] symbolically linking /home/michael/ros2_ws_test/build/map_description/data/warehouse_map.json -> /home/michael/ros2_ws_test/install/map_description/share/map_description/data
+[0.461s] symbolically linking /home/michael/ros2_ws_test/build/map_description/data/test_map.json -> /home/michael/ros2_ws_test/install/map_description/share/map_description/data
+[0.461s] symbolically linking /home/michael/ros2_ws_test/build/map_description/data/warehouse_map_real.json -> /home/michael/ros2_ws_test/install/map_description/share/map_description/data
+[0.461s] symbolically linking /home/michael/ros2_ws_test/build/map_description/data/warehouse_img_map.json -> /home/michael/ros2_ws_test/install/map_description/share/map_description/data
+[0.461s] creating /home/michael/ros2_ws_test/install/map_description/share/map_description/launch
+[0.461s] symbolically linking /home/michael/ros2_ws_test/build/map_description/launch/geo_map.launch.py -> /home/michael/ros2_ws_test/install/map_description/share/map_description/launch
+[0.461s] symbolically linking /home/michael/ros2_ws_test/build/map_description/launch/gazebo_map.launch.py -> /home/michael/ros2_ws_test/install/map_description/share/map_description/launch
+[0.461s] creating /home/michael/ros2_ws_test/install/map_description/share/map_description/rviz
+[0.461s] symbolically linking /home/michael/ros2_ws_test/build/map_description/rviz/default_setting.rviz -> /home/michael/ros2_ws_test/install/map_description/share/map_description/rviz
+[0.461s] creating /home/michael/ros2_ws_test/install/map_description/share/map_description/model
+[0.461s] symbolically linking /home/michael/ros2_ws_test/build/map_description/model/small_maze.sdf -> /home/michael/ros2_ws_test/install/map_description/share/map_description/model/.
+[0.461s] creating /home/michael/ros2_ws_test/install/map_description/share/map_description/model/test_map
+[0.461s] symbolically linking /home/michael/ros2_ws_test/build/map_description/model/test_map/model.config -> /home/michael/ros2_ws_test/install/map_description/share/map_description/model/test_map
+[0.461s] symbolically linking /home/michael/ros2_ws_test/build/map_description/model/test_map/model.sdf -> /home/michael/ros2_ws_test/install/map_description/share/map_description/model/test_map
+[0.461s] creating /home/michael/ros2_ws_test/install/map_description/share/map_description/model/small_warehouse
+[0.461s] symbolically linking /home/michael/ros2_ws_test/build/map_description/model/small_warehouse/model.config -> /home/michael/ros2_ws_test/install/map_description/share/map_description/model/small_warehouse
+[0.461s] symbolically linking /home/michael/ros2_ws_test/build/map_description/model/small_warehouse/model.sdf -> /home/michael/ros2_ws_test/install/map_description/share/map_description/model/small_warehouse
+[0.461s] creating /home/michael/ros2_ws_test/install/map_description/share/map_description/worlds
+[0.461s] symbolically linking /home/michael/ros2_ws_test/build/map_description/worlds/test_map.world -> /home/michael/ros2_ws_test/install/map_description/share/map_description/worlds
+[0.461s] symbolically linking /home/michael/ros2_ws_test/build/map_description/worlds/small_warehouse.world -> /home/michael/ros2_ws_test/install/map_description/share/map_description/worlds
+[0.472s] Invoked command in '/home/michael/ros2_ws_test/build/map_description' returned '0': CMAKE_PREFIX_PATH=/home/michael/ros2_ws_test/install/map_interfaces:/home/michael/ros2_ws_test/install/zmr_interfaces:/home/michael/ros2_ws_test/install/mps_interfaces:/home/michael/ros2_ws_test/install/mmp_interfaces:/home/michael/ros2_ws_test/install/mir_description:/home/michael/ros2_ws_test/install/gazebo_worlds:/home/michael/ros2_ws_test/install/gazebo_ros_actor_pose_plugin LD_LIBRARY_PATH=/home/michael/ros2_ws_test/install/map_interfaces/lib:/home/michael/ros2_ws_test/install/zmr_interfaces/lib:/home/michael/ros2_ws_test/install/mps_interfaces/lib:/home/michael/ros2_ws_test/install/gazebo_ros_actor_pose_plugin/lib:/home/michael/ros2_ws_test/install/mmp_interfaces/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib PYTHONPATH=/home/michael/ros2_ws_test/build/map_description/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/michael/ros2_ws_test/install/map_description/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/michael/ros2_ws_test/build/map_description/build --no-deps symlink_data

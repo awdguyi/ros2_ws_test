@@ -1,0 +1,16 @@
+msg/GeometricMap.idl
+msg/GeometricMap.msg
+msg/ObjectMotionType.idl
+msg/ObjectMotionType.msg
+msg/ObjectSemanticType.idl
+msg/ObjectSemanticType.msg
+msg/ObjectShapeType.idl
+msg/ObjectShapeType.msg
+msg/PolygonObject.idl
+msg/PolygonObject.msg
+msg/PolygonObjectArray.idl
+msg/PolygonObjectArray.msg
+msg/PolygonObjectArrayStamped.idl
+msg/PolygonObjectArrayStamped.msg
+msg/PolygonObjectStamped.idl
+msg/PolygonObjectStamped.msg

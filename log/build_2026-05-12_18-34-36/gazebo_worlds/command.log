@@ -1,0 +1,4 @@
+Invoking command in '/home/michael/ros2_ws_test/build/gazebo_worlds': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/michael/ros2_ws_test/build/gazebo_worlds -- -j24 -l24
+Invoked command in '/home/michael/ros2_ws_test/build/gazebo_worlds' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/michael/ros2_ws_test/build/gazebo_worlds -- -j24 -l24
+Invoking command in '/home/michael/ros2_ws_test/build/gazebo_worlds': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/michael/ros2_ws_test/build/gazebo_worlds
+Invoked command in '/home/michael/ros2_ws_test/build/gazebo_worlds' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/michael/ros2_ws_test/build/gazebo_worlds

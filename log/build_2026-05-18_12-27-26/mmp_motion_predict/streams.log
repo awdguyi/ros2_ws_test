@@ -1,0 +1,26 @@
+[0.254s] Invoking command in '/home/michael/ros2_ws_test/src/DyObAv-MPCnEBM-Warehouse-ROS2/src/mmp_motion_predict': AMENT_PREFIX_PATH=/home/michael/ros2_ws_test/install/mmp_interfaces:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/michael/ros2_ws_test/install/mmp_interfaces LD_LIBRARY_PATH=/home/michael/ros2_ws_test/install/mmp_interfaces/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/michael/ros2_ws_test/build/mmp_motion_predict/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/michael/ros2_ws_test/install/mmp_motion_predict/lib/python3.10/site-packages:/home/michael/ros2_ws_test/install/mmp_interfaces/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../../build/mmp_motion_predict build --build-base /home/michael/ros2_ws_test/build/mmp_motion_predict/build install --record /home/michael/ros2_ws_test/build/mmp_motion_predict/install.log --single-version-externally-managed install_data
+[0.343s] running egg_info
+[0.343s] writing ../../../../build/mmp_motion_predict/mmp_motion_predict.egg-info/PKG-INFO
+[0.343s] writing dependency_links to ../../../../build/mmp_motion_predict/mmp_motion_predict.egg-info/dependency_links.txt
+[0.343s] writing entry points to ../../../../build/mmp_motion_predict/mmp_motion_predict.egg-info/entry_points.txt
+[0.343s] writing requirements to ../../../../build/mmp_motion_predict/mmp_motion_predict.egg-info/requires.txt
+[0.343s] writing top-level names to ../../../../build/mmp_motion_predict/mmp_motion_predict.egg-info/top_level.txt
+[0.343s] reading manifest file '../../../../build/mmp_motion_predict/mmp_motion_predict.egg-info/SOURCES.txt'
+[0.344s] writing manifest file '../../../../build/mmp_motion_predict/mmp_motion_predict.egg-info/SOURCES.txt'
+[0.344s] running build
+[0.344s] running build_py
+[0.344s] copying mmp_motion_predict/motion_prediction.py -> /home/michael/ros2_ws_test/build/mmp_motion_predict/build/lib/mmp_motion_predict
+[0.344s] running install
+[0.344s] running install_lib
+[0.344s] copying /home/michael/ros2_ws_test/build/mmp_motion_predict/build/lib/mmp_motion_predict/motion_prediction.py -> /home/michael/ros2_ws_test/install/mmp_motion_predict/lib/python3.10/site-packages/mmp_motion_predict
+[0.345s] byte-compiling /home/michael/ros2_ws_test/install/mmp_motion_predict/lib/python3.10/site-packages/mmp_motion_predict/motion_prediction.py to motion_prediction.cpython-310.pyc
+[0.346s] running install_data
+[0.347s] running install_egg_info
+[0.347s] removing '/home/michael/ros2_ws_test/install/mmp_motion_predict/lib/python3.10/site-packages/mmp_motion_predict-0.0.0-py3.10.egg-info' (and everything under it)
+[0.349s] Copying ../../../../build/mmp_motion_predict/mmp_motion_predict.egg-info to /home/michael/ros2_ws_test/install/mmp_motion_predict/lib/python3.10/site-packages/mmp_motion_predict-0.0.0-py3.10.egg-info
+[0.350s] running install_scripts
+[0.358s] Installing actor_traj_publisher script to /home/michael/ros2_ws_test/install/mmp_motion_predict/lib/mmp_motion_predict
+[0.358s] Installing demo_traj_publisher script to /home/michael/ros2_ws_test/install/mmp_motion_predict/lib/mmp_motion_predict
+[0.358s] Installing motion_prediction_node script to /home/michael/ros2_ws_test/install/mmp_motion_predict/lib/mmp_motion_predict
+[0.359s] writing list of installed files to '/home/michael/ros2_ws_test/build/mmp_motion_predict/install.log'
+[0.368s] Invoked command in '/home/michael/ros2_ws_test/src/DyObAv-MPCnEBM-Warehouse-ROS2/src/mmp_motion_predict' returned '0': AMENT_PREFIX_PATH=/home/michael/ros2_ws_test/install/mmp_interfaces:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/michael/ros2_ws_test/install/mmp_interfaces LD_LIBRARY_PATH=/home/michael/ros2_ws_test/install/mmp_interfaces/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/michael/ros2_ws_test/build/mmp_motion_predict/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/michael/ros2_ws_test/install/mmp_motion_predict/lib/python3.10/site-packages:/home/michael/ros2_ws_test/install/mmp_interfaces/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../../build/mmp_motion_predict build --build-base /home/michael/ros2_ws_test/build/mmp_motion_predict/build install --record /home/michael/ros2_ws_test/build/mmp_motion_predict/install.log --single-version-externally-managed install_data

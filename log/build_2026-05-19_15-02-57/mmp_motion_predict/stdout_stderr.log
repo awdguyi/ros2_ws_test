@@ -1,0 +1,49 @@
+running develop
+running egg_info
+writing mmp_motion_predict.egg-info/PKG-INFO
+writing dependency_links to mmp_motion_predict.egg-info/dependency_links.txt
+writing entry points to mmp_motion_predict.egg-info/entry_points.txt
+writing requirements to mmp_motion_predict.egg-info/requires.txt
+writing top-level names to mmp_motion_predict.egg-info/top_level.txt
+reading manifest file 'mmp_motion_predict.egg-info/SOURCES.txt'
+writing manifest file 'mmp_motion_predict.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/michael/ros2_ws_test/install/mmp_motion_predict/lib/python3.10/site-packages/mmp-motion-predict.egg-link (link to .)
+Installing actor_traj_publisher script to /home/michael/ros2_ws_test/install/mmp_motion_predict/lib/mmp_motion_predict
+Installing demo_traj_publisher script to /home/michael/ros2_ws_test/install/mmp_motion_predict/lib/mmp_motion_predict
+Installing motion_prediction_node script to /home/michael/ros2_ws_test/install/mmp_motion_predict/lib/mmp_motion_predict
+
+Installed /home/michael/ros2_ws_test/build/mmp_motion_predict
+running symlink_data
+symbolically linking /home/michael/ros2_ws_test/build/mmp_motion_predict/resource/mmp_motion_predict -> /home/michael/ros2_ws_test/install/mmp_motion_predict/share/ament_index/resource_index/packages
+symbolically linking /home/michael/ros2_ws_test/build/mmp_motion_predict/package.xml -> /home/michael/ros2_ws_test/install/mmp_motion_predict/share/mmp_motion_predict
+symbolically linking /home/michael/ros2_ws_test/build/mmp_motion_predict/config/global_setting_zospital.yaml -> /home/michael/ros2_ws_test/install/mmp_motion_predict/share/mmp_motion_predict/config
+symbolically linking /home/michael/ros2_ws_test/build/mmp_motion_predict/config/hpd_1t20_poselu_enll_train.yaml -> /home/michael/ros2_ws_test/install/mmp_motion_predict/share/mmp_motion_predict/config
+symbolically linking /home/michael/ros2_ws_test/build/mmp_motion_predict/config/global_setting_warehouse.yaml -> /home/michael/ros2_ws_test/install/mmp_motion_predict/share/mmp_motion_predict/config
+symbolically linking /home/michael/ros2_ws_test/build/mmp_motion_predict/config/zpd_1t20_poselu_enll_train.yaml -> /home/michael/ros2_ws_test/install/mmp_motion_predict/share/mmp_motion_predict/config
+symbolically linking /home/michael/ros2_ws_test/build/mmp_motion_predict/config/wsd_1t20_poselu_enll_train.yaml -> /home/michael/ros2_ws_test/install/mmp_motion_predict/share/mmp_motion_predict/config
+symbolically linking /home/michael/ros2_ws_test/build/mmp_motion_predict/launch/demo_mmp_motion_predict.launch.py -> /home/michael/ros2_ws_test/install/mmp_motion_predict/share/mmp_motion_predict/launch
+symbolically linking /home/michael/ros2_ws_test/build/mmp_motion_predict/launch/mmp_motion_predict_hospital.launch.py -> /home/michael/ros2_ws_test/install/mmp_motion_predict/share/mmp_motion_predict/launch
+symbolically linking /home/michael/ros2_ws_test/build/mmp_motion_predict/launch/mmp_motion_predict.launch.py -> /home/michael/ros2_ws_test/install/mmp_motion_predict/share/mmp_motion_predict/launch
+symbolically linking /home/michael/ros2_ws_test/build/mmp_motion_predict/rviz/demo.rviz -> /home/michael/ros2_ws_test/install/mmp_motion_predict/share/mmp_motion_predict/rviz
+symbolically linking /home/michael/ros2_ws_test/build/mmp_motion_predict/data/actor_2_traj.xml -> /home/michael/ros2_ws_test/install/mmp_motion_predict/share/mmp_motion_predict/data/.
+symbolically linking /home/michael/ros2_ws_test/build/mmp_motion_predict/data/zospital_sim_original/zospital_map_axis.png -> /home/michael/ros2_ws_test/install/mmp_motion_predict/share/mmp_motion_predict/data/zospital_sim_original
+symbolically linking /home/michael/ros2_ws_test/build/mmp_motion_predict/data/zospital_sim_original/graph.json -> /home/michael/ros2_ws_test/install/mmp_motion_predict/share/mmp_motion_predict/data/zospital_sim_original
+symbolically linking /home/michael/ros2_ws_test/build/mmp_motion_predict/data/zospital_sim_original/map.pgm -> /home/michael/ros2_ws_test/install/mmp_motion_predict/share/mmp_motion_predict/data/zospital_sim_original
+symbolically linking /home/michael/ros2_ws_test/build/mmp_motion_predict/data/zospital_sim_original/zospital_map_axis.pdf -> /home/michael/ros2_ws_test/install/mmp_motion_predict/share/mmp_motion_predict/data/zospital_sim_original
+symbolically linking /home/michael/ros2_ws_test/build/mmp_motion_predict/data/zospital_sim_original/label.png -> /home/michael/ros2_ws_test/install/mmp_motion_predict/share/mmp_motion_predict/data/zospital_sim_original
+symbolically linking /home/michael/ros2_ws_test/build/mmp_motion_predict/data/zospital_sim_original/map_real.json -> /home/michael/ros2_ws_test/install/mmp_motion_predict/share/mmp_motion_predict/data/zospital_sim_original
+symbolically linking /home/michael/ros2_ws_test/build/mmp_motion_predict/data/zospital_sim_original/background.png -> /home/michael/ros2_ws_test/install/mmp_motion_predict/share/mmp_motion_predict/data/zospital_sim_original
+symbolically linking /home/michael/ros2_ws_test/build/mmp_motion_predict/data/zospital_sim_original/map.png -> /home/michael/ros2_ws_test/install/mmp_motion_predict/share/mmp_motion_predict/data/zospital_sim_original
+symbolically linking /home/michael/ros2_ws_test/build/mmp_motion_predict/data/zospital_sim_original/map.yaml -> /home/michael/ros2_ws_test/install/mmp_motion_predict/share/mmp_motion_predict/data/zospital_sim_original
+symbolically linking /home/michael/ros2_ws_test/build/mmp_motion_predict/data/zospital_sim_original/map.json -> /home/michael/ros2_ws_test/install/mmp_motion_predict/share/mmp_motion_predict/data/zospital_sim_original
+symbolically linking /home/michael/ros2_ws_test/build/mmp_motion_predict/data/zospital_sim_original/graph_real.json -> /home/michael/ros2_ws_test/install/mmp_motion_predict/share/mmp_motion_predict/data/zospital_sim_original
+symbolically linking /home/michael/ros2_ws_test/build/mmp_motion_predict/data/warehouse_sim_original/graph.json -> /home/michael/ros2_ws_test/install/mmp_motion_predict/share/mmp_motion_predict/data/warehouse_sim_original
+symbolically linking /home/michael/ros2_ws_test/build/mmp_motion_predict/data/warehouse_sim_original/map.pgm -> /home/michael/ros2_ws_test/install/mmp_motion_predict/share/mmp_motion_predict/data/warehouse_sim_original
+symbolically linking /home/michael/ros2_ws_test/build/mmp_motion_predict/data/warehouse_sim_original/background.png -> /home/michael/ros2_ws_test/install/mmp_motion_predict/share/mmp_motion_predict/data/warehouse_sim_original
+symbolically linking /home/michael/ros2_ws_test/build/mmp_motion_predict/data/warehouse_sim_original/map.yaml -> /home/michael/ros2_ws_test/install/mmp_motion_predict/share/mmp_motion_predict/data/warehouse_sim_original
+symbolically linking /home/michael/ros2_ws_test/build/mmp_motion_predict/data/warehouse_sim_original/map.json -> /home/michael/ros2_ws_test/install/mmp_motion_predict/share/mmp_motion_predict/data/warehouse_sim_original
+symbolically linking /home/michael/ros2_ws_test/build/mmp_motion_predict/model/wsd_poselu_enll_1 -> /home/michael/ros2_ws_test/install/mmp_motion_predict/share/mmp_motion_predict/model/.
+symbolically linking /home/michael/ros2_ws_test/build/mmp_motion_predict/model/wsd_none_bce_1 -> /home/michael/ros2_ws_test/install/mmp_motion_predict/share/mmp_motion_predict/model/.
+symbolically linking /home/michael/ros2_ws_test/build/mmp_motion_predict/model/zospital_poselu_enll_1 -> /home/michael/ros2_ws_test/install/mmp_motion_predict/share/mmp_motion_predict/model/.
+symbolically linking /home/michael/ros2_ws_test/build/mmp_motion_predict/model/hospital_poselu_enll_1 -> /home/michael/ros2_ws_test/install/mmp_motion_predict/share/mmp_motion_predict/model/.

@@ -1,0 +1,16 @@
+{"time":"2026-05-19T16:48:54.769322779+08:00","level":"INFO","msg":"wandb-core"}
+{"time":"2026-05-19T16:48:54.769517668+08:00","level":"INFO","msg":"stream: starting","core version":"0.27.0"}
+{"time":"2026-05-19T16:48:55.091334798+08:00","level":"INFO","msg":"stream: created new stream","id":"aco7d12i"}
+{"time":"2026-05-19T16:48:55.091428792+08:00","level":"INFO","msg":"stream: started"}
+{"time":"2026-05-19T16:48:55.091470218+08:00","level":"INFO","msg":"writer: started","stream_id":"aco7d12i"}
+{"time":"2026-05-19T16:48:55.091499929+08:00","level":"INFO","msg":"handler: started"}
+{"time":"2026-05-19T16:48:55.091509089+08:00","level":"INFO","msg":"sender: started"}
+{"time":"2026-05-19T16:49:00.15658445+08:00","level":"INFO","msg":"filestream: sending request","total_files":1}
+{"time":"2026-05-19T16:49:03.323202908+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2026-05-19T16:49:16.536245404+08:00","level":"ERROR","msg":"sender: sendSummary called after exit"}
+{"time":"2026-05-19T16:49:16.536508813+08:00","level":"ERROR","msg":"sender: received exit more than once, ignoring"}
+{"time":"2026-05-19T16:49:16.536593317+08:00","level":"INFO","msg":"stream: finishing up"}
+{"time":"2026-05-19T16:49:16.536603206+08:00","level":"INFO","msg":"handler: closed"}
+{"time":"2026-05-19T16:49:16.536883531+08:00","level":"INFO","msg":"sender: closed"}
+{"time":"2026-05-19T16:49:16.536898027+08:00","level":"INFO","msg":"stream: all finished"}
+{"time":"2026-05-19T16:49:16.537070783+08:00","level":"ERROR+4","msg":"filestream: fatal error: filestream: error making HTTP request: POST https://api.wandb.ai/files/awdguyi0208-123/mpc-warehouse-navigation/aco7d12i/file_stream giving up after 1 attempt(s): context canceled. got response: <nil>"}

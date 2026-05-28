@@ -1,0 +1,8 @@
+{
+  "package_name": "zmr_interfaces",
+  "non_idl_tuples": [
+    "/home/michael/ros2_ws_test/src/DyObAv-MPCnEBM-Warehouse-ROS2/src/zmr_interfaces:msg/CurrentFutureStates.msg",
+    "/home/michael/ros2_ws_test/src/DyObAv-MPCnEBM-Warehouse-ROS2/src/zmr_interfaces:srv/GetOtherRobotStates.srv",
+    "/home/michael/ros2_ws_test/src/DyObAv-MPCnEBM-Warehouse-ROS2/src/zmr_interfaces:srv/GetRobotState.srv"
+  ]
+}

@@ -1,0 +1,37 @@
+[0.494s] Invoking command in '/home/michael/ros2_ws_test/build/mps_motion_plan': CMAKE_PREFIX_PATH=/home/michael/ros2_ws_test/install/mps_interfaces:/home/michael/ros2_ws_test/install/map_interfaces:/home/michael/ros2_ws_test/install/zmr_interfaces:/home/michael/ros2_ws_test/install/mmp_interfaces:/home/michael/ros2_ws_test/install/mir_description:/home/michael/ros2_ws_test/install/gazebo_worlds:/home/michael/ros2_ws_test/install/gazebo_ros_actor_pose_plugin LD_LIBRARY_PATH=/home/michael/ros2_ws_test/install/mps_interfaces/lib:/home/michael/ros2_ws_test/install/map_interfaces/lib:/home/michael/ros2_ws_test/install/zmr_interfaces/lib:/home/michael/ros2_ws_test/install/gazebo_ros_actor_pose_plugin/lib:/home/michael/ros2_ws_test/install/mmp_interfaces/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib PYTHONPATH=/home/michael/ros2_ws_test/build/mps_motion_plan/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/michael/ros2_ws_test/install/mps_motion_plan/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/michael/ros2_ws_test/build/mps_motion_plan/build --no-deps symlink_data
+[0.597s] running develop
+[0.656s] running egg_info
+[0.656s] creating mps_motion_plan.egg-info
+[0.656s] writing mps_motion_plan.egg-info/PKG-INFO
+[0.656s] writing dependency_links to mps_motion_plan.egg-info/dependency_links.txt
+[0.656s] writing entry points to mps_motion_plan.egg-info/entry_points.txt
+[0.656s] writing requirements to mps_motion_plan.egg-info/requires.txt
+[0.656s] writing top-level names to mps_motion_plan.egg-info/top_level.txt
+[0.656s] writing manifest file 'mps_motion_plan.egg-info/SOURCES.txt'
+[0.657s] reading manifest file 'mps_motion_plan.egg-info/SOURCES.txt'
+[0.657s] writing manifest file 'mps_motion_plan.egg-info/SOURCES.txt'
+[0.658s] running build_ext
+[0.658s] Creating /home/michael/ros2_ws_test/install/mps_motion_plan/lib/python3.10/site-packages/mps-motion-plan.egg-link (link to .)
+[0.658s] Installing global_path_coordinate_node script to /home/michael/ros2_ws_test/install/mps_motion_plan/lib/mps_motion_plan
+[0.658s] Installing schedule_visualize_node script to /home/michael/ros2_ws_test/install/mps_motion_plan/lib/mps_motion_plan
+[0.658s] 
+[0.658s] Installed /home/michael/ros2_ws_test/build/mps_motion_plan
+[0.658s] running symlink_data
+[0.658s] creating /home/michael/ros2_ws_test/install/mps_motion_plan/share/ament_index
+[0.658s] creating /home/michael/ros2_ws_test/install/mps_motion_plan/share/ament_index/resource_index
+[0.658s] creating /home/michael/ros2_ws_test/install/mps_motion_plan/share/ament_index/resource_index/packages
+[0.658s] symbolically linking /home/michael/ros2_ws_test/build/mps_motion_plan/resource/mps_motion_plan -> /home/michael/ros2_ws_test/install/mps_motion_plan/share/ament_index/resource_index/packages
+[0.658s] symbolically linking /home/michael/ros2_ws_test/build/mps_motion_plan/package.xml -> /home/michael/ros2_ws_test/install/mps_motion_plan/share/mps_motion_plan
+[0.658s] creating /home/michael/ros2_ws_test/install/mps_motion_plan/share/mps_motion_plan/data
+[0.658s] symbolically linking /home/michael/ros2_ws_test/build/mps_motion_plan/data/zospital_img_graph.json -> /home/michael/ros2_ws_test/install/mps_motion_plan/share/mps_motion_plan/data
+[0.658s] symbolically linking /home/michael/ros2_ws_test/build/mps_motion_plan/data/test_graph.json -> /home/michael/ros2_ws_test/install/mps_motion_plan/share/mps_motion_plan/data
+[0.658s] symbolically linking /home/michael/ros2_ws_test/build/mps_motion_plan/data/zospital_graph.json -> /home/michael/ros2_ws_test/install/mps_motion_plan/share/mps_motion_plan/data
+[0.659s] symbolically linking /home/michael/ros2_ws_test/build/mps_motion_plan/data/warehouse_img_graph.json -> /home/michael/ros2_ws_test/install/mps_motion_plan/share/mps_motion_plan/data
+[0.659s] symbolically linking /home/michael/ros2_ws_test/build/mps_motion_plan/data/warehouse_graph.json -> /home/michael/ros2_ws_test/install/mps_motion_plan/share/mps_motion_plan/data
+[0.659s] symbolically linking /home/michael/ros2_ws_test/build/mps_motion_plan/data/warehouse_schedule.csv -> /home/michael/ros2_ws_test/install/mps_motion_plan/share/mps_motion_plan/data
+[0.659s] symbolically linking /home/michael/ros2_ws_test/build/mps_motion_plan/data/warehouse_schedule_dual.csv -> /home/michael/ros2_ws_test/install/mps_motion_plan/share/mps_motion_plan/data
+[0.659s] symbolically linking /home/michael/ros2_ws_test/build/mps_motion_plan/data/test_schedule.csv -> /home/michael/ros2_ws_test/install/mps_motion_plan/share/mps_motion_plan/data
+[0.659s] symbolically linking /home/michael/ros2_ws_test/build/mps_motion_plan/data/zospital_schedule.csv -> /home/michael/ros2_ws_test/install/mps_motion_plan/share/mps_motion_plan/data
+[0.659s] creating /home/michael/ros2_ws_test/install/mps_motion_plan/share/mps_motion_plan/launch
+[0.659s] symbolically linking /home/michael/ros2_ws_test/build/mps_motion_plan/launch/motion_plan.launch.py -> /home/michael/ros2_ws_test/install/mps_motion_plan/share/mps_motion_plan/launch
+[0.670s] Invoked command in '/home/michael/ros2_ws_test/build/mps_motion_plan' returned '0': CMAKE_PREFIX_PATH=/home/michael/ros2_ws_test/install/mps_interfaces:/home/michael/ros2_ws_test/install/map_interfaces:/home/michael/ros2_ws_test/install/zmr_interfaces:/home/michael/ros2_ws_test/install/mmp_interfaces:/home/michael/ros2_ws_test/install/mir_description:/home/michael/ros2_ws_test/install/gazebo_worlds:/home/michael/ros2_ws_test/install/gazebo_ros_actor_pose_plugin LD_LIBRARY_PATH=/home/michael/ros2_ws_test/install/mps_interfaces/lib:/home/michael/ros2_ws_test/install/map_interfaces/lib:/home/michael/ros2_ws_test/install/zmr_interfaces/lib:/home/michael/ros2_ws_test/install/gazebo_ros_actor_pose_plugin/lib:/home/michael/ros2_ws_test/install/mmp_interfaces/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib PYTHONPATH=/home/michael/ros2_ws_test/build/mps_motion_plan/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/michael/ros2_ws_test/install/mps_motion_plan/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/michael/ros2_ws_test/build/mps_motion_plan/build --no-deps symlink_data

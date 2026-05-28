@@ -1,0 +1,41 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/map_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/geometric_map__type_support_c.cpp.o"
+  "CMakeFiles/map_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/geometric_map__type_support_c.cpp.o.d"
+  "CMakeFiles/map_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/object_motion_type__type_support_c.cpp.o"
+  "CMakeFiles/map_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/object_motion_type__type_support_c.cpp.o.d"
+  "CMakeFiles/map_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/object_semantic_type__type_support_c.cpp.o"
+  "CMakeFiles/map_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/object_semantic_type__type_support_c.cpp.o.d"
+  "CMakeFiles/map_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/object_shape_type__type_support_c.cpp.o"
+  "CMakeFiles/map_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/object_shape_type__type_support_c.cpp.o.d"
+  "CMakeFiles/map_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/polygon_object__type_support_c.cpp.o"
+  "CMakeFiles/map_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/polygon_object__type_support_c.cpp.o.d"
+  "CMakeFiles/map_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/polygon_object_array__type_support_c.cpp.o"
+  "CMakeFiles/map_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/polygon_object_array__type_support_c.cpp.o.d"
+  "CMakeFiles/map_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/polygon_object_array_stamped__type_support_c.cpp.o"
+  "CMakeFiles/map_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/polygon_object_array_stamped__type_support_c.cpp.o.d"
+  "CMakeFiles/map_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/polygon_object_stamped__type_support_c.cpp.o"
+  "CMakeFiles/map_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/polygon_object_stamped__type_support_c.cpp.o.d"
+  "libmap_interfaces__rosidl_typesupport_fastrtps_c.pdb"
+  "libmap_interfaces__rosidl_typesupport_fastrtps_c.so"
+  "rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/geometric_map__rosidl_typesupport_fastrtps_c.h"
+  "rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/geometric_map__type_support_c.cpp"
+  "rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/object_motion_type__rosidl_typesupport_fastrtps_c.h"
+  "rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/object_motion_type__type_support_c.cpp"
+  "rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/object_semantic_type__rosidl_typesupport_fastrtps_c.h"
+  "rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/object_semantic_type__type_support_c.cpp"
+  "rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/object_shape_type__rosidl_typesupport_fastrtps_c.h"
+  "rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/object_shape_type__type_support_c.cpp"
+  "rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/polygon_object__rosidl_typesupport_fastrtps_c.h"
+  "rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/polygon_object__type_support_c.cpp"
+  "rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/polygon_object_array__rosidl_typesupport_fastrtps_c.h"
+  "rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/polygon_object_array__type_support_c.cpp"
+  "rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/polygon_object_array_stamped__rosidl_typesupport_fastrtps_c.h"
+  "rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/polygon_object_array_stamped__type_support_c.cpp"
+  "rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/polygon_object_stamped__rosidl_typesupport_fastrtps_c.h"
+  "rosidl_typesupport_fastrtps_c/map_interfaces/msg/detail/polygon_object_stamped__type_support_c.cpp"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/map_interfaces__rosidl_typesupport_fastrtps_c.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

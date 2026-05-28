@@ -1,0 +1,22 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from map_interfaces/msg/PolygonObjectStamped.msg
+// generated code does not contain a copyright notice
+
+#include "map_interfaces/msg/PolygonObject.idl"
+#include "std_msgs/msg/Header.idl"
+
+module map_interfaces {
+  module msg {
+    @verbatim (language="comment", text=
+      "Polygon with 2D points forming the object, with header")
+    struct PolygonObjectStamped {
+      @verbatim (language="comment", text=
+        "Header with frame_id and timestamp")
+      std_msgs::msg::Header header;
+
+      @verbatim (language="comment", text=
+        "Polygon with 2D points forming the object")
+      map_interfaces::msg::PolygonObject polygon_object;
+    };
+  };
+};

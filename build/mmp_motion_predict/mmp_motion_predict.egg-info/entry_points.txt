@@ -1,0 +1,5 @@
+[console_scripts]
+actor_traj_publisher = mmp_motion_predict.actor_traj_publisher:main
+demo_traj_publisher = mmp_motion_predict.demo_traj_publisher:main
+motion_prediction_node = mmp_motion_predict.motion_prediction_node:main
+

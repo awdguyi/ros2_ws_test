@@ -1,0 +1,65 @@
+{
+  "os": "Linux-6.8.0-111-generic-x86_64-with-glibc2.35",
+  "python": "CPython 3.10.12",
+  "startedAt": "2026-05-24T14:05:02.345908Z",
+  "args": [
+    "--ros-args",
+    "-r",
+    "__node:=mpc_trajectory_tracker_node",
+    "-r",
+    "__ns:=/zmr_X",
+    "--params-file",
+    "/tmp/launch_params_a6n6w5z8",
+    "--params-file",
+    "/tmp/launch_params_1ild6fs5",
+    "--params-file",
+    "/tmp/launch_params_djwz0z2q",
+    "--params-file",
+    "/tmp/launch_params_5qbbdka0",
+    "--params-file",
+    "/tmp/launch_params_jiu5vg9p",
+    "--params-file",
+    "/tmp/launch_params_g73aboqg",
+    "--params-file",
+    "/tmp/launch_params_owyl656i",
+    "--params-file",
+    "/tmp/launch_params_ijhk1awe",
+    "--params-file",
+    "/tmp/launch_params_lp04cwex",
+    "--params-file",
+    "/tmp/launch_params_22ztmso5",
+    "--params-file",
+    "/tmp/launch_params_7oudcdun"
+  ],
+  "program": "/home/michael/ros2_ws_test/install/zmr_mpc/lib/zmr_mpc/mpc_trajectory_tracker_node",
+  "codePath": "install/zmr_mpc/lib/zmr_mpc/mpc_trajectory_tracker_node",
+  "codePathLocal": "install/zmr_mpc/lib/zmr_mpc/mpc_trajectory_tracker_node",
+  "email": "awdguyi0208@gmail.com",
+  "root": "/home/michael/ros2_ws_test",
+  "host": "michael-system-product-name-local",
+  "executable": "/usr/bin/python3",
+  "cpu_count": 24,
+  "cpu_count_logical": 24,
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "gpu_count": 1,
+  "disk": {
+    "/": {
+      "total": "982795165696",
+      "used": "113121492992"
+    }
+  },
+  "memory": {
+    "total": "32877015040"
+  },
+  "gpu_nvidia": [
+    {
+      "name": "NVIDIA GeForce RTX 4090",
+      "memoryTotal": "25757220864",
+      "cudaCores": 16384,
+      "architecture": "Ada",
+      "uuid": "GPU-addf9c25-6a6b-322b-5099-6afc943dccb4"
+    }
+  ],
+  "cudaVersion": "13.0",
+  "writerId": "0f6vmxr7de51snuo3a0cj6wlw2l6x80m"
+}

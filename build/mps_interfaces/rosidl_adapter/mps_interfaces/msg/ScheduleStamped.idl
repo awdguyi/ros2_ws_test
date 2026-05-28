@@ -1,0 +1,20 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from mps_interfaces/msg/ScheduleStamped.msg
+// generated code does not contain a copyright notice
+
+#include "mps_interfaces/msg/Schedule.idl"
+#include "std_msgs/msg/Header.idl"
+
+module mps_interfaces {
+  module msg {
+    @verbatim (language="comment", text=
+      "A schedule of a robot indicates the time and location, stamped")
+    struct ScheduleStamped {
+      @verbatim (language="comment", text=
+        "Header with frame_id and timestamp")
+      std_msgs::msg::Header header;
+
+      mps_interfaces::msg::Schedule schedule;
+    };
+  };
+};

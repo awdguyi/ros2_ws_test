@@ -1,0 +1,1 @@
+/home/michael/ros2_ws_test/src/DyObAv-MPCnEBM-Warehouse-ROS2/src/mir_description/launch/mir_entity_spawn.launch.py

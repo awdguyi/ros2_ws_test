@@ -1,0 +1,3 @@
+[console_scripts]
+mpc_trajectory_tracker_node = zmr_mpc.mpc_trajectory_tracker_node:main
+

@@ -1,0 +1,1 @@
+/home/michael/ros2_ws_test/build/mps_interfaces/ament_cmake_core/mps_interfacesConfig.cmake

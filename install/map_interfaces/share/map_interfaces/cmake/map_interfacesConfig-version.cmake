@@ -1,0 +1,1 @@
+/home/michael/ros2_ws_test/build/map_interfaces/ament_cmake_core/map_interfacesConfig-version.cmake

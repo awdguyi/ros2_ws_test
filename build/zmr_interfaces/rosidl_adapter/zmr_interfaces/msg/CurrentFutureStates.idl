@@ -1,0 +1,14 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from zmr_interfaces/msg/CurrentFutureStates.msg
+// generated code does not contain a copyright notice
+
+
+module zmr_interfaces {
+  module msg {
+    struct CurrentFutureStates {
+      @verbatim (language="comment", text=
+        "contains the current and future (within the horizon) states of the robot")
+      sequence<double> robot_states;
+    };
+  };
+};

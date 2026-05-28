@@ -1,0 +1,1 @@
+ament_cmake_symlink_install_targets("TARGET_FILES" "/home/michael/ros2_ws_test/build/gazebo_ros_actor_pose_plugin/libgazebo_ros_actor_pose.so" "TARGETS" "gazebo_ros_actor_pose" "ARCHIVE_DESTINATION" "lib" "LIBRARY_DESTINATION" "lib" "RUNTIME_DESTINATION" "bin")

@@ -1,0 +1,15 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from mmp_interfaces/msg/HumanTrajectoryArray.msg
+// generated code does not contain a copyright notice
+
+#include "mmp_interfaces/msg/HumanTrajectory.idl"
+
+module mmp_interfaces {
+  module msg {
+    @verbatim (language="comment", text=
+      "Trajectory array")
+    struct HumanTrajectoryArray {
+      sequence<mmp_interfaces::msg::HumanTrajectory> human_trajectories;
+    };
+  };
+};

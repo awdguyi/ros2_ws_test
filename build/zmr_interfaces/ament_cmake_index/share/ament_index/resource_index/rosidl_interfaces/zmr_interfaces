@@ -1,0 +1,10 @@
+msg/CurrentFutureStates.idl
+msg/CurrentFutureStates.msg
+srv/GetOtherRobotStates.idl
+srv/GetOtherRobotStates.srv
+srv/GetOtherRobotStates_Request.msg
+srv/GetOtherRobotStates_Response.msg
+srv/GetRobotState.idl
+srv/GetRobotState.srv
+srv/GetRobotState_Request.msg
+srv/GetRobotState_Response.msg

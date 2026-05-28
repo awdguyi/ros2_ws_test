@@ -1,0 +1,27 @@
+[0.265s] Invoking command in '/home/michael/ros2_ws_test/src/DyObAv-MPCnEBM-Warehouse-ROS2/src/zmr_mpc': AMENT_PREFIX_PATH=/home/michael/ros2_ws_test/install/mps_interfaces:/home/michael/ros2_ws_test/install/zmr_interfaces:/home/michael/ros2_ws_test/install/map_interfaces:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/michael/ros2_ws_test/install/mps_interfaces:/home/michael/ros2_ws_test/install/zmr_interfaces:/home/michael/ros2_ws_test/install/map_interfaces LD_LIBRARY_PATH=/home/michael/ros2_ws_test/install/mps_interfaces/lib:/home/michael/ros2_ws_test/install/zmr_interfaces/lib:/home/michael/ros2_ws_test/install/map_interfaces/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/michael/ros2_ws_test/build/zmr_mpc/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/michael/ros2_ws_test/install/zmr_mpc/lib/python3.10/site-packages:/home/michael/ros2_ws_test/install/mps_interfaces/local/lib/python3.10/dist-packages:/home/michael/ros2_ws_test/install/zmr_interfaces/local/lib/python3.10/dist-packages:/home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../../build/zmr_mpc build --build-base /home/michael/ros2_ws_test/build/zmr_mpc/build install --record /home/michael/ros2_ws_test/build/zmr_mpc/install.log --single-version-externally-managed install_data
+[0.357s] running egg_info
+[0.357s] writing ../../../../build/zmr_mpc/zmr_mpc.egg-info/PKG-INFO
+[0.357s] writing dependency_links to ../../../../build/zmr_mpc/zmr_mpc.egg-info/dependency_links.txt
+[0.357s] writing entry points to ../../../../build/zmr_mpc/zmr_mpc.egg-info/entry_points.txt
+[0.357s] writing requirements to ../../../../build/zmr_mpc/zmr_mpc.egg-info/requires.txt
+[0.357s] writing top-level names to ../../../../build/zmr_mpc/zmr_mpc.egg-info/top_level.txt
+[0.358s] reading manifest file '../../../../build/zmr_mpc/zmr_mpc.egg-info/SOURCES.txt'
+[0.359s] writing manifest file '../../../../build/zmr_mpc/zmr_mpc.egg-info/SOURCES.txt'
+[0.359s] running build
+[0.359s] running build_py
+[0.359s] copying zmr_mpc/casadi_build/builder_panoc_v0.py -> /home/michael/ros2_ws_test/build/zmr_mpc/build/lib/zmr_mpc/casadi_build
+[0.359s] copying zmr_mpc/casadi_build/mpc_cost.py -> /home/michael/ros2_ws_test/build/zmr_mpc/build/lib/zmr_mpc/casadi_build
+[0.359s] running install
+[0.359s] running install_lib
+[0.359s] copying /home/michael/ros2_ws_test/build/zmr_mpc/build/lib/zmr_mpc/casadi_build/builder_panoc_v0.py -> /home/michael/ros2_ws_test/install/zmr_mpc/lib/python3.10/site-packages/zmr_mpc/casadi_build
+[0.360s] copying /home/michael/ros2_ws_test/build/zmr_mpc/build/lib/zmr_mpc/casadi_build/mpc_cost.py -> /home/michael/ros2_ws_test/install/zmr_mpc/lib/python3.10/site-packages/zmr_mpc/casadi_build
+[0.360s] byte-compiling /home/michael/ros2_ws_test/install/zmr_mpc/lib/python3.10/site-packages/zmr_mpc/casadi_build/builder_panoc_v0.py to builder_panoc_v0.cpython-310.pyc
+[0.361s] byte-compiling /home/michael/ros2_ws_test/install/zmr_mpc/lib/python3.10/site-packages/zmr_mpc/casadi_build/mpc_cost.py to mpc_cost.cpython-310.pyc
+[0.361s] running install_data
+[0.362s] running install_egg_info
+[0.366s] removing '/home/michael/ros2_ws_test/install/zmr_mpc/lib/python3.10/site-packages/zmr_mpc-0.0.0-py3.10.egg-info' (and everything under it)
+[0.366s] Copying ../../../../build/zmr_mpc/zmr_mpc.egg-info to /home/michael/ros2_ws_test/install/zmr_mpc/lib/python3.10/site-packages/zmr_mpc-0.0.0-py3.10.egg-info
+[0.366s] running install_scripts
+[0.371s] Installing mpc_trajectory_tracker_node script to /home/michael/ros2_ws_test/install/zmr_mpc/lib/zmr_mpc
+[0.372s] writing list of installed files to '/home/michael/ros2_ws_test/build/zmr_mpc/install.log'
+[0.381s] Invoked command in '/home/michael/ros2_ws_test/src/DyObAv-MPCnEBM-Warehouse-ROS2/src/zmr_mpc' returned '0': AMENT_PREFIX_PATH=/home/michael/ros2_ws_test/install/mps_interfaces:/home/michael/ros2_ws_test/install/zmr_interfaces:/home/michael/ros2_ws_test/install/map_interfaces:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/michael/ros2_ws_test/install/mps_interfaces:/home/michael/ros2_ws_test/install/zmr_interfaces:/home/michael/ros2_ws_test/install/map_interfaces LD_LIBRARY_PATH=/home/michael/ros2_ws_test/install/mps_interfaces/lib:/home/michael/ros2_ws_test/install/zmr_interfaces/lib:/home/michael/ros2_ws_test/install/map_interfaces/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/michael/ros2_ws_test/build/zmr_mpc/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/michael/ros2_ws_test/install/zmr_mpc/lib/python3.10/site-packages:/home/michael/ros2_ws_test/install/mps_interfaces/local/lib/python3.10/dist-packages:/home/michael/ros2_ws_test/install/zmr_interfaces/local/lib/python3.10/dist-packages:/home/michael/ros2_ws_test/install/map_interfaces/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../../build/zmr_mpc build --build-base /home/michael/ros2_ws_test/build/zmr_mpc/build install --record /home/michael/ros2_ws_test/build/zmr_mpc/install.log --single-version-externally-managed install_data

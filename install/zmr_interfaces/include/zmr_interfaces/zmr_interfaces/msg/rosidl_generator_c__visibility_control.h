@@ -1,0 +1,1 @@
+/home/michael/ros2_ws_test/build/zmr_interfaces/rosidl_generator_c/zmr_interfaces/msg/rosidl_generator_c__visibility_control.h

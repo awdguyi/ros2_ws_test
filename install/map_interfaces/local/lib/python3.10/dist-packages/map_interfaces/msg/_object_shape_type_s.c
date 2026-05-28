@@ -1,0 +1,1 @@
+/home/michael/ros2_ws_test/build/map_interfaces/rosidl_generator_py/map_interfaces/msg/_object_shape_type_s.c

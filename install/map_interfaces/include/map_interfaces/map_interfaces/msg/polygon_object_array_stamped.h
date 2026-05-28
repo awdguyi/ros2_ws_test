@@ -1,0 +1,1 @@
+/home/michael/ros2_ws_test/build/map_interfaces/rosidl_generator_c/map_interfaces/msg/polygon_object_array_stamped.h
