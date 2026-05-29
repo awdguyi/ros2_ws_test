@@ -1,3 +1,0 @@
-[console_scripts]
-robot_manager_node = zmr_manager.robot_manager_node:main
-

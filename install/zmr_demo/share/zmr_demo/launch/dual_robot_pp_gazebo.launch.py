@@ -1,1 +1,0 @@
-/home/michael/ros2_ws_test/build/zmr_demo/launch/dual_robot_pp_gazebo.launch.py

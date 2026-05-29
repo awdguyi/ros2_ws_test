@@ -1,6 +1,0 @@
-source;share/mmp_motion_predict/hook/pythonpath.ps1
-source;share/mmp_motion_predict/hook/pythonpath.dsv
-source;share/mmp_motion_predict/hook/pythonpath.sh
-source;share/mmp_motion_predict/hook/ament_prefix_path.ps1
-source;share/mmp_motion_predict/hook/ament_prefix_path.dsv
-source;share/mmp_motion_predict/hook/ament_prefix_path.sh

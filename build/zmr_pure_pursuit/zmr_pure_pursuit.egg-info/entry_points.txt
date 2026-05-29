@@ -1,3 +1,0 @@
-[console_scripts]
-pure_pursuit_controller_node = zmr_pure_pursuit.pure_pursuit_controller_node:main
-

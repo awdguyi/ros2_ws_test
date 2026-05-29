@@ -1,1 +1,0 @@
-/home/michael/ros2_ws_test/build/mps_interfaces/rosidl_cmake/srv/GetRobotSchedule_Request.msg

@@ -1,4 +1,0 @@
-source;share/mps_interfaces/local_setup.bash
-source;share/mps_interfaces/local_setup.dsv
-source;share/mps_interfaces/local_setup.sh
-source;share/mps_interfaces/local_setup.zsh

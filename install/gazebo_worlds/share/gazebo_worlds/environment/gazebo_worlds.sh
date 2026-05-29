@@ -1,1 +1,0 @@
-/home/michael/ros2_ws_test/build/gazebo_worlds/ament_cmake_environment_hooks/gazebo_worlds.sh

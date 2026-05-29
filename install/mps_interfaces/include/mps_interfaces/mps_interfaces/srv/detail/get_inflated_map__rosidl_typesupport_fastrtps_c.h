@@ -1,1 +1,0 @@
-/home/michael/ros2_ws_test/build/mps_interfaces/rosidl_typesupport_fastrtps_c/mps_interfaces/srv/detail/get_inflated_map__rosidl_typesupport_fastrtps_c.h

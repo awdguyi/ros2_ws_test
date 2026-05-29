@@ -284,138 +284,28 @@ class MpcControllerNode(Node):
             else:
                 ref_states = ref_states*0.9 + self.last_pred_states*0.1
 
-        # C7.5k: adaptive early preview (TTC 6-7.5s + ST gate) before main avoid
-        _C7_MAX_OFFSET          = 0.45
-        _C7_TTC_START           = 6.0
-        _C7_TTC_FULL            = 3.0
-        _C7_TTC_COMMIT          = 4.0    # below this → avoid takes priority over recenter
-        _C7_TTC_EARLY           = 7.5    # early preview zone upper bound
-        _C7_LP_RISE             = 0.35
-        _C7_LP_FALL             = 0.30
-        _C7_RECENTER_TH         = 0.15   # m: right error above this → recenter
-        _C7_RECENTER_MAX        = 0.10   # m: max left-pull
-        _C7_RECENTER_K          = 0.8
-        _C7_AVOID_COMMIT_OFFSET = 0.25   # avoid_target above this → committed avoid + skip recenter
-        _C7_COMMIT_FLOOR_RATIO  = 0.65   # committed avoid: reference floor = avoid_target * this
-        _C7_ERROR_COMP_K        = 0.5    # committed avoid: how much of signed_right_error to subtract
-        _C7_EARLY_MAX_OFFSET    = 0.15   # m: max preview offset in early zone
-        _C7_EARLY_ST_TH         = 0.3    # st_center_onc must exceed this to activate early preview
-        _ST_MIN_SCORE           = 0.5
-        _ST_MIN_BENEFIT         = 0.2
-
-        # Signed lateral error from reference path (positive = robot is right of ref)
+        # C7 right-reference shift disabled: MPC now tracks the unshifted
+        # center reference and avoids ST prediction tubes through dynamic
+        # obstacle constraints only.
         yaw = ref_states[0, 2]
         dx  = self.x - ref_states[0, 0]
         dy  = self.y - ref_states[0, 1]
         signed_right_error = dx * math.sin(yaw) - dy * math.cos(yaw)
-        right_err = max(0.0, signed_right_error)
-
-        ttc_oncoming = self._min_ttc_oncoming()
-
-        # TTC avoid branch
-        if ttc_oncoming < _C7_TTC_START:
-            ttc_strength  = min(1.0, max(0.0,
-                (_C7_TTC_START - ttc_oncoming) / (_C7_TTC_START - _C7_TTC_FULL)))
-            target_ttc_offset = _C7_MAX_OFFSET * ttc_strength
-        else:
-            ttc_strength      = 0.0
-            target_ttc_offset = 0.0
-
-        # ST avoid branch (same-dir weight=0, actor/mode mapping fixed)
-        if self._mu_cache:
-            st_center_score, st_center_onc, st_center_samd = self._score_lane_hazard_directional(ref_states)
-            right_ref      = self._generate_offset_ref(ref_states, _C7_MAX_OFFSET)
-            st_right_score, _, _ = self._score_lane_hazard_directional(right_ref)
-        else:
-            st_center_score = st_center_onc = st_center_samd = 0.0
-            st_right_score  = 0.0
-        st_benefit = st_center_score - st_right_score
-
-        if st_center_score > _ST_MIN_SCORE and st_benefit > _ST_MIN_BENEFIT:
-            st_strength      = min(1.0, (st_benefit - _ST_MIN_BENEFIT) / 0.5)
-            target_st_offset = _C7_MAX_OFFSET * st_strength
-        else:
-            target_st_offset = 0.0
-
-        avoid_target = max(target_ttc_offset, target_st_offset)
-
-        # Early preview: small right-bias when TTC in 6-7.5s window and ST confirms oncoming
-        early_preview = (
-            _C7_TTC_START < ttc_oncoming < _C7_TTC_EARLY
-            and st_center_onc > _C7_EARLY_ST_TH
-        )
-        if early_preview:
-            early_strength = min(1.0, max(0.0,
-                (_C7_TTC_EARLY - ttc_oncoming) / (_C7_TTC_EARLY - _C7_TTC_START)
-            ))
-            early_offset = _C7_EARLY_MAX_OFFSET * early_strength
-        else:
-            early_offset = 0.0
-        avoid_target = max(avoid_target, early_offset)
-
-        # Recenter branch: pull robot back toward center
-        if right_err > _C7_RECENTER_TH:
-            recenter_target = -min(
-                _C7_RECENTER_MAX,
-                _C7_RECENTER_K * (right_err - _C7_RECENTER_TH)
-            )
-        else:
-            recenter_target = 0.0
-
-        # Phase selection: recenter unless avoid is already committed
-        if (
-            right_err > _C7_RECENTER_TH
-            and ttc_oncoming > _C7_TTC_COMMIT
-            and avoid_target < _C7_AVOID_COMMIT_OFFSET
-        ):
-            target_offset = recenter_target
-            c7_phase = 1.0   # recenter
-            position_capped = False
-            committed_avoid = False
-        else:
-            c7_phase = 2.0 if avoid_target > 0.01 else 0.0
-
-            if c7_phase == 2.0:
-                if avoid_target > _C7_AVOID_COMMIT_OFFSET:
-                    # C7.5j: committed avoid with softer floor
-                    target_offset = max(
-                        avoid_target * _C7_COMMIT_FLOOR_RATIO,
-                        avoid_target - _C7_ERROR_COMP_K * max(0.0, signed_right_error)
-                    )
-                    target_offset = min(target_offset, _C7_MAX_OFFSET)
-                    position_capped = signed_right_error > avoid_target
-                    committed_avoid = True
-                else:
-                    # Weak avoid: conservative remaining-delta (C7.5h)
-                    raw_delta = avoid_target - max(0.0, signed_right_error)
-                    if raw_delta > 0.0:
-                        target_offset = min(raw_delta, _C7_MAX_OFFSET)
-                        position_capped = False
-                    else:
-                        target_offset = 0.0
-                        position_capped = avoid_target > 0.01
-                    committed_avoid = False
-            else:
-                target_offset = 0.0
-                position_capped = False
-                committed_avoid = False
-
-        strength = target_offset / _C7_MAX_OFFSET if _C7_MAX_OFFSET > 0 else 0.0
-
-        # Asymmetric LP: rise when moving further from center, fall when returning
-        _lp = _C7_LP_RISE if abs(target_offset) > abs(self._lane_offset_filtered) else _C7_LP_FALL
-        self._lane_offset_filtered = (
-            (1.0 - _lp) * self._lane_offset_filtered + _lp * target_offset
-        )
-        if abs(self._lane_offset_filtered) > 0.005:
-            ref_states = self._generate_offset_ref(ref_states, self._lane_offset_filtered)
-        # C7.5 (disabled — rollback): ST log-only, right_budget cap
-        # C7.4d (disabled — rollback): no recenter assist, soft_gate_scale=0.7
-        # C7.4c (disabled — rollback): right-budget cap, LP_FALL=0.30
-        # C7.3e (disabled — rollback): hard recenter gate, no ST branch
-        # C7.3 (disabled — rollback): no recenter gate, LP_FALL=0.12
-        # C7.2 (disabled — rollback): dist_oncoming = self._nearest_oncoming_dist()
-        # C7.1 (disabled — rollback): self._selected_lane = self._select_lane(ref_states)
+        ttc_oncoming = float('inf')
+        strength = 0.0
+        target_offset = 0.0
+        avoid_target = 0.0
+        recenter_target = 0.0
+        c7_phase = 0.0
+        position_capped = False
+        committed_avoid = False
+        early_preview = False
+        early_offset = 0.0
+        st_center_score = 0.0
+        st_center_onc = 0.0
+        st_center_samd = 0.0
+        st_benefit = 0.0
+        self._lane_offset_filtered = 0.0
 
         self.controller.set_ref_states(ref_states, ref_speed=ref_speed)
 
@@ -457,6 +347,13 @@ class MpcControllerNode(Node):
                 # C4: direction-aware radius scaling from stable raw trajectory history
                 dir_scales = self._compute_stable_dir_scales(n_obs, mu_list_list)
 
+                # ST line avoidance: use the predicted line itself. The solver
+                # adds the robot width later, so this introduces no extra
+                # pedestrian-side safety buffer.
+                _ST_TUBE_RADIUS = 0.25
+                _ST_CONF_ACTIVE = 1e-3
+                _DUMMY_DYN_OBS = [-1000.0, -1000.0, 0.2, 0.2, 0, 0.0]
+
                 # Direct Tt→pred_step mapping (matches May-14 git baseline).
                 for Tt, (mu_list, std_list, conf_list) in enumerate(
                         zip(mu_list_list, std_list_list, conf_list_list)):
@@ -464,8 +361,14 @@ class MpcControllerNode(Node):
                         break
                     for Nn, (mu, std, conf) in enumerate(
                             zip(mu_list, std_list, conf_list)):
-                        std_x = max(std[0], 0.15)
-                        std_y = max(std[1], 0.15)
+                        if conf <= _ST_CONF_ACTIVE or abs(mu[0]) >= 999.0 or abs(mu[1]) >= 999.0:
+                            dyn_obs_list[Nn][Tt] = _DUMMY_DYN_OBS
+                            self._mu_cache[Nn][Tt]   = None
+                            self._conf_cache[Nn][Tt] = 0.0
+                            continue
+
+                        std_x = max(std[0], _ST_TUBE_RADIUS)
+                        std_y = max(std[1], _ST_TUBE_RADIUS)
                         dyn_obs_list[Nn][Tt] = [mu[0], mu[1], std_x, std_y, 0, conf]
                         self._mu_cache[Nn][Tt]   = mu    # C7.4a
                         self._conf_cache[Nn][Tt] = conf  # C7.4a
@@ -618,7 +521,7 @@ class MpcControllerNode(Node):
                         "live/c7_recenter_target":   recenter_target,
                         "live/c7_position_capped":   1.0 if position_capped else 0.0,
                         "live/c7_committed_avoid":   1.0 if committed_avoid else 0.0,
-                        "live/c7_commit_floor":      avoid_target * _C7_COMMIT_FLOOR_RATIO,
+                        "live/c7_commit_floor":      0.0,
                         "live/c7_early_preview":     1.0 if early_preview else 0.0,
                         "live/c7_early_offset":      early_offset,
                         "live/c7_st_center_score":   st_center_score,

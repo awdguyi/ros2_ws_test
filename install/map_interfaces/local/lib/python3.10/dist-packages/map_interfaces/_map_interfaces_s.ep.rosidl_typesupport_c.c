@@ -1,1 +1,0 @@
-/home/michael/ros2_ws_test/build/map_interfaces/rosidl_generator_py/map_interfaces/_map_interfaces_s.ep.rosidl_typesupport_c.c

@@ -1,8 +1,0 @@
-/home/michael/ros2_ws_test/build/mps_interfaces/rosidl_adapter/mps_interfaces:msg/Schedule.idl
-/home/michael/ros2_ws_test/build/mps_interfaces/rosidl_adapter/mps_interfaces:msg/ScheduleArray.idl
-/home/michael/ros2_ws_test/build/mps_interfaces/rosidl_adapter/mps_interfaces:msg/ScheduleStamped.idl
-/home/michael/ros2_ws_test/build/mps_interfaces/rosidl_adapter/mps_interfaces:msg/ScheduleArrayStamped.idl
-/home/michael/ros2_ws_test/build/mps_interfaces/rosidl_adapter/mps_interfaces:msg/PathSchedule.idl
-/home/michael/ros2_ws_test/build/mps_interfaces/rosidl_adapter/mps_interfaces:msg/PathScheduleStamped.idl
-/home/michael/ros2_ws_test/build/mps_interfaces/rosidl_adapter/mps_interfaces:srv/GetRobotSchedule.idl
-/home/michael/ros2_ws_test/build/mps_interfaces/rosidl_adapter/mps_interfaces:srv/GetInflatedMap.idl

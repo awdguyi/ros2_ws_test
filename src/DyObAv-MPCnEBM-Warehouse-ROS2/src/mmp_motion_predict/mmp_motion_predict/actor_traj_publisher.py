@@ -33,32 +33,18 @@ class ActorTrajNode(Node):
         # Subscriber to actor poses
         self.actor_pose_received = False
 
-        actor1_pose_name = 'actor1_pose'
-        self.actor1_pose_subscription = self.create_subscription(
-            PoseStamped,
-            actor1_pose_name,
-            self.actor1_pose_callback,
-            10
-        )
-        self.actor1_traj = deque(maxlen=30)
-
-        actor2_pose_name = 'actor2_pose'
-        self.actor2_pose_subscription = self.create_subscription(
-            PoseStamped,
-            actor2_pose_name,
-            self.actor2_pose_callback,
-            10
-        )
-        self.actor2_traj = deque(maxlen=30)
-
-        actor3_pose_name = 'actor3_pose'
-        self.actor3_pose_subscription = self.create_subscription(
-            PoseStamped,
-            actor3_pose_name,
-            self.actor3_pose_callback,
-            10
-        )
-        self.actor3_traj = deque(maxlen=30)
+        self.actor_trajs = [deque(maxlen=30) for _ in range(5)]
+        self.actor_pose_subscriptions = []
+        for idx in range(5):
+            actor_pose_name = f'actor{idx + 1}_pose'
+            self.actor_pose_subscriptions.append(
+                self.create_subscription(
+                    PoseStamped,
+                    actor_pose_name,
+                    lambda msg, actor_idx=idx: self.actor_pose_callback(msg, actor_idx),
+                    10
+                )
+            )
 
         # Publisher for human trajectory
         human_trajs_name = 'human_traj_array'
@@ -76,38 +62,22 @@ class ActorTrajNode(Node):
         self.assemble_trajs_msg()
         self.human_trajs_publisher.publish(self.human_trajs_msg)
         
-    def actor1_pose_callback(self, msg: PoseStamped):
-        acotr1_pose = [float(msg.pose.position.x), float(msg.pose.position.y)]
-        self.actor1_traj.append(acotr1_pose)
-        self.actor_pose_received = True
-
-    def actor2_pose_callback(self, msg: PoseStamped):
-        acotr2_pose = [float(msg.pose.position.x), float(msg.pose.position.y)]
-        self.actor2_traj.append(acotr2_pose)
-        self.actor_pose_received = True
-
-    def actor3_pose_callback(self, msg: PoseStamped):
-        actor3_pose = [float(msg.pose.position.x), float(msg.pose.position.y)]
-        self.actor3_traj.append(actor3_pose)
+    def actor_pose_callback(self, msg: PoseStamped, actor_idx: int):
+        actor_pose = [float(msg.pose.position.x), float(msg.pose.position.y)]
+        self.actor_trajs[actor_idx].append(actor_pose)
         self.actor_pose_received = True
 
     def assemble_trajs_msg(self):
         self.human_trajs_msg = HumanTrajectoryArray()
 
-        if self.actor1_traj:
-            actor1_traj_msg = HumanTrajectory()
-            actor1_traj_msg.traj_points = [Point(x=float(x[0]), y=float(x[1]), z=0.0) for x in self.actor1_traj]
-            self.human_trajs_msg.human_trajectories.append(actor1_traj_msg)
-
-        if self.actor2_traj:
-            actor2_traj_msg = HumanTrajectory()
-            actor2_traj_msg.traj_points = [Point(x=float(x[0]), y=float(x[1]), z=0.0) for x in self.actor2_traj]
-            self.human_trajs_msg.human_trajectories.append(actor2_traj_msg)
-
-        if self.actor3_traj:
-            actor3_traj_msg = HumanTrajectory()
-            actor3_traj_msg.traj_points = [Point(x=float(x[0]), y=float(x[1]), z=0.0) for x in self.actor3_traj]
-            self.human_trajs_msg.human_trajectories.append(actor3_traj_msg)
+        for actor_traj in self.actor_trajs:
+            if actor_traj:
+                actor_traj_msg = HumanTrajectory()
+                actor_traj_msg.traj_points = [
+                    Point(x=float(x[0]), y=float(x[1]), z=0.0)
+                    for x in actor_traj
+                ]
+                self.human_trajs_msg.human_trajectories.append(actor_traj_msg)
 
         
 

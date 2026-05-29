@@ -1,1 +1,0 @@
-/home/michael/ros2_ws_test/build/zmr_mpc/launch/zmr_mpc.launch.py

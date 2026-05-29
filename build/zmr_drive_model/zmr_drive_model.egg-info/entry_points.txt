@@ -1,4 +1,0 @@
-[console_scripts]
-diff_drive_controller_node = zmr_drive_model.differential_drive_controller_node:main
-diff_drive_odom_node = zmr_drive_model.differential_drive_odom_node:main
-

@@ -1,1 +1,0 @@
-/home/michael/ros2_ws_test/build/mps_interfaces/rosidl_generator_cpp/mps_interfaces/msg/detail/schedule_array_stamped__struct.hpp

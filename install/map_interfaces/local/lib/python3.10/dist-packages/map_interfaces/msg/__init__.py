@@ -1,1 +1,0 @@
-/home/michael/ros2_ws_test/build/map_interfaces/rosidl_generator_py/map_interfaces/msg/__init__.py

@@ -205,17 +205,18 @@ class PanocBuilder:
         As        = dynamic_obstacles[(kt+1)*self._cfg.ndynobs+4::self._cfg.ndynobs*(self.N_hor+1)]
         alpha_dyn = dynamic_obstacles[(kt+1)*self._cfg.ndynobs+5::self._cfg.ndynobs*(self.N_hor+1)]
         ellipse_param = [x_dyn, y_dyn, 
-                         rx_dyn+self._spec.vehicle_width+self._spec.vehicle_margin, 
-                         ry_dyn+self._spec.vehicle_width+self._spec.vehicle_margin,
+                         rx_dyn+self._spec.vehicle_width, 
+                         ry_dyn+self._spec.vehicle_width,
                          As, alpha_dyn]
         # Stage 1: Gaussian cost replaces ellipse dead-zone for predictive horizon.
         # sigma=1.0m gives non-zero gradient up to ~3m, vs ellipse which has zero
         # gradient outside the boundary.
-        _sigma_dyn = 1.0
+        _sigma_dyn = 0.35
         cts.cost_dynobs_pred += mc.cost_gaussian_obstacles(
             state, x_dyn, y_dyn, alpha_dyn, sigma=_sigma_dyn, weight=q_dynobs)
 
-        penalty_constraints_dynobs_pred = 0.0
+        inside_dyn_obstacle_pred = mh.inside_ellipses(state, ellipse_param)
+        penalty_constraints_dynobs_pred = ca.fmax(0, alpha_dyn * inside_dyn_obstacle_pred)
 
         other_stuff = [penalty_constraints_stcobs, penalty_constraints_dynobs, penalty_constraints_dynobs_pred]
         return state, cts, other_stuff
@@ -321,7 +322,4 @@ class PanocBuilder:
             builder.build()
 
         print(f'[{self.__class__.__name__}] MPC module built with {self._num_params} parameters.')
-
-
-
 

@@ -1,9 +1,0 @@
-source;share/zmr_pure_pursuit/hook/pythonpath.ps1
-source;share/zmr_pure_pursuit/hook/pythonpath.dsv
-source;share/zmr_pure_pursuit/hook/pythonpath.sh
-source;share/zmr_pure_pursuit/hook/ament_prefix_path.ps1
-source;share/zmr_pure_pursuit/hook/ament_prefix_path.dsv
-source;share/zmr_pure_pursuit/hook/ament_prefix_path.sh
-source;../../build/zmr_pure_pursuit/share/zmr_pure_pursuit/hook/pythonpath_develop.ps1
-source;../../build/zmr_pure_pursuit/share/zmr_pure_pursuit/hook/pythonpath_develop.dsv
-source;../../build/zmr_pure_pursuit/share/zmr_pure_pursuit/hook/pythonpath_develop.sh

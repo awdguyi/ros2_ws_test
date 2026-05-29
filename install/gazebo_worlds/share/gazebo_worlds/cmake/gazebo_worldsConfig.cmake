@@ -1,1 +1,0 @@
-/home/michael/ros2_ws_test/build/gazebo_worlds/ament_cmake_core/gazebo_worldsConfig.cmake

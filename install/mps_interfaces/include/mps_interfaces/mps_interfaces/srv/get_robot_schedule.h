@@ -1,1 +1,0 @@
-/home/michael/ros2_ws_test/build/mps_interfaces/rosidl_generator_c/mps_interfaces/srv/get_robot_schedule.h

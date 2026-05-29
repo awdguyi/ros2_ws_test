@@ -17,15 +17,22 @@ PathNode = tuple[float, float]
 class MotionPredictor:
     def __init__(self, config_file_path: str = "/home/michael/ai_training_ws/SingularTrajectory/config/config_example.json", model_suffix: str = "zara2", ref_image_path:Optional[str]=None) -> None:
         print("\n🚀 [*] 正在從實驗室喚醒 SingularTrajectory SOTA 大腦...\n")
+        self.st_root = "/home/michael/ai_training_ws/SingularTrajectory"
+        cfg_path, ckpt_tag, weight_path = self._resolve_official_paths(config_file_path, model_suffix)
+
         class FakeArgs:
-            cfg = "/home/michael/ai_training_ws/SingularTrajectory/config/config_example.json"
-            gpu_id = "0"
-            test = True
-            tag = "SingularTrajectory-TEMP"
-            
+            pass
+
         self.args = FakeArgs()
+        self.args.cfg = cfg_path
+        self.args.gpu_id = "0"
+        self.args.test = True
+        self.args.tag = ckpt_tag
         self.hyper_params = get_exp_config(self.args.cfg)
+        self._absolutize_official_paths(self.hyper_params)
         os.environ["CUDA_VISIBLE_DEVICES"] = self.args.gpu_id
+        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        self._patch_cuda_if_needed()
         
         PredictorModel = getattr(baseline, self.hyper_params.baseline).TrajectoryPredictor
         hook_func = DotDict({
@@ -38,13 +45,12 @@ class MotionPredictor:
         self.my_trainer = ModelTrainer(base_model=PredictorModel, model=SingularTrajectory, hook_func=hook_func, args=self.args, hyper_params=self.hyper_params)
         
         self.model = self.my_trainer.model
-        _ckpt_base = "/home/michael/ai_training_ws/SingularTrajectory/checkpoints/SingularTrajectory-TEMP"
-        weight_path = os.path.join(_ckpt_base, model_suffix, "model_best.pth")
+        if not os.path.exists(weight_path):
+            raise FileNotFoundError(f"SingularTrajectory checkpoint not found: {weight_path}")
         print(f"[MotionPredictor] Loading checkpoint: {weight_path}")
-        self.model.load_state_dict(torch.load(weight_path))
+        self.model.load_state_dict(torch.load(weight_path, map_location=self.device))
         self.model.float()  # checkpoint saved in fp16; force all params to fp32
 
-        self.device = torch.device('cuda')
         self.model.to(self.device)
         self.model.eval()
         
@@ -53,6 +59,92 @@ class MotionPredictor:
 
         self.ebl = None
         self.ebl_ref_image_raw = None
+
+    def _resolve_official_paths(self, config_file_path: str, model_suffix: str):
+        """Resolve config/checkpoint using the official SingularTrajectory layout first.
+
+        For ETH/UCY variants, prefer the paper's stochastic task layout:
+        config/stochastic/singulartrajectory-transformerdiffusion-{dataset}.json
+        checkpoints/SingularTrajectory-stochastic/{dataset}/model_best.pth
+        Custom warehouse/distilled checkpoints fall back to the TEMP experiment tag.
+        """
+        official_cfg = os.path.join(
+            self.st_root, "config", "stochastic",
+            f"singulartrajectory-transformerdiffusion-{model_suffix}.json")
+        official_weight = os.path.join(
+            self.st_root, "checkpoints", "SingularTrajectory-stochastic",
+            model_suffix, "model_best.pth")
+        if os.path.exists(official_cfg) and os.path.exists(official_weight):
+            return official_cfg, "SingularTrajectory-stochastic", official_weight
+
+        temp_weight = os.path.join(
+            self.st_root, "checkpoints", "SingularTrajectory-TEMP",
+            model_suffix, "model_best.pth")
+        return config_file_path, "SingularTrajectory-TEMP", temp_weight
+
+    def _absolutize_official_paths(self, hyper_params):
+        for key in ("dataset_dir", "checkpoint_dir"):
+            if key in hyper_params and not os.path.isabs(hyper_params[key]):
+                hyper_params[key] = os.path.join(self.st_root, hyper_params[key])
+
+    def _patch_cuda_if_needed(self):
+        if self.device.type == 'cuda' or getattr(torch, "_st_ros_cuda_patched", False):
+            return
+
+        def _tensor_cuda(tensor_self, *args, **kwargs):
+            return tensor_self
+
+        def _module_cuda(module_self, *args, **kwargs):
+            return module_self
+
+        torch.Tensor.cuda = _tensor_cuda
+        torch.nn.Module.cuda = _module_cuda
+        torch._st_ros_cuda_patched = True
+        print("[MotionPredictor] CUDA unavailable; running SingularTrajectory on CPU.")
+
+    def _initial_adaptive_anchor(self, obs_traj: torch.Tensor) -> torch.Tensor:
+        """Official no-map fallback: use learned ST initial anchors, not zeros."""
+        n_ped = obs_traj.size(0)
+        anchor = torch.zeros(
+            (n_ped, self.hyper_params.k, self.hyper_params.num_samples),
+            dtype=torch.float32,
+            device=obs_traj.device)
+
+        with torch.no_grad():
+            moving_mask = self.model.calculate_mask(obs_traj)
+            moving_anchor = self.model.adaptive_anchor_m.C_anchor.detach().to(obs_traj.device)
+            static_anchor = self.model.adaptive_anchor_s.C_anchor.detach().to(obs_traj.device)
+
+            if moving_mask.any():
+                anchor[moving_mask] = moving_anchor.unsqueeze(0).expand(
+                    int(moving_mask.sum().item()), -1, -1)
+            if (~moving_mask).any():
+                anchor[~moving_mask] = static_anchor.unsqueeze(0).expand(
+                    int((~moving_mask).sum().item()), -1, -1)
+
+        return anchor
+
+    def _run_official_st_inference(self, obs_traj: torch.Tensor) -> np.ndarray:
+        """Run the same model entry used by official trainer.test()."""
+        with torch.no_grad():
+            adaptive_anchor = self._initial_adaptive_anchor(obs_traj)
+            scene_mask = torch.ones(
+                (obs_traj.size(0), obs_traj.size(0)),
+                dtype=torch.bool,
+                device=obs_traj.device)
+            addl_info = {
+                "scene_mask": scene_mask,
+                "num_samples": self.hyper_params.num_samples,
+                "inference_steps": (
+                    self.hyper_params.get('max_steps', None)
+                    if self.hyper_params.get('dynamic_steps_enabled', False)
+                    else None
+                ),
+                "inference_seed": None,
+            }
+            output = self.model(obs_traj, adaptive_anchor, addl_info=addl_info)
+            # Official shape: (num_samples, n_ped, pred_len, 2)
+            return output["recon_traj"].cpu().numpy().astype(np.float32).transpose(1, 0, 2, 3)
 
     def get_motion_prediction(self, input_traj: list[PathNode], rescale:Optional[float]=1.0, debug:bool=False):
         t = list(input_traj)
@@ -66,21 +158,8 @@ class MotionPredictor:
         else:
             t = t[-self.obs_len:]
             
-        obs_traj = torch.tensor([t], dtype=torch.float16).to(self.device)
-        
-        with torch.no_grad():
-            try:
-                future_traj = self.model(obs_traj) 
-                print(f"✅ [大腦推論成功] 算出來的 Shape 是: {future_traj.shape}")
-                future_traj_np = future_traj.cpu().numpy().astype(np.float32)
-            except Exception as e:
-                print("\n❌❌❌ [大腦推論崩潰] 進入保護機制！❌❌❌")
-                print(f"錯誤原因：{e}\n")
-                future_traj_np = np.zeros((1, 20, self.pred_len, 2), dtype=np.float32)
-                last_pt = np.array(t[-1])
-                for k in range(20):
-                    for step in range(self.pred_len):
-                        future_traj_np[0, k, step] = last_pt + np.array([0.1*(step+1), 0.1*(step+1)])
+        obs_traj = torch.tensor([t], dtype=torch.float32).to(self.device)
+        future_traj_np = self._run_official_st_inference(obs_traj)
 
         mu = np.mean(future_traj_np, axis=1)[0]
         std = np.std(future_traj_np, axis=1)[0]
@@ -219,75 +298,16 @@ class MotionPredictor:
             batch_input.append(t_ds)
 
         N = len(trajs_real)
-        last_positions = np.array([batch_input[i][-1] for i in range(N)], dtype=np.float32)
-        # velocity is now per 0.4 s step — matches PRED_DT directly
-        velocities = np.array([
-            [batch_input[i][-1][0] - batch_input[i][-2][0],
-             batch_input[i][-1][1] - batch_input[i][-2][1]]
-            for i in range(N)
-        ], dtype=np.float32)
-
         obs_traj = torch.tensor(batch_input, dtype=torch.float32).to(self.device)
 
-        model_ok = False
-        with torch.no_grad():
-            try:
-                k_dim = self.hyper_params.k              # 4
-                s_dim = self.hyper_params.num_samples    # 20
-                adaptive_anchor = torch.zeros(
-                    (N, k_dim, s_dim), dtype=torch.float32, device=self.device)
-                scene_mask = torch.ones(
-                    (N, N), dtype=torch.bool, device=self.device)
-                addl_info = {
-                    "scene_mask":      scene_mask,
-                    "num_samples":     s_dim,
-                    "inference_steps": 5,   # fewer diffusion steps → faster
-                }
-                output = self.model(obs_traj, adaptive_anchor, addl_info=addl_info)
-                # recon_traj: (s, N, pred_len, 2) → transpose to (N, s, pred_len, 2)
-                future_traj_np = output["recon_traj"].cpu().numpy().astype(np.float32)
-                future_traj_np = future_traj_np.transpose(1, 0, 2, 3)
-                model_ok = True
-                print(f"[SingularTraj] ✅ model OK, shape={future_traj_np.shape}")
-            except Exception as e:
-                print(f"[SingularTraj] fallback: {e}")
-                future_traj_np = np.zeros((N, 20, self.pred_len, 2), dtype=np.float32)
+        future_traj_np = self._run_official_st_inference(obs_traj)
+        print(f"[SingularTraj] official inference OK, shape={future_traj_np.shape}")
 
-        if not model_ok:
-            # Constant-velocity at PRED_DT per step (velocity already at 2.5 Hz scale)
-            for i in range(N):
-                for ki in range(20):
-                    for step in range(self.pred_len):
-                        future_traj_np[i, ki, step] = (
-                            last_positions[i] + velocities[i] * (step + 1)
-                        )
-
-        # Pre-filter once per pedestrian (used by both branches below)
+        # Keep the official ST samples clean by default. Optional filters are disabled unless
+        # explicitly wired later; MPC/C7 should consume the model's own prediction first.
         filtered_samples = []
         for i in range(N):
-            s = future_traj_np[i]
-            if obstacle_polys:
-                s = self._filter_by_obstacles(s, obstacle_polys)
-            filtered_samples.append(s)
-
-        # EBL energy filter: discard ST samples in high-energy (unlikely) regions
-        if self.ebl is not None:
-            ebl_filtered = []
-            for i in range(N):
-                s = filtered_samples[i]
-                H_map = self.ebl_ref_image_raw.shape[0]
-                obs_px = [(float((batch_input[i][t][0] + 15.0) * 10.0),
-                           float(H_map - 1 - (batch_input[i][t][1] + 15.0) * 10.0))
-                          for t in range(len(batch_input[i]))]
-                scores = self._ebl_score_samples(obs_px, s)
-                cutoff = np.percentile(scores, 60)
-                keep = np.where(scores <= cutoff)[0]
-                min_keep = max(1, int(s.shape[0] * 0.25))
-                if len(keep) < min_keep:
-                    ebl_filtered.append(s)
-                else:
-                    ebl_filtered.append(s[keep])
-            filtered_samples = ebl_filtered
+            filtered_samples.append(future_traj_np[i])
 
         if k_modes <= 1:
             # Single mean trajectory per pedestrian (original behaviour)
@@ -297,7 +317,7 @@ class MotionPredictor:
                 for i in range(N):
                     s = filtered_samples[i]
                     mu_row.append(tuple(np.mean(s, axis=0)[t]))
-                    std_row.append(tuple(np.std(s,  axis=0)[t]))
+                    std_row.append((0.0, 0.0))
                     conf_row.append(1.0)
                 mu_list_list.append(mu_row)
                 std_list_list.append(std_row)

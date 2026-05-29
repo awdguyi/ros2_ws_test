@@ -1,4 +1,0 @@
-[console_scripts]
-rotate_wheel = zmr_description.rotate_wheel:main
-spawn_robot = zmr_description.spawn_robot:main
-

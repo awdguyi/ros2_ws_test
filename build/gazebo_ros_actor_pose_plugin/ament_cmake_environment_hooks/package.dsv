@@ -1,4 +1,0 @@
-source;share/gazebo_ros_actor_pose_plugin/local_setup.bash
-source;share/gazebo_ros_actor_pose_plugin/local_setup.dsv
-source;share/gazebo_ros_actor_pose_plugin/local_setup.sh
-source;share/gazebo_ros_actor_pose_plugin/local_setup.zsh

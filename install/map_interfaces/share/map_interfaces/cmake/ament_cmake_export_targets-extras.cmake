@@ -1,1 +1,0 @@
-/home/michael/ros2_ws_test/build/map_interfaces/ament_cmake_export_targets/ament_cmake_export_targets-extras.cmake

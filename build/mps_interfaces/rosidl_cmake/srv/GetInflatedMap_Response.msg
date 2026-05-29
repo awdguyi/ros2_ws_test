@@ -1,2 +1,0 @@
-
-map_interfaces/GeometricMap inflated_map

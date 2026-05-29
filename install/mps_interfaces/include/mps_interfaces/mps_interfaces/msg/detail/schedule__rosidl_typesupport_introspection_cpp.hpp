@@ -1,1 +1,0 @@
-/home/michael/ros2_ws_test/build/mps_interfaces/rosidl_typesupport_introspection_cpp/mps_interfaces/msg/detail/schedule__rosidl_typesupport_introspection_cpp.hpp

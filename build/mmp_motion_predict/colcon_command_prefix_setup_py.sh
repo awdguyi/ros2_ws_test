@@ -1,2 +1,0 @@
-# generated from colcon_core/shell/template/command_prefix.sh.em
-. "/home/michael/ros2_ws_test/install/mmp_interfaces/share/mmp_interfaces/package.sh"

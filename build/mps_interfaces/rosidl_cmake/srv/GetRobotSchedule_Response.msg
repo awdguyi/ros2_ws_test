@@ -1,2 +1,0 @@
-
-PathScheduleStamped path_schedule

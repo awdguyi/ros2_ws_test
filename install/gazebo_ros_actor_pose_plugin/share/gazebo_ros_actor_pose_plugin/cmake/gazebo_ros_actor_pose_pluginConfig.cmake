@@ -1,1 +1,0 @@
-/home/michael/ros2_ws_test/build/gazebo_ros_actor_pose_plugin/ament_cmake_core/gazebo_ros_actor_pose_pluginConfig.cmake

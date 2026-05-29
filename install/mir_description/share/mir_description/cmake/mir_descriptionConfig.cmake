@@ -1,1 +1,0 @@
-/home/michael/ros2_ws_test/build/mir_description/ament_cmake_core/mir_descriptionConfig.cmake

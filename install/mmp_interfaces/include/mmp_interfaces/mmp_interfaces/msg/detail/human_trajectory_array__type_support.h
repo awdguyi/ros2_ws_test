@@ -1,1 +1,0 @@
-/home/michael/ros2_ws_test/build/mmp_interfaces/rosidl_generator_c/mmp_interfaces/msg/detail/human_trajectory_array__type_support.h

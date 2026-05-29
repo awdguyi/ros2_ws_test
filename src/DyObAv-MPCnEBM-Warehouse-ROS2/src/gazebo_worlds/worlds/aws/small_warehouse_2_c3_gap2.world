@@ -6084,87 +6084,158 @@
     </model>
 
     <actor name="actor1">
-
       <skin>
         <filename>walk.dae</filename>
       </skin>
-
       <animation name="walking">
         <filename>walk.dae</filename>
         <scale>1.0</scale>
         <interpolate_x>true</interpolate_x>
       </animation>
-
       <plugin name="actor1_plugin" filename="libgazebo_ros_actor_pose.so">
         <updateRate>10</updateRate>
         <refFrameId>map</refFrameId>
       </plugin>
-
-      <!-- C3: slow parallel walk northward at 0.33 m/s, blocking robot path for ~30s -->
       <script>
         <trajectory id="0" type="walking">
-          <!-- Start just ahead of robot (robot at y=-2.2), moving north -->
           <waypoint>
             <time>0</time>
-            <pose>1.0 -1.5 0.0 0 0 1.57</pose>
-          </waypoint>
-          <!-- 9.9m north in 30s = 0.33 m/s -->
-          <waypoint>
-            <time>30</time>
-            <pose>1.0 8.4 0.0 0 0 1.57</pose>
-          </waypoint>
-          <!-- Step aside east so robot can pass freely -->
-          <waypoint>
-            <time>35</time>
-            <pose>5.0 8.4 0.0 0 0 0.0</pose>
+            <pose>1.25 12.5 0.0 0 0 -1.57</pose>
           </waypoint>
           <waypoint>
-            <time>55</time>
-            <pose>5.0 8.4 0.0 0 0 0.0</pose>
+            <time>23</time>
+            <pose>1.25 4.75 0.0 0 0 -1.57</pose>
+          </waypoint>
+          <waypoint>
+            <time>120</time>
+            <pose>1.25 4.75 0.0 0 0 -1.57</pose>
           </waypoint>
         </trajectory>
       </script>
-
     </actor>
 
-    <actor name="actor3">
-
+    <actor name="actor2">
       <skin>
         <filename>walk.dae</filename>
       </skin>
-
       <animation name="walking">
         <filename>walk.dae</filename>
         <scale>1.0</scale>
         <interpolate_x>true</interpolate_x>
       </animation>
+      <plugin name="actor2_plugin" filename="libgazebo_ros_actor_pose.so">
+        <updateRate>10</updateRate>
+        <refFrameId>map</refFrameId>
+      </plugin>
+      <script>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>-2.0 12.75 0.0 0 0 -0.22</pose>
+          </waypoint>
+          <waypoint>
+            <time>25</time>
+            <pose>6.0 11.0 0.0 0 0 -0.22</pose>
+          </waypoint>
+          <waypoint>
+            <time>120</time>
+            <pose>6.0 11.0 0.0 0 0 -0.22</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
 
+    <actor name="actor3">
+      <skin>
+        <filename>walk.dae</filename>
+      </skin>
+      <animation name="walking">
+        <filename>walk.dae</filename>
+        <scale>1.0</scale>
+        <interpolate_x>true</interpolate_x>
+      </animation>
       <plugin name="actor3_plugin" filename="libgazebo_ros_actor_pose.so">
         <updateRate>10</updateRate>
         <refFrameId>map</refFrameId>
       </plugin>
-
-      <!-- C3 gap+2m: entire actor3 path shifted +2m north, 16m south in 49s = 0.33 m/s -->
       <script>
         <trajectory id="0" type="walking">
-          <!-- Full path shift: start y=11→13, end y=-5→-3, same 16m distance as original -->
           <waypoint>
             <time>0</time>
-            <pose>1.0 13.0 0.0 0 0 -1.57</pose>
+            <pose>-0.5 -0.25 0.0 0 0 1.26</pose>
           </waypoint>
-          <!-- 16m south in 49s = 0.33 m/s -->
           <waypoint>
-            <time>49</time>
-            <pose>1.0 -3.0 0.0 0 0 -1.57</pose>
+            <time>20</time>
+            <pose>1.5 6.0 0.0 0 0 1.26</pose>
           </waypoint>
-          <!-- Stay put -->
           <waypoint>
             <time>120</time>
-            <pose>1.0 -3.0 0.0 0 0 -1.57</pose>
+            <pose>1.5 6.0 0.0 0 0 1.26</pose>
           </waypoint>
         </trajectory>
       </script>
+    </actor>
 
+    <actor name="actor4">
+      <skin>
+        <filename>walk.dae</filename>
+      </skin>
+      <animation name="walking">
+        <filename>walk.dae</filename>
+        <scale>1.0</scale>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <plugin name="actor4_plugin" filename="libgazebo_ros_actor_pose.so">
+        <updateRate>10</updateRate>
+        <refFrameId>map</refFrameId>
+      </plugin>
+      <script>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>0.75 4.25 0.0 0 0 -1.37</pose>
+          </waypoint>
+          <waypoint>
+            <time>22</time>
+            <pose>2.25 -3.0 0.0 0 0 -1.37</pose>
+          </waypoint>
+          <waypoint>
+            <time>120</time>
+            <pose>2.25 -3.0 0.0 0 0 -1.37</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+
+    <actor name="actor5">
+      <skin>
+        <filename>walk.dae</filename>
+      </skin>
+      <animation name="walking">
+        <filename>walk.dae</filename>
+        <scale>1.0</scale>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <plugin name="actor5_plugin" filename="libgazebo_ros_actor_pose.so">
+        <updateRate>10</updateRate>
+        <refFrameId>map</refFrameId>
+      </plugin>
+      <script>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>1.25 10.5 0.0 0 0 -1.72</pose>
+          </waypoint>
+          <waypoint>
+            <time>21</time>
+            <pose>0.25 3.75 0.0 0 0 -1.72</pose>
+          </waypoint>
+          <waypoint>
+            <time>120</time>
+            <pose>0.25 3.75 0.0 0 0 -1.72</pose>
+          </waypoint>
+        </trajectory>
+      </script>
     </actor>
 
 

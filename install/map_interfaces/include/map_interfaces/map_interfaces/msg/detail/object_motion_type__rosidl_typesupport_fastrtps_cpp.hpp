@@ -1,1 +1,0 @@
-/home/michael/ros2_ws_test/build/map_interfaces/rosidl_typesupport_fastrtps_cpp/map_interfaces/msg/detail/object_motion_type__rosidl_typesupport_fastrtps_cpp.hpp

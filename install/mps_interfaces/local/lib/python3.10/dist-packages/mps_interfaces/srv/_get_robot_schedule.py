@@ -1,1 +1,0 @@
-/home/michael/ros2_ws_test/build/mps_interfaces/rosidl_generator_py/mps_interfaces/srv/_get_robot_schedule.py

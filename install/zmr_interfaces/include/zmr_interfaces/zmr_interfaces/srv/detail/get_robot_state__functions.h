@@ -1,1 +1,0 @@
-/home/michael/ros2_ws_test/build/zmr_interfaces/rosidl_generator_c/zmr_interfaces/srv/detail/get_robot_state__functions.h

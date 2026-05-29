@@ -1,1 +1,0 @@
-/home/michael/ros2_ws_test/src/DyObAv-MPCnEBM-Warehouse-ROS2/src/mmp_interfaces/msg/HumanTrajectory.msg

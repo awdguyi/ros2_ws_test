@@ -1,1 +1,0 @@
-/home/michael/ros2_ws_test/build/zmr_interfaces/rosidl_typesupport_fastrtps_cpp/zmr_interfaces/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
