@@ -4,6 +4,7 @@ from rclpy.node import Node
 from geometry_msgs.msg import Point
 from visualization_msgs.msg import Marker, MarkerArray
 from std_srvs.srv import Trigger
+from rcl_interfaces.msg import ParameterDescriptor
 from mmp_interfaces.msg import HumanTrajectory, HumanTrajectoryArray
 from mmp_interfaces.msg import MotionPredictionResult
 from map_interfaces.msg import GeometricMap as MapMsg  # type: ignore
@@ -24,13 +25,17 @@ class MotionPredictionNode(Node):
         self.declare_parameter('predictor_backend', 'st')
         self.declare_parameter('predictor_variant', 'zara2')
         self.declare_parameter('config_file_name', 'wsd_1t20_poselu_enll_train.yaml')
-        self.declare_parameter('ebm_model_suffix', '0')
+        self.declare_parameter(
+            'ebm_model_suffix',
+            '0',
+            ParameterDescriptor(dynamic_typing=True),
+        )
         self.declare_parameter('ebm_ref_image_path', '')
         self.declare_parameter('ebm_num_samples', 100)
         predictor_backend = str(self.get_parameter('predictor_backend').value).lower()
         predictor_variant = self.get_parameter('predictor_variant').value
         config_file_name = self.get_parameter('config_file_name').value
-        ebm_model_suffix = self.get_parameter('ebm_model_suffix').value
+        ebm_model_suffix = str(self.get_parameter('ebm_model_suffix').value)
         ebm_ref_image_path = self.get_parameter('ebm_ref_image_path').value
         ebm_num_samples = int(self.get_parameter('ebm_num_samples').value)
 
