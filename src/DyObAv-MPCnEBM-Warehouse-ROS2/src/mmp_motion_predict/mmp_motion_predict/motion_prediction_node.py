@@ -9,6 +9,7 @@ from mmp_interfaces.msg import MotionPredictionResult
 from map_interfaces.msg import GeometricMap as MapMsg  # type: ignore
 from shapely.geometry import Polygon as ShapelyPolygon
 from .motion_prediction import MotionPredictor
+from .ebm_motion_prediction import EBMMotionPredictor
 
 HUMAN_SIZE = 0.2
 ST_PREDICTION_LENGTH_SCALE = 1.0
@@ -20,8 +21,18 @@ class MotionPredictionNode(Node):
 
         self.declare_parameter('timer_period', 0.1) # 提速到 10Hz (0.1秒)
         self.timer_period = self.get_parameter('timer_period').value
+        self.declare_parameter('predictor_backend', 'st')
         self.declare_parameter('predictor_variant', 'zara2')
+        self.declare_parameter('config_file_name', 'wsd_1t20_poselu_enll_train.yaml')
+        self.declare_parameter('ebm_model_suffix', '0')
+        self.declare_parameter('ebm_ref_image_path', '')
+        self.declare_parameter('ebm_num_samples', 100)
+        predictor_backend = str(self.get_parameter('predictor_backend').value).lower()
         predictor_variant = self.get_parameter('predictor_variant').value
+        config_file_name = self.get_parameter('config_file_name').value
+        ebm_model_suffix = self.get_parameter('ebm_model_suffix').value
+        ebm_ref_image_path = self.get_parameter('ebm_ref_image_path').value
+        ebm_num_samples = int(self.get_parameter('ebm_num_samples').value)
 
         self.traj_subscription = self.create_subscription(
             HumanTrajectoryArray, 'human_traj_array', self.traj_callback, 10)
@@ -44,10 +55,26 @@ class MotionPredictionNode(Node):
         self.traj_received = False
         self.trajs = []
 
-        # 🧠 載入你的 2024 新大腦！(不再需要傳入地圖圖片)
-        self.motion_predictor = MotionPredictor(model_suffix=predictor_variant)
-        self.get_logger().info(f"✅ [SOTA大腦] 載入完成 (variant={predictor_variant})，等待路人資料...")
+        if predictor_backend == 'st':
+            # 🧠 原本 ST 大腦：維持 baseline 預設，不破壞 main 行為。
+            self.motion_predictor = MotionPredictor(model_suffix=predictor_variant)
+            self.get_logger().info(
+                f"✅ [MotionPredictionNode] ST predictor loaded (variant={predictor_variant})")
+        elif predictor_backend == 'ebm':
+            ref_image_path = str(ebm_ref_image_path).strip() or None
+            self.motion_predictor = EBMMotionPredictor(
+                config_file_path=config_file_name,
+                model_suffix=ebm_model_suffix,
+                ref_image_path=ref_image_path,
+                num_samples=ebm_num_samples,
+            )
+            self.get_logger().info(
+                f"✅ [MotionPredictionNode] EBM predictor loaded "
+                f"(config={config_file_name}, suffix={ebm_model_suffix}, samples={ebm_num_samples})")
+        else:
+            raise ValueError(f"Unknown predictor_backend: {predictor_backend}. Use 'st' or 'ebm'.")
 
+        self.predictor_backend = predictor_backend
         self.timer = self.create_timer(self.timer_period, self.timer_callback)
 
     def _init_motion_prediction_result_msg(self):
@@ -84,7 +111,7 @@ class MotionPredictionNode(Node):
         K_MODES = 1
         curr_mu_list = [traj[-1] for traj in self.trajs]
 
-        # 🔥 神級提速：把所有路人一次丟給大腦，不轉換影像、不群集！
+        # ST / EBM 共用 predict_all_humans API，輸出格式保持一致餵給 MPC。
         mu_list_list, std_list_list, conf_list_list = self.motion_predictor.predict_all_humans(
             self.trajs, k_modes=K_MODES, obstacle_polys=self.obstacle_polys)
 
@@ -105,7 +132,7 @@ class MotionPredictionNode(Node):
         std_list_list  = [curr_std_expanded]  + std_list_list
         conf_list_list = [curr_conf_expanded] + conf_list_list
 
-        if ST_PREDICTION_LENGTH_SCALE != 1.0:
+        if self.predictor_backend == 'st' and ST_PREDICTION_LENGTH_SCALE != 1.0:
             mu_list_list = self._scale_prediction_mu_for_mpc(
                 mu_list_list, conf_list_list, K_MODES, ST_PREDICTION_LENGTH_SCALE)
 
