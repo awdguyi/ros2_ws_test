@@ -8,11 +8,13 @@ from rclpy.node import Node
 from ament_index_python.packages import get_package_share_directory # type: ignore
 
 from geometry_msgs.msg import Point, PoseStamped
+from std_srvs.srv import Trigger
 
 from mmp_interfaces.msg import HumanTrajectory, HumanTrajectoryArray # type: ignore
 
 
 HUMAN_SIZE = 0.2 # meter
+MAX_ACTOR_COUNT = 15
 
 
 class ActorTrajNode(Node):
@@ -33,9 +35,14 @@ class ActorTrajNode(Node):
         # Subscriber to actor poses
         self.actor_pose_received = False
 
-        self.actor_trajs = [deque(maxlen=30) for _ in range(5)]
+        self.actor_trajs = [deque(maxlen=30) for _ in range(MAX_ACTOR_COUNT)]
+        self.clear_actor_trajs_service = self.create_service(
+            Trigger,
+            '/clear_actor_trajs',
+            self.clear_actor_trajs_callback
+        )
         self.actor_pose_subscriptions = []
-        for idx in range(5):
+        for idx in range(MAX_ACTOR_COUNT):
             actor_pose_name = f'actor{idx + 1}_pose'
             self.actor_pose_subscriptions.append(
                 self.create_subscription(
@@ -66,6 +73,16 @@ class ActorTrajNode(Node):
         actor_pose = [float(msg.pose.position.x), float(msg.pose.position.y)]
         self.actor_trajs[actor_idx].append(actor_pose)
         self.actor_pose_received = True
+
+    def clear_actor_trajs_callback(self, _request, response):
+        for actor_traj in self.actor_trajs:
+            actor_traj.clear()
+        self.actor_pose_received = False
+        self.human_trajs_msg = HumanTrajectoryArray()
+        response.success = True
+        response.message = f'cleared {MAX_ACTOR_COUNT} actor trajectory histories'
+        self.get_logger().info(response.message)
+        return response
 
     def assemble_trajs_msg(self):
         self.human_trajs_msg = HumanTrajectoryArray()

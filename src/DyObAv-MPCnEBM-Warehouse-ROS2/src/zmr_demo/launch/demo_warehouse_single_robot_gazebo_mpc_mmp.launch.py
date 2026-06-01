@@ -32,7 +32,8 @@ def summon_robot(pkg_share, model_file_name, robot_namespace: Union[str, LaunchC
         'use_gazebo': 'false',
         'init_x': str(robot_init_position[0]),
         'init_y': str(robot_init_position[1]),
-        'init_z': str(robot_init_position[2])}.items()
+        'init_z': '0.0',
+        'init_theta': str(robot_init_position[2])}.items()
     )
 
     if isinstance(robot_namespace, LaunchConfiguration):
@@ -63,7 +64,7 @@ def generate_launch_description():
     pkg_share = FindPackageShare(package=pkg_name).find(pkg_name)
 
     ### Fixed Values ###
-    robot_init_position = [1.0, -2.2, 0.0]
+    robot_init_position = [1.0, -2.2, 0.0]  # x, y, theta
 
     ### Default Values ###
     default_timer_period = 0.2
@@ -88,6 +89,9 @@ def generate_launch_description():
     default_max_task_time = '120.0'
     default_goal_tolerance = '0.5'
     default_predictor_variant = 'zara2'
+    default_reset_on_finish = 'true'
+    default_rerandomize_actors_on_reset = 'true'
+    default_randomize_actors = 'true'
 
     ### Declare Launch Variables ###
     timer_period = LaunchConfiguration('timer_period')
@@ -109,6 +113,9 @@ def generate_launch_description():
     max_task_time = LaunchConfiguration('max_task_time')
     goal_tolerance = LaunchConfiguration('goal_tolerance')
     predictor_variant = LaunchConfiguration('predictor_variant')
+    reset_on_finish = LaunchConfiguration('reset_on_finish')
+    rerandomize_actors_on_reset = LaunchConfiguration('rerandomize_actors_on_reset')
+    randomize_actors = LaunchConfiguration('randomize_actors')
 
     use_controller = LaunchConfiguration('use_controller')
 
@@ -224,6 +231,30 @@ def generate_launch_description():
     )
     ld.add_action(declare_predictor_variant_arg)
 
+    declare_reset_on_finish_arg = DeclareLaunchArgument(
+        name='reset_on_finish',
+        default_value=default_reset_on_finish,
+        choices=['true', 'false'],
+        description='Reset Gazebo world and MPC policy state after each recorded run',
+    )
+    ld.add_action(declare_reset_on_finish_arg)
+
+    declare_rerandomize_actors_on_reset_arg = DeclareLaunchArgument(
+        name='rerandomize_actors_on_reset',
+        default_value=default_rerandomize_actors_on_reset,
+        choices=['true', 'false'],
+        description='Randomize actor start-goal paths before resetting simulation time',
+    )
+    ld.add_action(declare_rerandomize_actors_on_reset_arg)
+
+    declare_randomize_actors_arg = DeclareLaunchArgument(
+        name='randomize_actors',
+        default_value=default_randomize_actors,
+        choices=['true', 'false'],
+        description='Randomize actors in the Gazebo world before startup',
+    )
+    ld.add_action(declare_randomize_actors_arg)
+
     declare_use_controller_arg = DeclareLaunchArgument(
         name='use_controller',
         default_value='true',
@@ -282,6 +313,10 @@ def generate_launch_description():
         [FindPackageShare(package=pkg_name_gazebo).find(pkg_name_gazebo), '/launch/small_warehouse.launch.py'])
     include_launch_gazebo = IncludeLaunchDescription(launch_file_gazebo, launch_arguments={
         'world_file_name': world_file_name,
+        'map_file_name': map_file_name,
+        'graph_file_name': graph_file_name,
+        'schedule_file_name': schedule_file_name,
+        'randomize_actors': randomize_actors,
         'paused': 'false'}.items()
     )
     ld.add_action(include_launch_gazebo)
@@ -329,7 +364,13 @@ def generate_launch_description():
         'scenario_id': scenario_id,
         'max_task_time': max_task_time,
         'goal_tolerance': goal_tolerance,
-        'predictor_variant': predictor_variant}.items()
+        'predictor_variant': predictor_variant,
+        'reset_on_finish': reset_on_finish,
+        'rerandomize_actors_on_reset': rerandomize_actors_on_reset,
+        'robot_init_x': str(robot_init_position[0]),
+        'robot_init_y': str(robot_init_position[1]),
+        'robot_init_z': '0.0',
+        'robot_init_theta': str(robot_init_position[2])}.items()
     )
     ld.add_action(include_launch_6)
 

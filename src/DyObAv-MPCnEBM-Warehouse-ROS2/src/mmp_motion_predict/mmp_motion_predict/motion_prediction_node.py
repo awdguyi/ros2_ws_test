@@ -3,6 +3,7 @@ import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Point
 from visualization_msgs.msg import Marker, MarkerArray
+from std_srvs.srv import Trigger
 from mmp_interfaces.msg import HumanTrajectory, HumanTrajectoryArray
 from mmp_interfaces.msg import MotionPredictionResult
 from map_interfaces.msg import GeometricMap as MapMsg  # type: ignore
@@ -32,6 +33,11 @@ class MotionPredictionNode(Node):
             MotionPredictionResult, 'motion_prediction_result', 10)
         self.motion_prediction_viz_publisher = self.create_publisher(
             MarkerArray, 'motion_prediction_viz', 10)
+        self.clear_motion_prediction_service = self.create_service(
+            Trigger,
+            '/clear_motion_prediction',
+            self.clear_motion_prediction_callback,
+        )
 
         self._init_motion_prediction_result_msg()
         self.last_num_markers = 0
@@ -60,6 +66,15 @@ class MotionPredictionNode(Node):
     def traj_callback(self, msg: HumanTrajectoryArray):
         self.trajs = [[(coords.x, coords.y) for coords in traj.traj_points] for traj in msg.human_trajectories]
         self.traj_received = True
+
+    def clear_motion_prediction_callback(self, _request, response):
+        self.trajs = []
+        self.traj_received = False
+        self._init_motion_prediction_result_msg()
+        response.success = True
+        response.message = 'motion prediction input/cache cleared'
+        self.get_logger().info(response.message)
+        return response
 
     def timer_callback(self):
         if not self.traj_received or len(self.trajs) == 0:
@@ -198,9 +213,9 @@ class MotionPredictionNode(Node):
             obs.pose.position.y = float(obs_mu[1])
             obs.pose.position.z = 0.16
             obs.pose.orientation.w = 1.0
-            obs.scale.x = HUMAN_SIZE * 2.4
-            obs.scale.y = HUMAN_SIZE * 2.4
-            obs.scale.z = HUMAN_SIZE * 2.4
+            obs.scale.x = 0.25
+            obs.scale.y = 0.25
+            obs.scale.z = 0.25
             obs.color.r = 1.0
             obs.color.g = 0.0
             obs.color.b = 0.0
@@ -215,7 +230,7 @@ class MotionPredictionNode(Node):
             obs_mu = mu_list_list[0][obs_index]
             add_observed_marker(ped_idx, obs_mu)
 
-            for mode_idx, color in enumerate(mode_colors):
+            for mode_idx, _ in enumerate(mode_colors):
                 flat_idx = ped_idx * k_modes + mode_idx
                 points = []
                 conf_values = []
@@ -238,21 +253,33 @@ class MotionPredictionNode(Node):
                 if len(points) < 2:
                     continue
 
-                alpha = (sum(conf_values) / len(conf_values)) * 0.8 if conf_values else 0.2
+                avg_alpha = (sum(conf_values) / len(conf_values)) * 0.6 if conf_values else 0.2
 
-                marker_id += 1
-                line = Marker()
-                line.header.frame_id = "map"
-                line.header.stamp = stamp
-                line.ns = name_space
-                line.id = marker_id
-                line.type = Marker.LINE_STRIP
-                line.action = Marker.ADD
-                line.pose.orientation.w = 1.0
-                line.scale.x = 0.015
-                line.points = points
-                set_marker_color(line, color, alpha)
-                marker_msg.markers.append(line)
+                # Split prediction into 3 time zones: red (0-30%), yellow (30-60%), green (60-100%)
+                n_seg = len(points) - 1
+                red_end  = max(1, int(n_seg * 0.3))
+                ylw_end  = max(2, int(n_seg * 0.6))
+                zones = [
+                    (points[:red_end + 1],  (1.0, 0.1, 0.1), avg_alpha * 0.7),
+                    (points[red_end:ylw_end + 1], (1.0, 0.8, 0.0), avg_alpha * 0.7),
+                    (points[ylw_end:],       (0.1, 1.0, 0.2), avg_alpha),
+                ]
+                for zone_pts, zone_color, zone_alpha in zones:
+                    if len(zone_pts) < 2:
+                        continue
+                    marker_id += 1
+                    line = Marker()
+                    line.header.frame_id = "map"
+                    line.header.stamp = stamp
+                    line.ns = name_space
+                    line.id = marker_id
+                    line.type = Marker.LINE_STRIP
+                    line.action = Marker.ADD
+                    line.pose.orientation.w = 1.0
+                    line.scale.x = 0.4  # 0.2m radius tube
+                    line.points = zone_pts
+                    set_marker_color(line, zone_color, zone_alpha)
+                    marker_msg.markers.append(line)
 
         if (marker_id - id_start) < self.last_num_markers:
             for extra_id in range(marker_id + 1, id_start + self.last_num_markers + 1):

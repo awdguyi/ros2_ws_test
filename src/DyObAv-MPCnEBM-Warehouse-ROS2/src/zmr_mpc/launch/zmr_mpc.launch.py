@@ -31,6 +31,12 @@ def generate_launch_description():
     default_max_task_time = '120.0'
     default_goal_tolerance = '0.5'
     default_predictor_variant = 'zara2'
+    default_reset_on_finish = 'true'
+    default_rerandomize_actors_on_reset = 'true'
+    default_robot_init_x = '1.0'
+    default_robot_init_y = '-2.2'
+    default_robot_init_z = '0.0'
+    default_robot_init_theta = '0.0'
 
     ### Declare Launch Variables ###
     timer_period = LaunchConfiguration('timer_period')
@@ -46,6 +52,12 @@ def generate_launch_description():
     max_task_time = LaunchConfiguration('max_task_time')
     goal_tolerance = LaunchConfiguration('goal_tolerance')
     predictor_variant = LaunchConfiguration('predictor_variant')
+    reset_on_finish = LaunchConfiguration('reset_on_finish')
+    rerandomize_actors_on_reset = LaunchConfiguration('rerandomize_actors_on_reset')
+    robot_init_x = LaunchConfiguration('robot_init_x')
+    robot_init_y = LaunchConfiguration('robot_init_y')
+    robot_init_z = LaunchConfiguration('robot_init_z')
+    robot_init_theta = LaunchConfiguration('robot_init_theta')
 
     ### Declare Launch Arguments ###
     declare_timer_period_arg = DeclareLaunchArgument(
@@ -134,6 +146,34 @@ def generate_launch_description():
     )
     ld.add_action(declare_predictor_variant_arg)
 
+    declare_reset_on_finish_arg = DeclareLaunchArgument(
+        name="reset_on_finish",
+        default_value=default_reset_on_finish,
+        choices=["true", "false"],
+        description="Reset Gazebo world and MPC policy state after each recorded run",
+    )
+    ld.add_action(declare_reset_on_finish_arg)
+
+    declare_rerandomize_actors_on_reset_arg = DeclareLaunchArgument(
+        name="rerandomize_actors_on_reset",
+        default_value=default_rerandomize_actors_on_reset,
+        choices=["true", "false"],
+        description="Randomize actor start-goal paths before resetting simulation time",
+    )
+    ld.add_action(declare_rerandomize_actors_on_reset_arg)
+
+    for name, default_value in [
+        ('robot_init_x', default_robot_init_x),
+        ('robot_init_y', default_robot_init_y),
+        ('robot_init_z', default_robot_init_z),
+        ('robot_init_theta', default_robot_init_theta),
+    ]:
+        ld.add_action(DeclareLaunchArgument(
+            name=name,
+            default_value=default_value,
+            description='Robot pose used after automatic reset',
+        ))
+
     ### Nodes ###
     mpc_trajectory_tracker_node = Node(
         package=pkg_name,
@@ -156,6 +196,12 @@ def generate_launch_description():
             {'max_task_time': max_task_time},
             {'goal_tolerance': goal_tolerance},
             {'predictor_variant': predictor_variant},
+            {'reset_on_finish': reset_on_finish},
+            {'rerandomize_actors_on_reset': rerandomize_actors_on_reset},
+            {'robot_init_x': robot_init_x},
+            {'robot_init_y': robot_init_y},
+            {'robot_init_z': robot_init_z},
+            {'robot_init_theta': robot_init_theta},
         ],
     )
     ld.add_action(mpc_trajectory_tracker_node)

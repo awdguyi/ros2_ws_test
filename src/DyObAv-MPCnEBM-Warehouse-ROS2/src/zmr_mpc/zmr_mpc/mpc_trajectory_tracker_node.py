@@ -23,6 +23,9 @@ from ament_index_python.packages import get_package_share_directory # type: igno
 from nav_msgs.msg import Odometry
 from geometry_msgs.msg import Twist, Point, Polygon, Point32 # type: ignore
 from visualization_msgs.msg import Marker, MarkerArray
+from std_srvs.srv import Empty, Trigger
+from gazebo_msgs.msg import EntityState
+from gazebo_msgs.srv import SetEntityState
 
 from map_interfaces.msg import PolygonObject # type: ignore
 from mps_interfaces.srv import GetRobotSchedule, GetInflatedMap # type: ignore
@@ -156,6 +159,68 @@ class MpcControllerNode(Node):
             break
         self.robot_states_request = GetOtherRobotStates.Request()
 
+        self.declare_parameter('reset_on_finish', True)
+        self._reset_on_finish: bool = bool(self.get_parameter('reset_on_finish').value)
+        self.declare_parameter('reset_service_name', '/reset_simulation')
+        self._reset_service_name: str = self.get_parameter('reset_service_name').value
+        self.reset_world_client = self.create_client(
+            Empty,
+            self._reset_service_name,
+            callback_group=client_cb_group
+        )
+        self.declare_parameter('set_entity_state_service_name', '/set_entity_state')
+        self._set_entity_state_service_name: str = self.get_parameter(
+            'set_entity_state_service_name').value
+        self.set_entity_state_client = self.create_client(
+            SetEntityState,
+            self._set_entity_state_service_name,
+            callback_group=client_cb_group
+        )
+        self.declare_parameter('robot_entity_name', f'{self.robot_namespace}/robot')
+        self._robot_entity_name: str = self.get_parameter('robot_entity_name').value
+        self.declare_parameter('robot_init_x', 1.0)
+        self.declare_parameter('robot_init_y', -2.2)
+        self.declare_parameter('robot_init_z', 0.0)
+        self.declare_parameter('robot_init_theta', 0.0)
+        self._robot_init_x = float(self.get_parameter('robot_init_x').value)
+        self._robot_init_y = float(self.get_parameter('robot_init_y').value)
+        self._robot_init_z = float(self.get_parameter('robot_init_z').value)
+        self._robot_init_theta = float(self.get_parameter('robot_init_theta').value)
+        self.declare_parameter('rerandomize_actors_on_reset', True)
+        self._rerandomize_actors_on_reset: bool = bool(
+            self.get_parameter('rerandomize_actors_on_reset').value
+        )
+        self.declare_parameter('rerandomize_actors_service_name', '/rerandomize_actors')
+        self._rerandomize_actors_service_name: str = self.get_parameter(
+            'rerandomize_actors_service_name').value
+        self.rerandomize_actors_client = self.create_client(
+            Trigger,
+            self._rerandomize_actors_service_name,
+            callback_group=client_cb_group
+        )
+        self.declare_parameter('clear_actor_trajs_service_name', '/clear_actor_trajs')
+        self._clear_actor_trajs_service_name: str = self.get_parameter(
+            'clear_actor_trajs_service_name').value
+        self.clear_actor_trajs_client = self.create_client(
+            Trigger,
+            self._clear_actor_trajs_service_name,
+            callback_group=client_cb_group
+        )
+        self.reset_policy_service = self.create_service(
+            Trigger,
+            'reset_mpc_policy',
+            self._reset_policy_callback,
+        )
+        self.release_policy_service = self.create_service(
+            Trigger,
+            'release_mpc_policy',
+            self._release_policy_callback,
+        )
+        self._reset_pending = False
+        self._waiting_reset_odom = False
+        self._reset_pending_since: Optional[float] = None
+        self._reset_timeout_sec = 15.0
+
         # Publisher for cmd_vel
         self.cmd_vel_publisher = self.create_publisher(
             Twist,
@@ -225,6 +290,10 @@ class MpcControllerNode(Node):
         self._wandb_run = None
         self.declare_parameter('predictor_variant', 'zara2')
         self._predictor_variant: str = self.get_parameter('predictor_variant').value
+        self.declare_parameter('human_radius_inflation', 0.25)
+        self._human_radius_inflation: float = float(
+            self.get_parameter('human_radius_inflation').value
+        )
         if self._log_wandb:
             try:
                 wandb.login()
@@ -249,6 +318,15 @@ class MpcControllerNode(Node):
         self.send_schedule_request()
 
     def timer_callback(self):
+        if self._reset_pending:
+            if (
+                self._reset_pending_since is not None
+                and time.time() - self._reset_pending_since > self._reset_timeout_sec
+            ):
+                self.get_logger().warn("[Recorder] Reset/rerandomize timeout; resuming MPC")
+                self._release_reset_pending()
+            self.cmd_vel_publisher.publish(Twist())
+            return
         if not self.odom_received:
             self.get_logger().debug("Waiting for odometry message...")
             return
@@ -258,7 +336,7 @@ class MpcControllerNode(Node):
         if not self.map_received:
             self.get_logger().debug("Waiting for map info message...")
             return
-        
+
         self.kt += 1
         
         current_state = np.array([self.x, self.y, self.theta])
@@ -367,16 +445,17 @@ class MpcControllerNode(Node):
                             self._conf_cache[Nn][Tt] = 0.0
                             continue
 
-                        std_x = max(std[0], _ST_TUBE_RADIUS)
-                        std_y = max(std[1], _ST_TUBE_RADIUS)
+                        base_rx = max(std[0], _ST_TUBE_RADIUS)
+                        base_ry = max(std[1], _ST_TUBE_RADIUS)
+                        std_x = base_rx + self._human_radius_inflation
+                        std_y = base_ry + self._human_radius_inflation
                         dyn_obs_list[Nn][Tt] = [mu[0], mu[1], std_x, std_y, 0, conf]
                         self._mu_cache[Nn][Tt]   = mu    # C7.4a
                         self._conf_cache[Nn][Tt] = conf  # C7.4a
 
                 full_dyn_obstacle_list = dyn_obs_list
-                # dyn_obs_mpc_viz disabled (cyan lines removed from RViz)
-                # self.dyn_obs_mpc_viz_publisher.publish(
-                #     self._dyn_obs_list_to_vis_msg(dyn_obs_list))
+                self.dyn_obs_mpc_viz_publisher.publish(
+                    self._dyn_obs_list_to_vis_msg(dyn_obs_list))
                 self.get_logger().debug(
                     f"[DynObs] n_obs={n_obs} pred_steps={pred_steps}")
             except Exception as e:
@@ -389,6 +468,21 @@ class MpcControllerNode(Node):
             map_updated=False)
         v, w = actions[-1]
         self._last_v = float(v)  # C7.3: cache for next step's TTC
+
+        # Immediate human body no-speed zone. This matches the red transparent
+        # body circle published in /dyn_obs_mpc_viz and intentionally uses only
+        # Tt=0, not the future prediction tube.
+        _zone_scale = 1.0
+        if full_dyn_obstacle_list:
+            for obs_traj in full_dyn_obstacle_list:
+                if not obs_traj:
+                    continue
+                if self._robot_inside_dyn_obstacle_step(obs_traj[0]):
+                    _zone_scale = 0.0
+                    break
+        v = float(v) * _zone_scale
+        if _zone_scale == 0.0:
+            w = 0.0
 
         # self.print_debug_info(v, w, debug_info)
 
@@ -528,6 +622,7 @@ class MpcControllerNode(Node):
                         "live/c7_st_benefit":        st_benefit,
                         "live/c7_st_oncoming_score": st_center_onc,
                         "live/c7_st_same_dir_score": st_center_samd,
+                        "live/human_radius_inflation": self._human_radius_inflation,
                     })
                 if self._goal_pos:
                     dist_to_goal = math.hypot(
@@ -557,6 +652,11 @@ class MpcControllerNode(Node):
         self.theta = 2 * math.atan2(msg.pose.pose.orientation.z, msg.pose.pose.orientation.w)
 
         self.odom_received = True
+        if self._waiting_reset_odom:
+            self._waiting_reset_odom = False
+            self.get_logger().info(
+                f"[Recorder] Reset odom received: "
+                f"x={self.x:.2f}, y={self.y:.2f}, theta={self.theta:.2f}")
 
     def raw_traj_callback(self, msg: HumanTrajectoryArray):
         self.raw_traj_data = msg
@@ -943,53 +1043,51 @@ class MpcControllerNode(Node):
         self.robot_states_response = self.get_robot_states_client.call(self.robot_states_request)
         return self.robot_states_response
 
+    def _robot_inside_dyn_obstacle_step(self, step) -> bool:
+        if abs(step[0]) > 500.0:
+            return False
+        rx = max(float(step[2]), 1e-3)
+        ry = max(float(step[3]), 1e-3)
+        dx = self.x - float(step[0])
+        dy = self.y - float(step[1])
+        stop_scale = 1.10
+        rx *= stop_scale
+        ry *= stop_scale
+        return (dx * dx) / (rx * rx) + (dy * dy) / (ry * ry) <= 1.0
+
     def _dyn_obs_list_to_vis_msg(self, dyn_obs_list: list) -> MarkerArray:
         """Publish the obstacle trajectories exactly as fed into the MPC solver.
 
-        Each obstacle gets a LINE_STRIP (cyan) showing its predicted path over
-        the MPC horizon, plus a bright sphere at Tt=0 (current position).
-        Opacity fades toward the end of the horizon so the time direction is clear.
+        Each obstacle gets one red transparent disk at Tt=0. This is the
+        current human-body no-speed zone used by the speed gate.
         """
         marker_msg = MarkerArray()
         marker_id = 0
-        n_hor = self.cfg_mpc.N_hor
 
         for Nn, obs_traj in enumerate(dyn_obs_list):
             # Skip dummy obstacles (placed at -1000,-1000 to deactivate hard constraints)
             if abs(obs_traj[0][0]) > 500:
                 continue
-            # LINE_STRIP: full predicted path
-            line = Marker()
-            line.header.frame_id = "map"
-            line.ns = "dyn_obs_mpc_ns"
-            line.id = marker_id; marker_id += 1
-            line.type = Marker.LINE_STRIP
-            line.action = Marker.ADD
-            line.scale.x = 0.05
-            line.color.r = 0.0; line.color.g = 1.0; line.color.b = 1.0; line.color.a = 0.8
-            line.pose.orientation.w = 1.0
-            for Tt in range(n_hor + 1):
-                p = Point()
-                p.x = float(obs_traj[Tt][0])
-                p.y = float(obs_traj[Tt][1])
-                p.z = float(Tt) * 0.02  # slight z-lift so time order is visible
-                line.points.append(p)
-            marker_msg.markers.append(line)
 
-            # Sphere at Tt=0: bright white — confirms "this is where MPC thinks obstacle is now"
-            sphere = Marker()
-            sphere.header.frame_id = "map"
-            sphere.ns = "dyn_obs_mpc_ns"
-            sphere.id = marker_id; marker_id += 1
-            sphere.type = Marker.SPHERE
-            sphere.action = Marker.ADD
-            sphere.pose.position.x = float(obs_traj[0][0])
-            sphere.pose.position.y = float(obs_traj[0][1])
-            sphere.pose.position.z = 0.1
-            sphere.pose.orientation.w = 1.0
-            sphere.scale.x = sphere.scale.y = sphere.scale.z = 0.2
-            sphere.color.r = 1.0; sphere.color.g = 1.0; sphere.color.b = 1.0; sphere.color.a = 1.0
-            marker_msg.markers.append(sphere)
+            zone = Marker()
+            zone.header.frame_id = "map"
+            zone.ns = "dyn_obs_mpc_ns"
+            zone.id = marker_id; marker_id += 1
+            zone.type = Marker.CYLINDER
+            zone.action = Marker.ADD
+            zone.pose.position.x = float(obs_traj[0][0])
+            zone.pose.position.y = float(obs_traj[0][1])
+            zone.pose.position.z = 0.02
+            zone.pose.orientation.w = 1.0
+            stop_scale = 1.10
+            zone.scale.x = max(0.02, float(obs_traj[0][2]) * 2.0 * stop_scale)
+            zone.scale.y = max(0.02, float(obs_traj[0][3]) * 2.0 * stop_scale)
+            zone.scale.z = 0.02
+            zone.color.r = 1.0
+            zone.color.g = 0.0
+            zone.color.b = 0.0
+            zone.color.a = 0.22
+            marker_msg.markers.append(zone)
 
         # Clean up stale markers from previous frame
         for stale_id in range(marker_id, self._dyn_obs_mpc_viz_last_count):
@@ -1100,6 +1198,186 @@ class MpcControllerNode(Node):
         self._init_run_tracking()
         self._last_goal_pos = last
         self._awaiting_departure = True
+        self._reset_world_after_run()
+
+    def _clear_policy_state(self):
+        self.kt = 0
+        self.first_message = True
+        self.last_pred_states = None
+        self.motion_prediction_result = []
+        self.raw_traj_data = None
+        self._dir_scale_filtered = {}
+        self._mu_cache = []
+        self._conf_cache = []
+        self._lane_offset_filtered = 0.0
+        self._last_v = 0.0
+        self._obs_in_zone = False
+        self._obs_zone_frames = 0
+        self.odom_received = False
+        if getattr(self, 'ref_path_coords', None):
+            self.planner.load_path(
+                self.ref_path_coords,
+                None,
+                self.cfg_robot.lin_vel_max
+            )
+
+    def _reset_policy_callback(self, _request, response):
+        self.cmd_vel_publisher.publish(Twist())
+        self._clear_policy_state()
+        self._reset_pending = True
+        self._waiting_reset_odom = False
+        self._reset_pending_since = time.time()
+        response.success = True
+        response.message = 'MPC policy cleared and command output held at zero'
+        self.get_logger().info(f'[Recorder] {response.message}')
+        return response
+
+    def _release_policy_callback(self, _request, response):
+        self.cmd_vel_publisher.publish(Twist())
+        self._clear_policy_state()
+        self._release_reset_pending()
+        response.success = True
+        response.message = 'MPC policy released after reset'
+        self.get_logger().info(f'[Recorder] {response.message}')
+        return response
+
+    def _reset_world_after_run(self):
+        if not self._reset_on_finish:
+            return
+
+        self.cmd_vel_publisher.publish(Twist())
+        self._clear_policy_state()
+
+        self._reset_pending = True
+        self._reset_pending_since = time.time()
+        self._clear_actor_history_before_rerandomize()
+
+    def _clear_actor_history_before_rerandomize(self):
+        if not self.clear_actor_trajs_client.wait_for_service(timeout_sec=0.5):
+            self.get_logger().warn(
+                f"[Recorder] Actor trajectory history clear skipped: "
+                f"service {self._clear_actor_trajs_service_name} not available")
+            self._rerandomize_actors_after_clear()
+            return
+
+        future = self.clear_actor_trajs_client.call_async(Trigger.Request())
+        future.add_done_callback(self._on_actor_history_clear_done)
+
+    def _on_actor_history_clear_done(self, future):
+        try:
+            result = future.result()
+            if result is not None and result.success:
+                self.get_logger().info(f"[Recorder] {result.message}")
+            elif result is not None:
+                self.get_logger().warn(
+                    f"[Recorder] Actor trajectory history clear failed: {result.message}")
+        except Exception as exc:
+            self.get_logger().warn(f"[Recorder] Actor trajectory history clear failed: {exc}")
+        self._rerandomize_actors_after_clear()
+
+    def _rerandomize_actors_after_clear(self):
+        if not self._rerandomize_actors_on_reset:
+            self._reset_simulation_after_rerandomize()
+            return
+        if not self.rerandomize_actors_client.wait_for_service(timeout_sec=0.5):
+            self.get_logger().warn(
+                f"[Recorder] Actor rerandomize skipped: "
+                f"service {self._rerandomize_actors_service_name} not available")
+            self._reset_simulation_after_rerandomize()
+            return
+
+        future = self.rerandomize_actors_client.call_async(Trigger.Request())
+        future.add_done_callback(self._on_actor_rerandomize_done)
+
+    def _on_actor_rerandomize_done(self, future):
+        try:
+            result = future.result()
+            if result is not None and result.success:
+                self.get_logger().info(f"[Recorder] {result.message}")
+            elif result is not None:
+                self.get_logger().warn(f"[Recorder] Actor rerandomize failed: {result.message}")
+        except Exception as exc:
+            self.get_logger().warn(f"[Recorder] Actor rerandomize failed: {exc}")
+        self._reset_simulation_after_rerandomize()
+
+    def _reset_simulation_after_rerandomize(self):
+        if not self.reset_world_client.wait_for_service(timeout_sec=0.5):
+            self.get_logger().warn(
+                f"[Recorder] Simulation reset skipped: "
+                f"service {self._reset_service_name} not available")
+            self._force_robot_init_pose()
+            return
+
+        future = self.reset_world_client.call_async(Empty.Request())
+        future.add_done_callback(self._on_world_reset_done)
+
+    def _on_world_reset_done(self, future):
+        try:
+            future.result()
+            self.get_logger().info(
+                f"[Recorder] Simulation reset by {self._reset_service_name}; "
+                f"forcing robot back to init pose")
+            self._waiting_reset_odom = True
+            self.odom_received = False
+        except Exception as exc:
+            self.get_logger().warn(f"[Recorder] Simulation reset failed: {exc}")
+        self._force_robot_init_pose()
+
+    def _force_robot_init_pose(self):
+        self.x = self._robot_init_x
+        self.y = self._robot_init_y
+        self.theta = self._robot_init_theta
+        self.odom_received = True
+
+        if not self.set_entity_state_client.wait_for_service(timeout_sec=0.5):
+            self.get_logger().warn(
+                f"[Recorder] Robot pose reset service "
+                f"{self._set_entity_state_service_name} not available")
+            self._release_reset_pending()
+            return
+
+        state = EntityState()
+        state.name = self._robot_entity_name
+        state.reference_frame = 'world'
+        state.pose.position.x = self._robot_init_x
+        state.pose.position.y = self._robot_init_y
+        state.pose.position.z = self._robot_init_z
+        half_theta = 0.5 * self._robot_init_theta
+        state.pose.orientation.z = math.sin(half_theta)
+        state.pose.orientation.w = math.cos(half_theta)
+        state.twist.linear.x = 0.0
+        state.twist.linear.y = 0.0
+        state.twist.angular.z = 0.0
+
+        request = SetEntityState.Request()
+        request.state = state
+        future = self.set_entity_state_client.call_async(request)
+        future.add_done_callback(self._on_robot_init_pose_done)
+
+    def _on_robot_init_pose_done(self, future):
+        try:
+            result = future.result()
+            if result is not None and result.success:
+                self.get_logger().info(
+                    f"[Recorder] Robot reset to init pose: "
+                    f"x={self._robot_init_x:.2f}, y={self._robot_init_y:.2f}, "
+                    f"theta={self._robot_init_theta:.2f}")
+            elif result is not None:
+                self.get_logger().warn(
+                    f"[Recorder] Robot pose reset failed: {result.status_message}")
+        except Exception as exc:
+            self.get_logger().warn(f"[Recorder] Robot pose reset failed: {exc}")
+
+        self.x = self._robot_init_x
+        self.y = self._robot_init_y
+        self.theta = self._robot_init_theta
+        self.odom_received = True
+        self._release_reset_pending()
+
+    def _release_reset_pending(self):
+        self._reset_pending = False
+        self._waiting_reset_odom = False
+        self._reset_pending_since = None
 
     @staticmethod
     def _seg_deviation(x: float, y: float, path: list) -> float:

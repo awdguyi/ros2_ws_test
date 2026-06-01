@@ -28,6 +28,9 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'rviz_robot_simulator = zmr_demo.rviz_robot_simulator:main',
+            'rviz_actor_simulator = zmr_demo.rviz_actor_simulator:main',
+            'rviz_trial_manager = zmr_demo.rviz_trial_manager:main',
         ],
     },
 )

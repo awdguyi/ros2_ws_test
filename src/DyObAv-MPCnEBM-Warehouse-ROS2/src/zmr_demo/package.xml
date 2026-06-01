@@ -12,6 +12,21 @@
   <test_depend>ament_pep257</test_depend>
   <test_depend>python3-pytest</test_depend>
 
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>rcl_interfaces</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>nav_msgs</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>std_srvs</exec_depend>
+  <exec_depend>tf2_ros</exec_depend>
+  <exec_depend>visualization_msgs</exec_depend>
+  <exec_depend>mmp_interfaces</exec_depend>
+  <exec_depend>map_description</exec_depend>
+  <exec_depend>mps_motion_plan</exec_depend>
+  <exec_depend>mmp_motion_predict</exec_depend>
+  <exec_depend>zmr_description</exec_depend>
+  <exec_depend>zmr_mpc</exec_depend>
+
   <export>
     <build_type>ament_python</build_type>
   </export>

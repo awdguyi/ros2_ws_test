@@ -1,20 +1,24 @@
+#!/usr/bin/env python3
+
 import json
 import math
 import os
 import random
-import re
-import tempfile
+import time
 
-from launch import LaunchDescription
-from launch_ros.actions import Node
-from launch_ros.substitutions import FindPackageShare
+import rclpy
+from rclpy.callback_groups import ReentrantCallbackGroup
+from rclpy.executors import MultiThreadedExecutor
+from rclpy.node import Node
 
-from launch.actions import DeclareLaunchArgument, ExecuteProcess, OpaqueFunction
-from launch.substitutions import LaunchConfiguration
+from ament_index_python.packages import get_package_share_directory
+from gazebo_msgs.srv import DeleteEntity, SpawnEntity
+from std_srvs.srv import Trigger
 
 
 ACTOR_MIN_COUNT = 10
 ACTOR_MAX_COUNT = 15
+ACTOR_DELETE_MAX_COUNT = 20
 ACTOR_HOLD_UNTIL = 120.0
 ACTOR_MIN_SPEED = 0.24
 ACTOR_MAX_SPEED = 0.588
@@ -24,13 +28,6 @@ MIN_MAIN_AISLE_LENGTH = 1.0
 ACTOR_LATERAL_OFFSET_MIN = 0.15
 ACTOR_LATERAL_OFFSET_MAX = 0.55
 MIN_RANDOM_ROUTE_LENGTH = 8.0
-ACTOR_ENTITY_SPAWNER_PLUGIN = '''
-    <plugin name="actor_entity_spawner" filename="libactor_entity_spawner_plugin.so"/>
-'''
-
-
-def _as_bool(value: str) -> bool:
-    return str(value).strip().lower() in ('1', 'true', 'yes', 'on')
 
 
 def _point_in_poly(point: tuple[float, float], poly: list[list[float]]) -> bool:
@@ -285,11 +282,71 @@ def _waypoint_xml(points: list[tuple[float, float]], speed: float) -> str:
     return ''.join(waypoints)
 
 
-def _actor_xml(actor_idx: int, walkable_area, walkable_graph) -> str:
-    actor_points, speed = _sample_actor_path(walkable_area, walkable_graph)
-    waypoints = _waypoint_xml(actor_points, speed)
+class RandomActorRespawner(Node):
+    def __init__(self):
+        super().__init__('random_actor_respawner')
 
-    return f'''
+        self.declare_parameter('map_file_name', 'warehouse_map_real.json')
+        self.declare_parameter('graph_file_name', 'warehouse_graph.json')
+        self.declare_parameter('actor_min_count', ACTOR_MIN_COUNT)
+        self.declare_parameter('actor_max_count', ACTOR_MAX_COUNT)
+        self.declare_parameter('actor_delete_max_count', ACTOR_DELETE_MAX_COUNT)
+
+        self.actor_min_count = int(self.get_parameter('actor_min_count').value)
+        self.actor_max_count = int(self.get_parameter('actor_max_count').value)
+        self.actor_delete_max_count = int(self.get_parameter('actor_delete_max_count').value)
+        if self.actor_min_count > self.actor_max_count:
+            raise ValueError('actor_min_count must be <= actor_max_count')
+        if self.actor_delete_max_count < self.actor_max_count:
+            raise ValueError('actor_delete_max_count must be >= actor_max_count')
+        map_file_name = str(self.get_parameter('map_file_name').value)
+        graph_file_name = str(self.get_parameter('graph_file_name').value)
+
+        map_share = get_package_share_directory('map_description')
+        graph_share = get_package_share_directory('mps_motion_plan')
+        self.walkable_area = _load_walkable_area(map_share, map_file_name)
+        self.walkable_graph = _load_walkable_graph(
+            graph_share,
+            graph_file_name,
+            self.walkable_area,
+        )
+
+        self.callback_group = ReentrantCallbackGroup()
+        self.delete_client = self.create_client(
+            DeleteEntity,
+            '/delete_entity',
+            callback_group=self.callback_group,
+        )
+        self.spawn_client = self.create_client(
+            SpawnEntity,
+            '/spawn_actor_entity',
+            callback_group=self.callback_group,
+        )
+        self.service = self.create_service(
+            Trigger,
+            '/rerandomize_actors',
+            self.rerandomize_callback,
+            callback_group=self.callback_group,
+        )
+        self._busy = False
+        self.get_logger().info(
+            f'Ready to rerandomize {self.actor_min_count}-{self.actor_max_count} '
+            f'actor start-goal paths')
+
+    @staticmethod
+    def _wait_future(future, timeout_sec=5.0):
+        deadline = time.time() + timeout_sec
+        while rclpy.ok() and not future.done() and time.time() < deadline:
+            time.sleep(0.02)
+        return future.done()
+
+    def _actor_xml_with_summary(self, actor_idx: int):
+        actor_points, speed = _sample_actor_path(
+            self.walkable_area,
+            self.walkable_graph,
+        )
+        waypoints = _waypoint_xml(actor_points, speed)
+        actor_xml = f'''
     <actor name="actor{actor_idx}">
       <skin>
         <filename>walk.dae</filename>
@@ -310,172 +367,80 @@ def _actor_xml(actor_idx: int, walkable_area, walkable_graph) -> str:
       </script>
     </actor>
 '''
+        return actor_xml, actor_points[0], actor_points[-1], speed
+
+    def rerandomize_callback(self, _request, response):
+        if self._busy:
+            response.success = False
+            response.message = 'actor rerandomization already running'
+            return response
+
+        self._busy = True
+        try:
+            if not self.delete_client.wait_for_service(timeout_sec=2.0):
+                raise RuntimeError('/delete_entity service not available')
+            if not self.spawn_client.wait_for_service(timeout_sec=2.0):
+                raise RuntimeError('/spawn_actor_entity service not available')
+
+            random_seed = time.time_ns() ^ (os.getpid() << 16)
+            random.seed(random_seed)
+            actor_count = random.randint(self.actor_min_count, self.actor_max_count)
+            self.get_logger().info(
+                f'Rerandomizing {actor_count} actors with seed={random_seed}')
+
+            for actor_idx in range(1, self.actor_delete_max_count + 1):
+                req = DeleteEntity.Request()
+                req.name = f'actor{actor_idx}'
+                future = self.delete_client.call_async(req)
+                self._wait_future(future, timeout_sec=2.0)
+
+            summaries = []
+            for actor_idx in range(1, actor_count + 1):
+                actor_xml, start, goal, speed = self._actor_xml_with_summary(actor_idx)
+                req = SpawnEntity.Request()
+                req.name = f'actor{actor_idx}'
+                req.xml = '<sdf version="1.6">' + actor_xml + '</sdf>'
+                req.robot_namespace = ''
+                req.reference_frame = 'world'
+                future = self.spawn_client.call_async(req)
+                if not self._wait_future(future, timeout_sec=5.0):
+                    raise RuntimeError(f'timeout spawning actor{actor_idx}')
+                result = future.result()
+                if result is not None and not result.success:
+                    raise RuntimeError(
+                        f'failed spawning actor{actor_idx}: {result.status_message}')
+                summaries.append(
+                    f'actor{actor_idx}: '
+                    f'({start[0]:.2f},{start[1]:.2f})->'
+                    f'({goal[0]:.2f},{goal[1]:.2f}) v={speed:.2f}')
+
+            response.success = True
+            response.message = (
+                f'regenerated {actor_count} random actor start-goal paths '
+                f'with seed={random_seed}')
+            self.get_logger().info(response.message)
+            self.get_logger().info(' | '.join(summaries))
+        except Exception as exc:
+            response.success = False
+            response.message = str(exc)
+            self.get_logger().warn(f'Rerandomize failed: {exc}')
+        finally:
+            self._busy = False
+        return response
 
 
-def _generate_random_actor_world(source_world_path: str, walkable_area, walkable_graph) -> str:
-    with open(source_world_path, 'r', encoding='utf-8') as world_file:
-        world_text = world_file.read()
-
-    world_text = re.sub(
-        r'\n\s*<actor name="actor\d+">.*?</actor>',
-        '',
-        world_text,
-        flags=re.DOTALL,
-    )
-
-    actor_count = random.randint(ACTOR_MIN_COUNT, ACTOR_MAX_COUNT)
-    actors_text = '\n'.join(
-        _actor_xml(idx, walkable_area, walkable_graph)
-        for idx in range(1, actor_count + 1)
-    )
-    world_text = world_text.replace(
-        '</world>',
-        f'{ACTOR_ENTITY_SPAWNER_PLUGIN}{actors_text}\n  </world>',
-        1,
-    )
-
-    output_file = tempfile.NamedTemporaryFile(
-        mode='w',
-        suffix='.world',
-        prefix='small_warehouse_random_actors_',
-        delete=False,
-        encoding='utf-8',
-    )
-    with output_file:
-        output_file.write(world_text)
-
-    print(f'[small_warehouse.launch] generated {actor_count} random actors: {output_file.name}')
-    return output_file.name
+def main(args=None):
+    rclpy.init(args=args)
+    node = RandomActorRespawner()
+    executor = MultiThreadedExecutor(num_threads=2)
+    executor.add_node(node)
+    try:
+        executor.spin()
+    finally:
+        executor.remove_node(node)
+        node.destroy_node()
+        rclpy.shutdown()
 
 
-def _launch_gazebo(context, pkg_share: str, map_share: str, graph_share: str):
-    world_file_name = LaunchConfiguration('world_file_name').perform(context)
-    if os.path.isabs(world_file_name):
-        world_file_path = world_file_name
-    else:
-        world_file_path = os.path.join(pkg_share, 'worlds', world_file_name)
-
-    if _as_bool(LaunchConfiguration('randomize_actors').perform(context)):
-        map_file_name = LaunchConfiguration('map_file_name').perform(context)
-        graph_file_name = LaunchConfiguration('graph_file_name').perform(context)
-        walkable_area = _load_walkable_area(map_share, map_file_name)
-        walkable_graph = _load_walkable_graph(graph_share, graph_file_name, walkable_area)
-        world_file_path = _generate_random_actor_world(world_file_path, walkable_area, walkable_graph)
-
-    cmd = [
-        'gazebo',
-        '--verbose',
-        world_file_path,
-        '-s',
-        'libgazebo_ros_init.so',
-        '-s',
-        'libgazebo_ros_factory.so',
-    ]
-    if _as_bool(LaunchConfiguration('paused').perform(context)):
-        cmd.append('--pause')
-
-    actions = [ExecuteProcess(cmd=cmd, output='screen')]
-
-    if _as_bool(LaunchConfiguration('randomize_actors').perform(context)):
-        actions.append(Node(
-            package='gazebo_worlds',
-            executable='random_actor_respawner.py',
-            name='random_actor_respawner',
-            output='screen',
-            parameters=[
-                {'map_file_name': LaunchConfiguration('map_file_name')},
-                {'graph_file_name': LaunchConfiguration('graph_file_name')},
-                {'actor_min_count': ACTOR_MIN_COUNT},
-                {'actor_max_count': ACTOR_MAX_COUNT},
-                {'actor_delete_max_count': 20},
-            ],
-        ))
-
-    return actions
-
-
-def generate_launch_description():
-    ld = LaunchDescription()
-
-    pkg_name = 'gazebo_worlds'
-    pkg_share = FindPackageShare(package=pkg_name).find(pkg_name)
-    map_share = FindPackageShare(package='map_description').find('map_description')
-    graph_share = FindPackageShare(package='mps_motion_plan').find('mps_motion_plan')
-
-    # Define launch arguments
-    declare_world_file_name_arg = DeclareLaunchArgument(
-        name='world_file_name',
-        default_value='aws/small_warehouse_3.world',
-        description='Relative path to the world model file to load'
-    )
-    ld.add_action(declare_world_file_name_arg)
-
-    declare_paused_arg = DeclareLaunchArgument(
-        'paused', default_value='true',
-        description='Start the simulation in a paused state'
-    )
-    ld.add_action(declare_paused_arg)
-
-    declare_randomize_actors_arg = DeclareLaunchArgument(
-        'randomize_actors', default_value='true',
-        description='Replace fixed actors with 15 random graph-routed actors'
-    )
-    ld.add_action(declare_randomize_actors_arg)
-
-    declare_map_file_name_arg = DeclareLaunchArgument(
-        'map_file_name', default_value='warehouse_map_real.json',
-        description='Map JSON used to keep random actors away from static obstacles'
-    )
-    ld.add_action(declare_map_file_name_arg)
-
-    declare_graph_file_name_arg = DeclareLaunchArgument(
-        'graph_file_name', default_value='warehouse_graph.json',
-        description='Graph JSON used to route random actors around static obstacles'
-    )
-    ld.add_action(declare_graph_file_name_arg)
-
-    declare_schedule_file_name_arg = DeclareLaunchArgument(
-        'schedule_file_name', default_value='warehouse_schedule.csv',
-        description='Reserved for compatibility with demo launch files'
-    )
-    ld.add_action(declare_schedule_file_name_arg)
-
-    # declare_use_sim_time_arg = DeclareLaunchArgument(
-    #     'use_sim_time', default_value='true',
-    #     description='Use simulation (Gazebo) clock if true'
-    # )
-    # ld.add_action(declare_use_sim_time_arg)
-
-    # declare_gui_arg = DeclareLaunchArgument(
-    #     'gui', default_value='true',
-    #     description='Launch Gazebo GUI'
-    # )
-    # ld.add_action(declare_gui_arg)
-
-    # declare_headless_arg = DeclareLaunchArgument(
-    #     'headless', default_value='false',
-    #     description='Launch Gazebo without GUI (headless mode)'
-    # )
-    # ld.add_action(declare_headless_arg)
-
-    # declare_debug_arg = DeclareLaunchArgument(
-    #     'debug', default_value='false',
-    #     description='Start Gazebo in debug mode'
-    # )
-    # ld.add_action(declare_debug_arg)
-
-    # declare_verbose_arg = DeclareLaunchArgument(
-    #     'verbose', default_value='true',
-    #     description='Enable verbose Gazebo output'
-    # )
-    # ld.add_action(declare_verbose_arg)
-
-    # declare_recording_arg = DeclareLaunchArgument(
-    #     'recording', default_value='false',
-    #     description='Enable Gazebo state log recording'
-    # )
-    # ld.add_action(declare_recording_arg)
-
-    ld.add_action(OpaqueFunction(function=_launch_gazebo, args=[pkg_share, map_share, graph_share]))
-
-    return ld
+if __name__ == '__main__':
+    main()

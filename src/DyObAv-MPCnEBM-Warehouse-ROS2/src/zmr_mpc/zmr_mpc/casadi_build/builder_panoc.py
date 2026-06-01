@@ -190,8 +190,8 @@ class PanocBuilder:
 
             # Keep hard penalty for physical safety (stays as AL constraint).
             inside_dyn_obstacle = mh.inside_ellipses(state, [x_dyn_cur, y_dyn_cur,
-                                                             rx_dyn_cur+self._spec.vehicle_width,
-                                                             ry_dyn_cur+self._spec.vehicle_width,
+                                                             rx_dyn_cur,
+                                                             ry_dyn_cur,
                                                              dynamic_obstacles[4::self._cfg.ndynobs*(self.N_hor+1)]])
             penalty_constraints_dynobs += ca.fmax(0, inside_dyn_obstacle)
         else:
@@ -204,9 +204,9 @@ class PanocBuilder:
         ry_dyn    = dynamic_obstacles[(kt+1)*self._cfg.ndynobs+3::self._cfg.ndynobs*(self.N_hor+1)]
         As        = dynamic_obstacles[(kt+1)*self._cfg.ndynobs+4::self._cfg.ndynobs*(self.N_hor+1)]
         alpha_dyn = dynamic_obstacles[(kt+1)*self._cfg.ndynobs+5::self._cfg.ndynobs*(self.N_hor+1)]
-        ellipse_param = [x_dyn, y_dyn, 
-                         rx_dyn+self._spec.vehicle_width, 
-                         ry_dyn+self._spec.vehicle_width,
+        ellipse_param = [x_dyn, y_dyn,
+                         rx_dyn,
+                         ry_dyn,
                          As, alpha_dyn]
         # Stage 1: Gaussian cost replaces ellipse dead-zone for predictive horizon.
         # sigma=1.0m gives non-zero gradient up to ~3m, vs ellipse which has zero

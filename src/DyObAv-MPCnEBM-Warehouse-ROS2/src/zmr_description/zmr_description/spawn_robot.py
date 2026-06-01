@@ -11,6 +11,7 @@ Reference:
 
 import os
 import sys
+import math
 
 import rclpy
 import xacro # for parsing xacro files
@@ -51,7 +52,9 @@ def main():
     request.initial_pose.position.x = float(x)
     request.initial_pose.position.y = float(y)
     request.initial_pose.position.z = float(z)
-    request.initial_pose.orientation.z = float(theta)
+    half_theta = 0.5 * float(theta)
+    request.initial_pose.orientation.z = math.sin(half_theta)
+    request.initial_pose.orientation.w = math.cos(half_theta)
 
     if model_format == "xacro":
         doc = xacro.process_file(model_file_path, mappings={"namespace": namespace})
