@@ -24,7 +24,11 @@ def generate_launch_description():
     graph_file_name = LaunchConfiguration('graph_file_name')
     schedule_file_name = LaunchConfiguration('schedule_file_name')
     config_mmp_fname = LaunchConfiguration('config_mmp_fname')
+    predictor_backend = LaunchConfiguration('predictor_backend')
     predictor_variant = LaunchConfiguration('predictor_variant')
+    ebm_model_suffix = LaunchConfiguration('ebm_model_suffix')
+    ebm_ref_image_path = LaunchConfiguration('ebm_ref_image_path')
+    ebm_num_samples = LaunchConfiguration('ebm_num_samples')
     num_trials = LaunchConfiguration('num_trials')
     trial_timeout_sec = LaunchConfiguration('trial_timeout_sec')
     random_seed_base = LaunchConfiguration('random_seed_base')
@@ -69,7 +73,11 @@ def generate_launch_description():
         ('graph_file_name', 'warehouse_graph.json', 'Navigation graph'),
         ('schedule_file_name', 'warehouse_schedule.csv', 'Robot schedule'),
         ('config_mmp_fname', 'wsd_1t20_poselu_enll_train.yaml', 'Motion prediction config'),
+        ('predictor_backend', 'ebm', 'Motion prediction backend: st or ebm'),
         ('predictor_variant', 'ST-warehouse-progress', 'ST checkpoint variant'),
+        ('ebm_model_suffix', '0', 'EBM checkpoint suffix'),
+        ('ebm_ref_image_path', '', 'Optional EBM reference image path'),
+        ('ebm_num_samples', '100', 'EBM samples per prediction step'),
         ('num_trials', '100', 'Number of RViz-only trials'),
         ('trial_timeout_sec', '90.0', 'Per-trial timeout'),
         ('random_seed_base', '1000', 'Actor random seed base'),
@@ -84,7 +92,7 @@ def generate_launch_description():
         ('start_front_clear_dist', '4.0', 'Forward clear-zone length from robot start'),
         ('start_front_clear_width', '1.8', 'Forward clear-zone width from robot start'),
         ('min_actor_spawn_separation', '0.8', 'Minimum spacing between actor initial positions'),
-        ('output_csv', 'rviz_100_trials.csv', 'Trial summary CSV'),
+        ('output_csv', 'rviz_100_trials_ebm.csv', 'Trial summary CSV'),
         ('goal_x', '1.0', 'Goal x'),
         ('goal_y', '12.3', 'Goal y'),
         ('goal_tolerance', '0.5', 'Goal tolerance'),
@@ -100,7 +108,7 @@ def generate_launch_description():
         ('rviz_file_name', 'mmp_single_robot_surroundings.rviz', 'RViz config'),
         ('log_csv', 'false', 'Let MPC write its own CSV'),
         ('log_wandb', 'false', 'Enable W&B in MPC'),
-        ('scenario_id', 'rviz_only_trials', 'MPC scenario label'),
+        ('scenario_id', 'rviz_only_trials_ebm', 'MPC scenario label'),
     ]:
         ld.add_action(DeclareLaunchArgument(
             name=name,
@@ -202,8 +210,12 @@ def generate_launch_description():
         output='screen',
         parameters=[
             {'timer_period': timer_period},
+            {'predictor_backend': predictor_backend},
             {'config_file_name': config_mmp_fname},
             {'predictor_variant': predictor_variant},
+            {'ebm_model_suffix': ebm_model_suffix},
+            {'ebm_ref_image_path': ebm_ref_image_path},
+            {'ebm_num_samples': ebm_num_samples},
         ],
     ))
 
