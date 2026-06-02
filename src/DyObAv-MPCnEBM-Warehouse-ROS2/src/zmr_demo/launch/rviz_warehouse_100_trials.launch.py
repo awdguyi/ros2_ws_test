@@ -47,6 +47,12 @@ def generate_launch_description():
     collision_ignore_when_stopped = LaunchConfiguration('collision_ignore_when_stopped')
     collision_motion_threshold = LaunchConfiguration('collision_motion_threshold')
     freeze_fail_sec = LaunchConfiguration('freeze_fail_sec')
+    freeze_ignore_ped_distance = LaunchConfiguration('freeze_ignore_ped_distance')
+    static_obstacle_margin = LaunchConfiguration('static_obstacle_margin')
+    spawn_protection_time_sec = LaunchConfiguration('spawn_protection_time_sec')
+    robot_path_protection_time_sec = LaunchConfiguration('robot_path_protection_time_sec')
+    robot_path_protection_radius = LaunchConfiguration('robot_path_protection_radius')
+    robot_path_protection_progress_max = LaunchConfiguration('robot_path_protection_progress_max')
     actor_warmup_sec = LaunchConfiguration('actor_warmup_sec')
     actor_warmup_timeout_sec = LaunchConfiguration('actor_warmup_timeout_sec')
     robot_settle_sec = LaunchConfiguration('robot_settle_sec')
@@ -88,10 +94,16 @@ def generate_launch_description():
         ('goal_x', '1.0', 'Goal x'),
         ('goal_y', '12.3', 'Goal y'),
         ('goal_tolerance', '0.5', 'Goal tolerance'),
-        ('collision_distance', '0.22', 'Pedestrian fail distance; independent from MPC human inflation'),
+        ('collision_distance', '0.15', 'Pedestrian fail distance; independent from MPC human inflation'),
         ('collision_ignore_when_stopped', 'true', 'Ignore pedestrian collision while robot is stopped'),
         ('collision_motion_threshold', '0.05', 'Minimum robot speed to count pedestrian collision'),
         ('freeze_fail_sec', '10.0', 'Freeze failure seconds'),
+        ('freeze_ignore_ped_distance', '0.5', 'Do not accumulate freeze while a pedestrian is close'),
+        ('static_obstacle_margin', '0.15', 'Static obstacle evaluation margin'),
+        ('spawn_protection_time_sec', '8.0', 'Actor early path protection time near robot start'),
+        ('robot_path_protection_time_sec', '8.0', 'Actor early path protection time near robot path prefix'),
+        ('robot_path_protection_radius', '0.30', 'Reject early actor paths this close to the robot path prefix'),
+        ('robot_path_protection_progress_max', '0.35', 'Protected fraction of robot start-to-goal path'),
         ('actor_warmup_sec', '2.0', 'Delay after actor reset before robot reset'),
         ('actor_warmup_timeout_sec', '10.0', 'Maximum time to wait for actor/prediction warmup'),
         ('robot_settle_sec', '0.5', 'Delay after robot reset before starting a trial'),
@@ -190,6 +202,10 @@ def generate_launch_description():
             {'start_front_clear_dist': start_front_clear_dist},
             {'start_front_clear_width': start_front_clear_width},
             {'min_actor_spawn_separation': min_actor_spawn_separation},
+            {'spawn_protection_time_sec': spawn_protection_time_sec},
+            {'robot_path_protection_time_sec': robot_path_protection_time_sec},
+            {'robot_path_protection_radius': robot_path_protection_radius},
+            {'robot_path_protection_progress_max': robot_path_protection_progress_max},
             {'map_file_name': map_file_name},
             {'graph_file_name': graph_file_name},
         ],
@@ -248,6 +264,8 @@ def generate_launch_description():
             {'collision_ignore_when_stopped': collision_ignore_when_stopped},
             {'collision_motion_threshold': collision_motion_threshold},
             {'freeze_fail_sec': freeze_fail_sec},
+            {'freeze_ignore_ped_distance': freeze_ignore_ped_distance},
+            {'static_obstacle_margin': static_obstacle_margin},
             {'actor_warmup_sec': actor_warmup_sec},
             {'actor_warmup_timeout_sec': actor_warmup_timeout_sec},
             {'robot_settle_sec': robot_settle_sec},

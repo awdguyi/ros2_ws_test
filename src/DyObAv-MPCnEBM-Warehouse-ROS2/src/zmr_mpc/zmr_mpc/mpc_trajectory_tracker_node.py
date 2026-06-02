@@ -411,7 +411,9 @@ class MpcControllerNode(Node):
         if self.dynobs_received:
             try:
                 mu_list_list, std_list_list, conf_list_list = self.motion_prediction_result
-                n_obs = max([len(x) for x in mu_list_list])
+                raw_n_obs = max([len(x) for x in mu_list_list])
+                selected_dynobs_indices = self._select_nearest_dynobs_indices(mu_list_list, raw_n_obs)
+                n_obs = len(selected_dynobs_indices)
                 # Initialize to far-away dummy with alpha=0; unfilled slots no longer
                 # create fake obstacles at the origin.
                 dyn_obs_list = [[[-1000.0, -1000.0, 0.2, 0.2, 0, 0.0]] * (self.cfg_mpc.N_hor + 1) for _ in range(n_obs)]
@@ -423,7 +425,7 @@ class MpcControllerNode(Node):
                 pred_steps = len(mu_list_list)
 
                 # C4: direction-aware radius scaling from stable raw trajectory history
-                dir_scales = self._compute_stable_dir_scales(n_obs, mu_list_list)
+                dir_scales = self._compute_stable_dir_scales(raw_n_obs, mu_list_list)
 
                 # ST line avoidance: use the predicted line itself. The solver
                 # adds the robot width later, so this introduces no extra
@@ -437,27 +439,31 @@ class MpcControllerNode(Node):
                         zip(mu_list_list, std_list_list, conf_list_list)):
                     if Tt > self.cfg_mpc.N_hor:
                         break
-                    for Nn, (mu, std, conf) in enumerate(
-                            zip(mu_list, std_list, conf_list)):
+                    for slot_idx, raw_idx in enumerate(selected_dynobs_indices):
+                        if raw_idx >= len(mu_list) or raw_idx >= len(std_list) or raw_idx >= len(conf_list):
+                            continue
+                        mu = mu_list[raw_idx]
+                        std = std_list[raw_idx]
+                        conf = conf_list[raw_idx]
                         if conf <= _ST_CONF_ACTIVE or abs(mu[0]) >= 999.0 or abs(mu[1]) >= 999.0:
-                            dyn_obs_list[Nn][Tt] = _DUMMY_DYN_OBS
-                            self._mu_cache[Nn][Tt]   = None
-                            self._conf_cache[Nn][Tt] = 0.0
+                            dyn_obs_list[slot_idx][Tt] = _DUMMY_DYN_OBS
+                            self._mu_cache[slot_idx][Tt]   = None
+                            self._conf_cache[slot_idx][Tt] = 0.0
                             continue
 
                         base_rx = max(std[0], _ST_TUBE_RADIUS)
                         base_ry = max(std[1], _ST_TUBE_RADIUS)
                         std_x = base_rx + self._human_radius_inflation
                         std_y = base_ry + self._human_radius_inflation
-                        dyn_obs_list[Nn][Tt] = [mu[0], mu[1], std_x, std_y, 0, conf]
-                        self._mu_cache[Nn][Tt]   = mu    # C7.4a
-                        self._conf_cache[Nn][Tt] = conf  # C7.4a
+                        dyn_obs_list[slot_idx][Tt] = [mu[0], mu[1], std_x, std_y, 0, conf]
+                        self._mu_cache[slot_idx][Tt]   = mu    # C7.4a
+                        self._conf_cache[slot_idx][Tt] = conf  # C7.4a
 
                 full_dyn_obstacle_list = dyn_obs_list
                 self.dyn_obs_mpc_viz_publisher.publish(
                     self._dyn_obs_list_to_vis_msg(dyn_obs_list))
                 self.get_logger().debug(
-                    f"[DynObs] n_obs={n_obs} pred_steps={pred_steps}")
+                    f"[DynObs] n_obs={n_obs}/{raw_n_obs} pred_steps={pred_steps}")
             except Exception as e:
                 self.get_logger().error(f"[DynObs] 建構失敗: {e}", throttle_duration_sec=2.0)
 
@@ -901,6 +907,28 @@ class MpcControllerNode(Node):
 
         return min_dist
 
+    def _select_nearest_dynobs_indices(self, mu_list_list: list, raw_n_obs: int) -> list[int]:
+        max_dynobs = int(getattr(self.cfg_mpc, 'Ndynobs', raw_n_obs))
+        if raw_n_obs <= max_dynobs:
+            return list(range(raw_n_obs))
+
+        scores = []
+        for obs_idx in range(raw_n_obs):
+            best_dist = float('inf')
+            for mu_list in mu_list_list[:min(len(mu_list_list), self.cfg_mpc.N_hor + 1)]:
+                if obs_idx >= len(mu_list):
+                    continue
+                mx, my = mu_list[obs_idx]
+                if abs(mx) >= 999.0 or abs(my) >= 999.0:
+                    continue
+                best_dist = min(best_dist, math.hypot(mx - self.x, my - self.y))
+            scores.append((best_dist, obs_idx))
+
+        selected = [obs_idx for _, obs_idx in sorted(scores)[:max_dynobs]]
+        self.get_logger().debug(
+            f"[DynObs] selected nearest {len(selected)}/{raw_n_obs} actors for MPC")
+        return selected
+
     def _compute_stable_dir_scales(self, n_obs: int, mu_list_list: list) -> list:
         _LP_ALPHA = 0.5   # fast recovery — half-life ~2 steps
         dir_scales = [1.0] * n_obs
@@ -1056,48 +1084,22 @@ class MpcControllerNode(Node):
         return (dx * dx) / (rx * rx) + (dy * dy) / (ry * ry) <= 1.0
 
     def _dyn_obs_list_to_vis_msg(self, dyn_obs_list: list) -> MarkerArray:
-        """Publish the obstacle trajectories exactly as fed into the MPC solver.
+        """Clear dynamic obstacle visualization markers.
 
-        Each obstacle gets one red transparent disk at Tt=0. This is the
-        current human-body no-speed zone used by the speed gate.
+        The no-speed zone is still active through _robot_inside_dyn_obstacle_step(),
+        but the red transparent RViz stop circles are hidden.
         """
         marker_msg = MarkerArray()
-        marker_id = 0
-
-        for Nn, obs_traj in enumerate(dyn_obs_list):
-            # Skip dummy obstacles (placed at -1000,-1000 to deactivate hard constraints)
-            if abs(obs_traj[0][0]) > 500:
-                continue
-
-            zone = Marker()
-            zone.header.frame_id = "map"
-            zone.ns = "dyn_obs_mpc_ns"
-            zone.id = marker_id; marker_id += 1
-            zone.type = Marker.CYLINDER
-            zone.action = Marker.ADD
-            zone.pose.position.x = float(obs_traj[0][0])
-            zone.pose.position.y = float(obs_traj[0][1])
-            zone.pose.position.z = 0.02
-            zone.pose.orientation.w = 1.0
-            stop_scale = 1.10
-            zone.scale.x = max(0.02, float(obs_traj[0][2]) * 2.0 * stop_scale)
-            zone.scale.y = max(0.02, float(obs_traj[0][3]) * 2.0 * stop_scale)
-            zone.scale.z = 0.02
-            zone.color.r = 1.0
-            zone.color.g = 0.0
-            zone.color.b = 0.0
-            zone.color.a = 0.22
-            marker_msg.markers.append(zone)
 
         # Clean up stale markers from previous frame
-        for stale_id in range(marker_id, self._dyn_obs_mpc_viz_last_count):
+        for stale_id in range(self._dyn_obs_mpc_viz_last_count):
             m = Marker()
             m.header.frame_id = "map"
             m.ns = "dyn_obs_mpc_ns"
             m.id = stale_id
             m.action = Marker.DELETE
             marker_msg.markers.append(m)
-        self._dyn_obs_mpc_viz_last_count = marker_id
+        self._dyn_obs_mpc_viz_last_count = 0
         return marker_msg
 
     # ------------------------------------------------------------------ #

@@ -34,6 +34,12 @@ CSV_FIELDS = [
     'min_linear_velocity_mps',
     'mean_solver_ms',
     'max_solver_ms',
+    'fail_x',
+    'fail_y',
+    'fail_theta',
+    'fail_speed_mps',
+    'fail_static_obstacle_id',
+    'fail_current_ped_clearance_m',
 ]
 
 
@@ -74,11 +80,12 @@ class RvizTrialManager(Node):
         self.declare_parameter('goal_x', 1.0, descriptor)
         self.declare_parameter('goal_y', 12.3, descriptor)
         self.declare_parameter('goal_tolerance', 0.5, descriptor)
-        self.declare_parameter('collision_distance', 0.22, descriptor)
+        self.declare_parameter('collision_distance', 0.15, descriptor)
         self.declare_parameter('collision_ignore_when_stopped', True, descriptor)
         self.declare_parameter('collision_motion_threshold', 0.05, descriptor)
         self.declare_parameter('freeze_velocity_threshold', 0.05, descriptor)
         self.declare_parameter('freeze_fail_sec', 10.0, descriptor)
+        self.declare_parameter('freeze_ignore_ped_distance', 0.5, descriptor)
         self.declare_parameter('robot_namespace', 'zmr_X', descriptor)
         self.declare_parameter('startup_delay_sec', 5.0, descriptor)
         self.declare_parameter('inter_trial_delay_sec', 1.0, descriptor)
@@ -107,6 +114,8 @@ class RvizTrialManager(Node):
             self.get_parameter('collision_motion_threshold').value)
         self.freeze_velocity_threshold = float(self.get_parameter('freeze_velocity_threshold').value)
         self.freeze_fail_sec = float(self.get_parameter('freeze_fail_sec').value)
+        self.freeze_ignore_ped_distance = float(
+            self.get_parameter('freeze_ignore_ped_distance').value)
         self.robot_namespace = str(self.get_parameter('robot_namespace').value).strip('/')
         self.startup_delay_sec = float(self.get_parameter('startup_delay_sec').value)
         self.inter_trial_delay_sec = float(self.get_parameter('inter_trial_delay_sec').value)
@@ -226,18 +235,26 @@ class RvizTrialManager(Node):
         self.actor_reset_done_time = None
         self.robot_reset_done_time = None
         self.static_collision = False
+        self.static_collision_obstacle_id = -1
+        self.fail_x = float('nan')
+        self.fail_y = float('nan')
+        self.fail_theta = float('nan')
+        self.fail_speed = float('nan')
+        self.fail_static_obstacle_id = -1
+        self.fail_current_ped_clearance = float('nan')
 
     def odom_callback(self, msg: Odometry):
         self.odom_ready = True
         self.x = msg.pose.pose.position.x
         self.y = msg.pose.pose.position.y
+        self.theta = self.yaw_from_quaternion(msg.pose.pose.orientation)
         self.v = msg.twist.twist.linear.x
         if self.state == 'running':
             self.linear_velocities.append(abs(self.v))
             self.path_deviations.append(abs(self.x - self.goal_x))
+            self.update_ped_clearance()
             self.update_static_collision()
             self.update_freeze()
-            self.update_ped_clearance()
 
     def actor_pose_callback(self, msg: PoseArray):
         self.actor_poses = [(pose.position.x, pose.position.y) for pose in msg.poses]
@@ -513,6 +530,15 @@ class RvizTrialManager(Node):
             return
         self.finish_freeze()
         elapsed = time.time() - self.trial_start_time if self.trial_start_time else 0.0
+        if not success:
+            self.fail_x = self.x
+            self.fail_y = self.y
+            self.fail_theta = getattr(self, 'theta', float('nan'))
+            self.fail_speed = self.v
+            self.fail_static_obstacle_id = (
+                self.static_collision_obstacle_id if fail_reason == 'static_collision' else -1
+            )
+            self.fail_current_ped_clearance = self.current_ped_clearance
         row = {
             'trial_id': self.trial_id,
             'seed': self.active_seed,
@@ -529,6 +555,12 @@ class RvizTrialManager(Node):
             'min_linear_velocity_mps': self.fmt(min(self.linear_velocities) if self.linear_velocities else float('nan')),
             'mean_solver_ms': 'NaN',
             'max_solver_ms': 'NaN',
+            'fail_x': self.fmt(self.fail_x),
+            'fail_y': self.fmt(self.fail_y),
+            'fail_theta': self.fmt(self.fail_theta),
+            'fail_speed_mps': self.fmt(self.fail_speed),
+            'fail_static_obstacle_id': self.fail_static_obstacle_id,
+            'fail_current_ped_clearance_m': self.fmt(self.fail_current_ped_clearance),
         }
         with open(self.output_csv, 'a', newline='') as csv_file:
             csv.DictWriter(csv_file, fieldnames=CSV_FIELDS).writerow(row)
@@ -567,8 +599,11 @@ class RvizTrialManager(Node):
     def update_static_collision(self):
         if not self.static_obstacles or not self.odom_ready:
             return
-        if any(point_in_poly((self.x, self.y), obs) for obs in self.static_obstacles):
-            self.static_collision = True
+        for obs_id, obs in enumerate(self.static_obstacles):
+            if point_in_poly((self.x, self.y), obs):
+                self.static_collision = True
+                self.static_collision_obstacle_id = obs_id
+                return
 
     def obstacles_ready(self):
         local_ready = (not self.enable_static_collision_check) or bool(self.static_obstacles)
@@ -577,6 +612,11 @@ class RvizTrialManager(Node):
 
     def update_freeze(self):
         frozen = abs(self.v) < self.freeze_velocity_threshold and self.distance_to_goal() > 1.0
+        if frozen and self.current_ped_clearance <= self.freeze_ignore_ped_distance:
+            if self.freeze_start is not None:
+                self.cumul_freeze_sec += time.time() - self.freeze_start
+                self.freeze_start = None
+            return
         now = time.time()
         if frozen and self.freeze_start is None:
             self.freeze_start = now
@@ -605,6 +645,12 @@ class RvizTrialManager(Node):
                 return 'NaN'
             return round(value, 4)
         return value
+
+    @staticmethod
+    def yaw_from_quaternion(q):
+        siny_cosp = 2.0 * (q.w * q.z + q.x * q.y)
+        cosy_cosp = 1.0 - 2.0 * (q.y * q.y + q.z * q.z)
+        return math.atan2(siny_cosp, cosy_cosp)
 
 
 def main(args=None):

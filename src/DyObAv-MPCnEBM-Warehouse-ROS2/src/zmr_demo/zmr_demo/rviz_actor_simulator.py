@@ -139,7 +139,10 @@ class RvizActorSimulator(Node):
         self.declare_parameter('start_front_clear_dist', 4.0, descriptor)
         self.declare_parameter('start_front_clear_width', 1.8, descriptor)
         self.declare_parameter('min_actor_spawn_separation', 0.8, descriptor)
-        self.declare_parameter('spawn_protection_time_sec', 3.0, descriptor)
+        self.declare_parameter('spawn_protection_time_sec', 8.0, descriptor)
+        self.declare_parameter('robot_path_protection_time_sec', 8.0, descriptor)
+        self.declare_parameter('robot_path_protection_radius', 0.30, descriptor)
+        self.declare_parameter('robot_path_protection_progress_max', 0.35, descriptor)
 
         self.timer_period = float(self.get_parameter('timer_period').value)
         self.actor_min_count = int(self.get_parameter('actor_min_count').value)
@@ -165,6 +168,12 @@ class RvizActorSimulator(Node):
         self.start_front_clear_width = float(self.get_parameter('start_front_clear_width').value)
         self.min_actor_spawn_separation = float(self.get_parameter('min_actor_spawn_separation').value)
         self.spawn_protection_time_sec = float(self.get_parameter('spawn_protection_time_sec').value)
+        self.robot_path_protection_time_sec = float(
+            self.get_parameter('robot_path_protection_time_sec').value)
+        self.robot_path_protection_radius = float(
+            self.get_parameter('robot_path_protection_radius').value)
+        self.robot_path_protection_progress_max = float(
+            self.get_parameter('robot_path_protection_progress_max').value)
 
         self.boundary, self.inflated_obstacles = self.load_walkable_area()
         self.node_dict, self.edge_list = self.load_walkable_graph()
@@ -433,7 +442,53 @@ class RvizActorSimulator(Node):
             if self.inside_robot_front_clear_zone(pos):
                 return True
             t += PROTECTION_CHECK_DT
+        t = 0.0
+        while t <= self.robot_path_protection_time_sec + 1e-9:
+            pos = self.interpolate_actor(actor, t, loop=False)
+            if self.distance_to_protected_robot_path(pos) < self.robot_path_protection_radius:
+                return True
+            t += PROTECTION_CHECK_DT
         return False
+
+    def distance_to_protected_robot_path(self, point):
+        max_distance = max(
+            0.0,
+            min(self.main_aisle_length, self.main_aisle_length * self.robot_path_protection_progress_max),
+        )
+        best = float('inf')
+        traveled = 0.0
+        points = self.main_aisle_centerline
+        for idx in range(len(points) - 1):
+            start = points[idx]
+            end = points[idx + 1]
+            seg_len = self.distance(start, end)
+            if traveled >= max_distance:
+                break
+            usable = min(seg_len, max_distance - traveled)
+            if usable <= 1e-9:
+                break
+            ratio = usable / seg_len
+            clipped_end = (
+                start[0] + (end[0] - start[0]) * ratio,
+                start[1] + (end[1] - start[1]) * ratio,
+            )
+            best = min(best, self.distance_to_segment(point, start, clipped_end))
+            traveled += usable
+        return best
+
+    @staticmethod
+    def distance_to_segment(point, start, end):
+        px, py = point
+        sx, sy = start
+        ex, ey = end
+        dx = ex - sx
+        dy = ey - sy
+        denom = dx * dx + dy * dy
+        if denom <= 1e-12:
+            return math.hypot(px - sx, py - sy)
+        u = max(0.0, min(1.0, ((px - sx) * dx + (py - sy) * dy) / denom))
+        closest = sx + u * dx, sy + u * dy
+        return math.hypot(px - closest[0], py - closest[1])
 
     def inside_robot_front_clear_zone(self, point):
         dx = point[0] - self.robot_start[0]
@@ -471,7 +526,9 @@ class RvizActorSimulator(Node):
             f'other_actors={other_count} '
             f'min_dist_to_robot_start={min_start_dist:.2f}m '
             f'min_actor_spawn_separation={min_sep:.2f}m '
-            f'main_aisle_width={self.main_aisle_width:.1f}m'
+            f'main_aisle_width={self.main_aisle_width:.1f}m '
+            f'path_protection={self.robot_path_protection_time_sec:.1f}s/'
+            f'{self.robot_path_protection_radius:.2f}m'
         )
 
     @staticmethod
