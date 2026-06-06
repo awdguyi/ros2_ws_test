@@ -57,6 +57,13 @@ class MpcControllerNode(Node):
         self.declare_parameter('pred_dt', 0.4)
         self.pred_dt = self.get_parameter('pred_dt').value
 
+        self.declare_parameter('output_speed_cap_deviation_threshold', 0.65)
+        self.output_speed_cap_deviation_threshold = float(
+            self.get_parameter('output_speed_cap_deviation_threshold').value)
+        self.declare_parameter('output_speed_cap_linear_max', 1.0)
+        self.output_speed_cap_linear_max = float(
+            self.get_parameter('output_speed_cap_linear_max').value)
+
         # Note that this will be set to False if the service is not available
         self.declare_parameter('enable_fleet_manager', False)
         self.enable_fleet_manager = self.get_parameter('enable_fleet_manager').value
@@ -490,6 +497,10 @@ class MpcControllerNode(Node):
         if _zone_scale == 0.0:
             w = 0.0
 
+        path_deviation = self._distance_to_reference_path(float(self.x), float(self.y))
+        if path_deviation > self.output_speed_cap_deviation_threshold:
+            v = min(float(v), self.output_speed_cap_linear_max)
+
         # self.print_debug_info(v, w, debug_info)
 
         cmd_vel = Twist()
@@ -666,6 +677,31 @@ class MpcControllerNode(Node):
 
     def raw_traj_callback(self, msg: HumanTrajectoryArray):
         self.raw_traj_data = msg
+
+    def _distance_to_reference_path(self, x: float, y: float) -> float:
+        if not getattr(self, 'ref_path_coords', None) or len(self.ref_path_coords) < 2:
+            return 0.0
+        return min(
+            self._distance_to_segment(
+                x, y,
+                float(p0[0]), float(p0[1]),
+                float(p1[0]), float(p1[1]),
+            )
+            for p0, p1 in zip(self.ref_path_coords[:-1], self.ref_path_coords[1:])
+        )
+
+    @staticmethod
+    def _distance_to_segment(px, py, x0, y0, x1, y1):
+        dx = x1 - x0
+        dy = y1 - y0
+        denom = dx * dx + dy * dy
+        if denom <= 1e-9:
+            return math.hypot(px - x0, py - y0)
+        t = ((px - x0) * dx + (py - y0) * dy) / denom
+        t = max(0.0, min(1.0, t))
+        proj_x = x0 + t * dx
+        proj_y = y0 + t * dy
+        return math.hypot(px - proj_x, py - proj_y)
 
     def _generate_offset_ref(self, ref_states: np.ndarray, offset_m: float) -> np.ndarray:
         """C7: shift reference path laterally to the right by offset_m, using path tangent."""

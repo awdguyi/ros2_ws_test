@@ -38,6 +38,10 @@ CSV_FIELDS = [
     'fail_y',
     'fail_theta',
     'fail_speed_mps',
+    'fail_prev3_mean_linear_velocity_mps',
+    'fail_prev3_max_linear_velocity_mps',
+    'fail_prev3_mean_angular_velocity_radps',
+    'fail_prev3_max_angular_velocity_radps',
     'fail_static_obstacle_id',
     'fail_current_ped_clearance_m',
 ]
@@ -221,12 +225,15 @@ class RvizTrialManager(Node):
         self.x = float('nan')
         self.y = float('nan')
         self.v = 0.0
+        self.w = 0.0
         self.trial_start_time = None
         self.actor_count = 0
         self.min_ped_clearance = float('inf')
         self.current_ped_clearance = float('inf')
         self.path_deviations = []
         self.linear_velocities = []
+        self.angular_velocities = []
+        self.velocity_history = []
         self.cumul_freeze_sec = 0.0
         self.freeze_start = None
         self.active_seed = self.random_seed_base + self.trial_id
@@ -240,6 +247,10 @@ class RvizTrialManager(Node):
         self.fail_y = float('nan')
         self.fail_theta = float('nan')
         self.fail_speed = float('nan')
+        self.fail_prev3_mean_linear_velocity = float('nan')
+        self.fail_prev3_max_linear_velocity = float('nan')
+        self.fail_prev3_mean_angular_velocity = float('nan')
+        self.fail_prev3_max_angular_velocity = float('nan')
         self.fail_static_obstacle_id = -1
         self.fail_current_ped_clearance = float('nan')
 
@@ -249,8 +260,11 @@ class RvizTrialManager(Node):
         self.y = msg.pose.pose.position.y
         self.theta = self.yaw_from_quaternion(msg.pose.pose.orientation)
         self.v = msg.twist.twist.linear.x
+        self.w = msg.twist.twist.angular.z
         if self.state == 'running':
             self.linear_velocities.append(abs(self.v))
+            self.angular_velocities.append(abs(self.w))
+            self.velocity_history.append((time.time(), abs(self.v), abs(self.w)))
             self.path_deviations.append(abs(self.x - self.goal_x))
             self.update_ped_clearance()
             self.update_static_collision()
@@ -535,6 +549,7 @@ class RvizTrialManager(Node):
             self.fail_y = self.y
             self.fail_theta = getattr(self, 'theta', float('nan'))
             self.fail_speed = self.v
+            self.capture_fail_velocity_window()
             self.fail_static_obstacle_id = (
                 self.static_collision_obstacle_id if fail_reason == 'static_collision' else -1
             )
@@ -559,6 +574,14 @@ class RvizTrialManager(Node):
             'fail_y': self.fmt(self.fail_y),
             'fail_theta': self.fmt(self.fail_theta),
             'fail_speed_mps': self.fmt(self.fail_speed),
+            'fail_prev3_mean_linear_velocity_mps': self.fmt(
+                self.fail_prev3_mean_linear_velocity),
+            'fail_prev3_max_linear_velocity_mps': self.fmt(
+                self.fail_prev3_max_linear_velocity),
+            'fail_prev3_mean_angular_velocity_radps': self.fmt(
+                self.fail_prev3_mean_angular_velocity),
+            'fail_prev3_max_angular_velocity_radps': self.fmt(
+                self.fail_prev3_max_angular_velocity),
             'fail_static_obstacle_id': self.fail_static_obstacle_id,
             'fail_current_ped_clearance_m': self.fmt(self.fail_current_ped_clearance),
         }
@@ -572,6 +595,21 @@ class RvizTrialManager(Node):
         self.trial_id += 1
         self.state = 'between_trials'
         self.state_since = time.time()
+
+    def capture_fail_velocity_window(self, window_sec=3.0):
+        now = time.time()
+        recent = [
+            item for item in self.velocity_history
+            if now - item[0] <= window_sec
+        ]
+        if not recent:
+            return
+        linear_values = [item[1] for item in recent]
+        angular_values = [item[2] for item in recent]
+        self.fail_prev3_mean_linear_velocity = self.mean(linear_values)
+        self.fail_prev3_max_linear_velocity = max(linear_values)
+        self.fail_prev3_mean_angular_velocity = self.mean(angular_values)
+        self.fail_prev3_max_angular_velocity = max(angular_values)
 
     def update_ped_clearance(self):
         if not self.odom_ready:

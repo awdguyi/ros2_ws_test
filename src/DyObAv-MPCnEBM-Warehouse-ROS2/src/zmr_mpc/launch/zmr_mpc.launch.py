@@ -33,6 +33,8 @@ def generate_launch_description():
     default_predictor_variant = 'zara2'
     default_reset_on_finish = 'true'
     default_rerandomize_actors_on_reset = 'true'
+    default_output_speed_cap_deviation_threshold = '0.65'
+    default_output_speed_cap_linear_max = '1.0'
     default_robot_init_x = '1.0'
     default_robot_init_y = '-2.2'
     default_robot_init_z = '0.0'
@@ -54,6 +56,9 @@ def generate_launch_description():
     predictor_variant = LaunchConfiguration('predictor_variant')
     reset_on_finish = LaunchConfiguration('reset_on_finish')
     rerandomize_actors_on_reset = LaunchConfiguration('rerandomize_actors_on_reset')
+    output_speed_cap_deviation_threshold = LaunchConfiguration(
+        'output_speed_cap_deviation_threshold')
+    output_speed_cap_linear_max = LaunchConfiguration('output_speed_cap_linear_max')
     robot_init_x = LaunchConfiguration('robot_init_x')
     robot_init_y = LaunchConfiguration('robot_init_y')
     robot_init_z = LaunchConfiguration('robot_init_z')
@@ -162,6 +167,17 @@ def generate_launch_description():
     )
     ld.add_action(declare_rerandomize_actors_on_reset_arg)
 
+    ld.add_action(DeclareLaunchArgument(
+        name="output_speed_cap_deviation_threshold",
+        default_value=default_output_speed_cap_deviation_threshold,
+        description="Path deviation threshold that caps final cmd_vel linear speed",
+    ))
+    ld.add_action(DeclareLaunchArgument(
+        name="output_speed_cap_linear_max",
+        default_value=default_output_speed_cap_linear_max,
+        description="Maximum final cmd_vel linear speed when path deviation is high",
+    ))
+
     for name, default_value in [
         ('robot_init_x', default_robot_init_x),
         ('robot_init_y', default_robot_init_y),
@@ -198,6 +214,8 @@ def generate_launch_description():
             {'predictor_variant': predictor_variant},
             {'reset_on_finish': reset_on_finish},
             {'rerandomize_actors_on_reset': rerandomize_actors_on_reset},
+            {'output_speed_cap_deviation_threshold': output_speed_cap_deviation_threshold},
+            {'output_speed_cap_linear_max': output_speed_cap_linear_max},
             {'robot_init_x': robot_init_x},
             {'robot_init_y': robot_init_y},
             {'robot_init_z': robot_init_z},

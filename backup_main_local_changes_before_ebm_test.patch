@@ -1,0 +1,132 @@
+diff --git a/src/DyObAv-MPCnEBM-Warehouse-ROS2/src/zmr_demo/launch/rviz_warehouse_100_trials.launch.py b/src/DyObAv-MPCnEBM-Warehouse-ROS2/src/zmr_demo/launch/rviz_warehouse_100_trials.launch.py
+index a04c1df..37e78e1 100644
+--- a/src/DyObAv-MPCnEBM-Warehouse-ROS2/src/zmr_demo/launch/rviz_warehouse_100_trials.launch.py
++++ b/src/DyObAv-MPCnEBM-Warehouse-ROS2/src/zmr_demo/launch/rviz_warehouse_100_trials.launch.py
+@@ -44,6 +44,7 @@ def generate_launch_description():
+     goal_y = LaunchConfiguration('goal_y')
+     goal_tolerance = LaunchConfiguration('goal_tolerance')
+     collision_distance = LaunchConfiguration('collision_distance')
++    ped_stop_distance = LaunchConfiguration('ped_stop_distance')
+     collision_ignore_when_stopped = LaunchConfiguration('collision_ignore_when_stopped')
+     collision_motion_threshold = LaunchConfiguration('collision_motion_threshold')
+     freeze_fail_sec = LaunchConfiguration('freeze_fail_sec')
+@@ -88,7 +89,8 @@ def generate_launch_description():
+         ('goal_x', '1.0', 'Goal x'),
+         ('goal_y', '12.3', 'Goal y'),
+         ('goal_tolerance', '0.5', 'Goal tolerance'),
+-        ('collision_distance', '0.22', 'Pedestrian fail distance; independent from MPC human inflation'),
++        ('collision_distance', '0.20', 'Pedestrian fail core distance; smaller than the MPC red stop zone'),
++        ('ped_stop_distance', '0.22', 'Pedestrian stop-zone distance for alignment/logging only; does not fail trials'),
+         ('collision_ignore_when_stopped', 'true', 'Ignore pedestrian collision while robot is stopped'),
+         ('collision_motion_threshold', '0.05', 'Minimum robot speed to count pedestrian collision'),
+         ('freeze_fail_sec', '10.0', 'Freeze failure seconds'),
+@@ -245,6 +247,7 @@ def generate_launch_description():
+             {'goal_y': goal_y},
+             {'goal_tolerance': goal_tolerance},
+             {'collision_distance': collision_distance},
++            {'ped_stop_distance': ped_stop_distance},
+             {'collision_ignore_when_stopped': collision_ignore_when_stopped},
+             {'collision_motion_threshold': collision_motion_threshold},
+             {'freeze_fail_sec': freeze_fail_sec},
+diff --git a/src/DyObAv-MPCnEBM-Warehouse-ROS2/src/zmr_demo/zmr_demo/rviz_trial_manager.py b/src/DyObAv-MPCnEBM-Warehouse-ROS2/src/zmr_demo/zmr_demo/rviz_trial_manager.py
+index e918804..d224ead 100644
+--- a/src/DyObAv-MPCnEBM-Warehouse-ROS2/src/zmr_demo/zmr_demo/rviz_trial_manager.py
++++ b/src/DyObAv-MPCnEBM-Warehouse-ROS2/src/zmr_demo/zmr_demo/rviz_trial_manager.py
+@@ -74,7 +74,8 @@ class RvizTrialManager(Node):
+         self.declare_parameter('goal_x', 1.0, descriptor)
+         self.declare_parameter('goal_y', 12.3, descriptor)
+         self.declare_parameter('goal_tolerance', 0.5, descriptor)
+-        self.declare_parameter('collision_distance', 0.22, descriptor)
++        self.declare_parameter('collision_distance', 0.20, descriptor)
++        self.declare_parameter('ped_stop_distance', 0.22, descriptor)
+         self.declare_parameter('collision_ignore_when_stopped', True, descriptor)
+         self.declare_parameter('collision_motion_threshold', 0.05, descriptor)
+         self.declare_parameter('freeze_velocity_threshold', 0.05, descriptor)
+@@ -101,6 +102,7 @@ class RvizTrialManager(Node):
+         self.goal_y = float(self.get_parameter('goal_y').value)
+         self.goal_tolerance = float(self.get_parameter('goal_tolerance').value)
+         self.collision_distance = float(self.get_parameter('collision_distance').value)
++        self.ped_stop_distance = float(self.get_parameter('ped_stop_distance').value)
+         self.collision_ignore_when_stopped = self.as_bool(
+             self.get_parameter('collision_ignore_when_stopped').value)
+         self.collision_motion_threshold = float(
+@@ -160,6 +162,11 @@ class RvizTrialManager(Node):
+         self.get_logger().info(
+             f'RViz trial manager ready: num_trials={self.num_trials}, csv={self.output_csv}'
+         )
++        self.get_logger().info(
++            f'pedestrian zones: stop_distance={self.ped_stop_distance:.3f}m '
++            f'(no fail), collision_distance={self.collision_distance:.3f}m '
++            f'(fail only if robot speed >= {self.collision_motion_threshold:.3f}m/s)'
++        )
+ 
+     @staticmethod
+     def resolve_csv_path(path_text):
+@@ -558,6 +565,9 @@ class RvizTrialManager(Node):
+             )
+ 
+     def ped_collision_active(self):
++        # The MPC uses a larger red transparent circle as a no-speed / stop zone.
++        # Trial failure is intentionally checked against the smaller collision core
++        # so entering the stop zone while braking does not immediately fail a trial.
+         if self.current_ped_clearance >= self.collision_distance:
+             return False
+         if not self.collision_ignore_when_stopped:
+diff --git a/src/DyObAv-MPCnEBM-Warehouse-ROS2/src/zmr_mpc/zmr_mpc/mpc_trajectory_tracker_node.py b/src/DyObAv-MPCnEBM-Warehouse-ROS2/src/zmr_mpc/zmr_mpc/mpc_trajectory_tracker_node.py
+index 91e1990..f5ecf66 100644
+--- a/src/DyObAv-MPCnEBM-Warehouse-ROS2/src/zmr_mpc/zmr_mpc/mpc_trajectory_tracker_node.py
++++ b/src/DyObAv-MPCnEBM-Warehouse-ROS2/src/zmr_mpc/zmr_mpc/mpc_trajectory_tracker_node.py
+@@ -1056,48 +1056,22 @@ class MpcControllerNode(Node):
+         return (dx * dx) / (rx * rx) + (dy * dy) / (ry * ry) <= 1.0
+ 
+     def _dyn_obs_list_to_vis_msg(self, dyn_obs_list: list) -> MarkerArray:
+-        """Publish the obstacle trajectories exactly as fed into the MPC solver.
++        """Clear dynamic obstacle visualization markers.
+ 
+-        Each obstacle gets one red transparent disk at Tt=0. This is the
+-        current human-body no-speed zone used by the speed gate.
++        The speed gate still uses the current human-body stop zone internally,
++        but the red transparent stop circles are intentionally hidden in RViz.
+         """
+         marker_msg = MarkerArray()
+-        marker_id = 0
+-
+-        for Nn, obs_traj in enumerate(dyn_obs_list):
+-            # Skip dummy obstacles (placed at -1000,-1000 to deactivate hard constraints)
+-            if abs(obs_traj[0][0]) > 500:
+-                continue
+-
+-            zone = Marker()
+-            zone.header.frame_id = "map"
+-            zone.ns = "dyn_obs_mpc_ns"
+-            zone.id = marker_id; marker_id += 1
+-            zone.type = Marker.CYLINDER
+-            zone.action = Marker.ADD
+-            zone.pose.position.x = float(obs_traj[0][0])
+-            zone.pose.position.y = float(obs_traj[0][1])
+-            zone.pose.position.z = 0.02
+-            zone.pose.orientation.w = 1.0
+-            stop_scale = 1.10
+-            zone.scale.x = max(0.02, float(obs_traj[0][2]) * 2.0 * stop_scale)
+-            zone.scale.y = max(0.02, float(obs_traj[0][3]) * 2.0 * stop_scale)
+-            zone.scale.z = 0.02
+-            zone.color.r = 1.0
+-            zone.color.g = 0.0
+-            zone.color.b = 0.0
+-            zone.color.a = 0.22
+-            marker_msg.markers.append(zone)
+ 
+         # Clean up stale markers from previous frame
+-        for stale_id in range(marker_id, self._dyn_obs_mpc_viz_last_count):
++        for stale_id in range(self._dyn_obs_mpc_viz_last_count):
+             m = Marker()
+             m.header.frame_id = "map"
+             m.ns = "dyn_obs_mpc_ns"
+             m.id = stale_id
+             m.action = Marker.DELETE
+             marker_msg.markers.append(m)
+-        self._dyn_obs_mpc_viz_last_count = marker_id
++        self._dyn_obs_mpc_viz_last_count = 0
+         return marker_msg
+ 
+     # ------------------------------------------------------------------ #

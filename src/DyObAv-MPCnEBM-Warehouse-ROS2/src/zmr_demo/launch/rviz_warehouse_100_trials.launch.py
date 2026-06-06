@@ -63,6 +63,9 @@ def generate_launch_description():
     log_csv = LaunchConfiguration('log_csv')
     log_wandb = LaunchConfiguration('log_wandb')
     scenario_id = LaunchConfiguration('scenario_id')
+    output_speed_cap_deviation_threshold = LaunchConfiguration(
+        'output_speed_cap_deviation_threshold')
+    output_speed_cap_linear_max = LaunchConfiguration('output_speed_cap_linear_max')
 
     for name, default_value, description in [
         ('timer_period', '0.2', 'Main planning period'),
@@ -113,6 +116,8 @@ def generate_launch_description():
         ('log_csv', 'false', 'Let MPC write its own CSV'),
         ('log_wandb', 'false', 'Enable W&B in MPC'),
         ('scenario_id', 'rviz_only_trials', 'MPC scenario label'),
+        ('output_speed_cap_deviation_threshold', '0.65', 'Path deviation threshold that caps final cmd_vel linear speed'),
+        ('output_speed_cap_linear_max', '1.0', 'Maximum final cmd_vel linear speed when path deviation is high'),
     ]:
         ld.add_action(DeclareLaunchArgument(
             name=name,
@@ -239,6 +244,8 @@ def generate_launch_description():
         'max_task_time': trial_timeout_sec,
         'goal_tolerance': goal_tolerance,
         'predictor_variant': predictor_variant,
+        'output_speed_cap_deviation_threshold': output_speed_cap_deviation_threshold,
+        'output_speed_cap_linear_max': output_speed_cap_linear_max,
         'reset_on_finish': 'false',
         'rerandomize_actors_on_reset': 'false',
         'robot_init_x': '1.0',
